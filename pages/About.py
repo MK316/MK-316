@@ -5,7 +5,7 @@ image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
 st.image(image_url, caption="\"Every student can learn, just not on the same day, or the same way.\" – George Evans", use_column_width=True)
 
 
-st.markdown("### ❄️ About me...")
+st.markdown("### About me...")
 st.markdown("![Profile Image](https://github.com/MK316/MK-316/raw/main/images/profile-small.jpg)")  # Correct markdown syntax for images
 st.markdown("\n\n")
 st.markdown("- Github ID: MK316")
