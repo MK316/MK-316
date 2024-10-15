@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-st.image("https://github.com/MK316/MK-316/raw/main/images/mk316.png", caption="MK316 logo", width = 200)
+st.image("https://github.com/MK316/MK-316/raw/main/images/mk316.png", caption=" ", width = 200)
 st.markdown("### _Welcome to my application gallery_")
 
 # Additional content
