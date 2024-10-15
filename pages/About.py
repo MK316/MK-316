@@ -1,6 +1,6 @@
 import streamlit as st  # Corrected the import alias to 'st' from 'sr'
 
-st.markdown("### ☕ About me...")
+st.markdown("### ❄️ About me...")
 st.markdown("![Profile Image](https://github.com/MK316/MK-316/raw/main/images/profile-small.jpg)")  # Correct markdown syntax for images
 st.markdown("\n\n")
 st.markdown("- Github ID: MK316")
