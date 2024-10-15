@@ -13,7 +13,7 @@ html, body, [class*="css"] {{
 st.markdown(css, unsafe_allow_html=True)
 
 st.title("🌾 MK316")
-st.markdown("###Language Learning AppHub")
+st.markdown("### Language Learning AppHub")
 
 # Additional content
 st.markdown("""
