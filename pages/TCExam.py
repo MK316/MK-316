@@ -13,7 +13,7 @@ def tce_apps_page():
     col1, = st.columns(1)  # Note the comma to unpack the column from the list
 
     with col1:
-        st.image("images/button01.png", width=100)
+        st.image("images/TCE.png", width=100)
         if st.button('App 1: TCE exam search', key='1'):
             st.markdown("🌀[App link](https://mk316-TCE.hf.space/): Searchable exam questions in phonetics & phonology", unsafe_allow_html=True)
             st.markdown("2024.02.05")
