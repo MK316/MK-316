@@ -11,7 +11,7 @@ def elearning_apps_page():
 
     # Describing your apps briefly
     st.markdown("""
-    Explore our selection of English learning apps designed specifically for learners. These applications use interactive and innovative tools to improve vocabulary knowledge, pronunciation, listening skills, and phonetic awareness, providing effective resources and exercises.
+    Explore my selection of English learning apps designed specifically for learners. These applications use interactive and innovative tools to improve vocabulary knowledge, pronunciation, listening skills, and phonetic awareness, providing effective resources and exercises.
     """)
 
     # First row with three columns
