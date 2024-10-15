@@ -5,7 +5,9 @@ font_url = "https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display
 css = f"""
 <style>
 @import url('{font_url}');
-html, body, [class*="css"] {{
+
+/* Apply the Roboto font globally */
+html, body, div, p, span, h1, h2, h3, h4, h5, h6 {{
     font-family: 'Roboto', sans-serif !important;
 }}
 </style>
