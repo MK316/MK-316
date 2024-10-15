@@ -2,7 +2,7 @@ import streamlit as st
 
 # Include custom CSS
 font_url = "https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-st.markdown(f"<style>@import url('{font_url}'); body {{ font-family: 'Roboto', sans-serif; }}</style>", unsafe_allow_html=True)
+st.markdown(f"<style>@import url('{https://fonts.google.com/specimen/Agdasima}'); body {{ font-family: 'Roboto', sans-serif; }}</style>", unsafe_allow_html=True)
 
 st.title("🌾 MK316 - Language Learning Applications")
 
