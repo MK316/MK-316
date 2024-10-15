@@ -18,5 +18,10 @@ def tce_apps_page():
             st.markdown("🌀[App link](https://mk316-TCE.hf.space/): Searchable exam questions in phonetics & phonology", unsafe_allow_html=True)
             st.markdown("2024.02.05")
 
+# Call the function to generate the page content first
 tce_apps_page()
 
+# URL to the raw image on GitHub
+image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
+# Display the image, now it will appear after everything else
+st.image(image_url, caption="\"Teachers have three loves: love of learning, love of learners, and the love of bringing the first two loves together.\" — Scott Hayden", use_column_width=True)
