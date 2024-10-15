@@ -12,11 +12,14 @@ html, body, [class*="css"] {{
 """
 st.markdown(css, unsafe_allow_html=True)
 
-st.title("🌾 MK316 - Language Learning Applications")
+st.title("🌾 MK316 - Language Learning AppHub")
 
 # Additional content
 st.markdown("""
-Welcome to MK316 - your hub for exploring innovative language learning applications powered by Streamlit! Dive into our projects, or explore my digital classroom at [mrkim21.github.io](https://mrkim21.github.io).
+### Welcome to MK316 - your hub for exploring innovative language learning applications powered by Streamlit! Dive into our projects, or explore my digital classroom at [mrkim21.github.io](https://mrkim21.github.io).
 """)
 
+st.markdown("""
+I'm on a journey to learn coding to develop language apps that are customized and learner-centered, rather than relying on solutions that don't necessarily fit my students and classroom. My goal is to create interactive tools that make language learning more engaging and effective. I'm excited to share this process with you as we explore new, impactful ways to teach languages.
+""")
 st.markdown("Since Oct. 14, 2024")
