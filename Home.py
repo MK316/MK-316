@@ -2,11 +2,12 @@ import streamlit as st
 
 
 # URL to the raw image on GitHub
-image_url = "https://github.com/MK316/MK-316/raw/main/images/mk316.png"
+image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
 
 # Display the image
 st.image(image_url, caption="\"Wannna really learn coding? Give teaching a go!\"", use_column_width=True)
 
+st.image("https://github.com/MK316/MK-316/raw/main/images/bg2.png", caption="MK316 logo", use_column_width=True)
 st.markdown("### _Welcome to my application gallery_")
 
 # Additional content
