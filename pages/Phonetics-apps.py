@@ -10,7 +10,7 @@ def phonetics_apps_page():
     """)
 
     # Create columns for each application
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
         st.image("images/ipa01.png", width=100)
@@ -26,6 +26,7 @@ def phonetics_apps_page():
         st.image("images/ipa01.png", width=100)
         if st.button('Launch App 3', key='3'):
             st.markdown("Click here to launch [App 3](https://playsound.streamlit.app/)", unsafe_allow_html=True)
+            
     with col4:
         st.image("images/ipa01.png", width=100)
         if st.button('Launch App 4', key='4'):
