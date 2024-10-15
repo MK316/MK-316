@@ -19,7 +19,7 @@ def phonetics_apps_page():
     
     with col2:
         st.image("images/button03.png", width=100)
-        if st.button('App 2: Playsound', key='3'):
+        if st.button('App 2: Playsound', key='2'):
             st.markdown("🌀[App link](https://playsound.streamlit.app/): Upload audio to play; Speed controller", unsafe_allow_html=True)
     
     with col3:
