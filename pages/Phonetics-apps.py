@@ -1,7 +1,7 @@
 import streamlit as st
 
 def phonetics_apps_page():
-    st.title('[fəˈnɛɾɪks] Apps')
+    st.title('🐾 [fəˈnɛɾɪks] Apps')
     st.write('Applications used to teach Phonetics.')
 
     # Describing your apps briefly
