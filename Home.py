@@ -7,7 +7,7 @@ image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
 # Display the image
 st.image(image_url, caption="\"Wannna really learn coding? Give teaching a go!\"", use_column_width=True)
 
-st.title("MK316")
+st.markdown("![MK316](https://github.com/MK316/MK-316/raw/main/images/mk316.png")
 st.markdown("### _Welcome to my application gallery_")
 
 # Additional content
