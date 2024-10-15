@@ -6,16 +6,17 @@ def tce_apps_page():
 
     # Describing your apps briefly
     st.markdown("""
-    This page features applications designed to prepare users for Teacher Certificate Exams. The tools offer resources to help their prepration.
+    This page features applications designed to prepare users for Teacher Certificate Exams. The tools offer resources to help their preparation.
     """)
 
-    # First row with three columns
-    col1 = st.columns(1)  # Define columns for the first row
+    # Define a single column
+    col1, = st.columns(1)  # Note the comma to unpack the column from the list
 
     with col1:
         st.image("images/button01.png", width=100)
         if st.button('App 1: TCE exam search', key='1'):
-            st.markdown("🌀[App link](https://mk316-TCE.hf.space/): Searcheable exam questions in phonetics & phonology", unsafe_allow_html=True)
+            st.markdown("🌀[App link](https://mk316-TCE.hf.space/): Searchable exam questions in phonetics & phonology", unsafe_allow_html=True)
             st.markdown("2024.02.05")
 
 tce_apps_page()
+
