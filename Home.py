@@ -21,6 +21,6 @@ Welcome to MK316 - your hub for exploring innovative language learning applicati
 """)
 
 st.markdown("""
-I'm on a journey to learn coding to develop language apps that are customized and learner-centered, rather than relying on solutions that don't necessarily fit my students and classroom. My goal is to create interactive tools that make language learning more engaging and effective. I'm excited to share this process with you as we explore new, impactful ways to teach languages.
+I'm on a journey to learn coding to develop language apps that are **customized** and **learner-centered**, rather than relying on solutions that don't necessarily fit my students and classroom. My goal is to create interactive tools that make language learning more engaging and effective. I'm excited to share this process with you as we explore new, impactful ways to teach languages.
 """)
 st.markdown("Since Oct. 14, 2024")
