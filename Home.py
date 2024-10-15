@@ -8,10 +8,10 @@ image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
 st.image(image_url, caption="\"Wannna really learn coding? Give teaching a go!\"", use_column_width=True)
 
 st.title("MK316")
-st.markdown("### _Application Gallery_")
+st.markdown("### _Welcome to my application gallery_")
 
 # Additional content
-st.markdown("Saluton! \nThis will be my digital app gallery for exploring innovative language learning applications powered by Streamlit! (Started on Oct. 14) The gallery is still under preparation, but in the meantime, feel free to explore my digital classroom at [mrkim21.github.io](https://mrkim21.github.io).")
+st.markdown("This will be a digital app gallery for exploring innovative language learning applications powered by Streamlit! (Started on Oct. 14) The gallery is still under preparation, but in the meantime, feel free to explore my digital classroom at [mrkim21.github.io](https://mrkim21.github.io).")
 
 st.markdown("""
 I'm on a journey to learn coding to develop language apps that are **_customized_** and **_learner-centered_**, 
