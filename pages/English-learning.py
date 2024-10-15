@@ -1,10 +1,5 @@
 import streamlit as st  # Corrected the import alias to 'st', which is standard
 
-# URL to the raw image on GitHub
-image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
-# Display the image
-st.image(image_url, caption="\"Every student can learn, just not on the same day, or the same way.\" – George Evans", use_column_width=True)
-
 def elearning_apps_page():
     st.title('✏️ English Learning')
     st.write('Applications for English learners.')
@@ -59,3 +54,8 @@ def elearning_apps_page():
             st.markdown("2024.02.03")
 
 elearning_apps_page()
+
+# URL to the raw image on GitHub
+image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
+# Display the image
+st.image(image_url, caption="\"Every student can learn, just not on the same day, or the same way.\" – George Evans", use_column_width=True)
