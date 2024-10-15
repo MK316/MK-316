@@ -15,7 +15,7 @@ html, body, div, p, span, h1, h2, h3, h4, h5, h6 {{
 st.markdown(css, unsafe_allow_html=True)
 
 st.title("🌾 MK316")
-st.markdown("### Language Learning AppHub")
+st.markdown("### _My Language Learning App Gallery_")
 
 # Additional content
 st.markdown("""
