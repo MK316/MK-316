@@ -12,7 +12,7 @@ st.markdown("### _Application Gallery_")
 
 # Additional content
 st.markdown("""
-Bonjour! This will be my digital app gallery for exploring innovative language learning applications powered by Streamlit! (Started on Oct. 14) The gallery is still under preparation, but in the meantime, feel free to explore my digital classroom at [mrkim21.github.io](https://mrkim21.github.io).
+Bonjour! \nThis will be my digital app gallery for exploring innovative language learning applications powered by Streamlit! (Started on Oct. 14) The gallery is still under preparation, but in the meantime, feel free to explore my digital classroom at [mrkim21.github.io](https://mrkim21.github.io).
 """)
 
 st.markdown("""
