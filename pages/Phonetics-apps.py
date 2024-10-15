@@ -15,7 +15,7 @@ def phonetics_apps_page():
     with col1:
         st.image("images/button01.png", width=100)
         if st.button('App 1: \nIPA quiz', key='1'):
-            st.markdown("IPA Quiz with phonetic descriptions; Scoring, [App link](https://ipa-practice.streamlit.app/)", unsafe_allow_html=True)
+            st.markdown("IPA Quiz with phonetic descriptions; Scoring; 🌀[App link](https://ipa-practice.streamlit.app/)", unsafe_allow_html=True)
     
     with col2:
         st.image("images/button01.png", width=100)
