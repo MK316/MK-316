@@ -47,6 +47,6 @@ def phonetics_apps_page():
     with col6:
         st.image("images/button03.png", width=100)
         if st.button('App 6: MP3-to-wav', key='6'):
-            st.markdown("🌀[App link](https://mk-316-mp3towav): Convert mp3 to wav file", unsafe_allow_html=True)
+            st.markdown("🌀[App link](https://mk-316-mp3towav.hf.space/): Convert mp3 to wav file", unsafe_allow_html=True)
 
 phonetics_apps_page()
