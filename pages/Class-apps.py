@@ -1,6 +1,6 @@
 import streamlit as st
 
-def phonetics_apps_page():
+def class_apps_page():
     st.title('Classroom management')
     st.write('Applications used in my classroom.')
 
@@ -51,7 +51,7 @@ def phonetics_apps_page():
     with col6:
         st.image("images/wordcloud.png", width=100)
         if st.button('App 6: Wordcloud', key='6'):
-            st.markdown("🌀[App link](https://mk-316-wordcloud.hf.space/): Generate a simple wordcloud image from texts", unsafe_allow_html=True)
+            st.markdown("🌀[App link](https://mk-316-wordcloud.hf.space/): Generate a simple wordcloud image from your text", unsafe_allow_html=True)
             st.markdown("2024.04.14")
 
-phonetics_apps_page()
+class_apps_page()
