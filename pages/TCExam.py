@@ -1,7 +1,7 @@
 import streamlit as st
 
 def tce_apps_page():
-    st.title('Teacher Certificate Exam Apps')
+    st.title('TCE Prep')
     st.write('Applications for TCE preparing students.')
 
     # Describing your apps briefly
