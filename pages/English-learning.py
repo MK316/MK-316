@@ -1,7 +1,7 @@
 import streamlit as st  # Corrected the import alias to 'st', which is standard
 
 def elearning_apps_page():
-    st.title('✏️ English Learning')
+    st.title('🍃 English Learning')
     st.write('Applications for English learners.')
 
     # Describing your apps briefly
