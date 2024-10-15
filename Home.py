@@ -1,20 +1,13 @@
 import streamlit as st
 
-# Include custom CSS for Roboto font from Google Fonts
-font_url = "https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-css = f"""
-<style>
-@import url('{font_url}');
 
-/* Apply the Roboto font globally */
-html, body, div, p, span, h1, h2, h3, h4, h5, h6 {{
-    font-family: 'Roboto', sans-serif !important;
-}}
-</style>
-"""
-st.markdown(css, unsafe_allow_html=True)
+# URL to the raw image on GitHub
+image_url = "https://github.com/MK316/MK-316/blob/cec2786befe66ab9c59a8a1ff5e037e1931bb18f/images/bg2.png"
 
-st.title("🌾 MK316")
+# Display the image
+st.image(image_url, caption="My Image", use_column_width=True)
+
+st.title("MK316")
 st.markdown("### _Application Gallery_")
 
 # Additional content
