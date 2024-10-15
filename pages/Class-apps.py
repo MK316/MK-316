@@ -1,7 +1,7 @@
 import streamlit as st
 
 def class_apps_page():
-    st.title('Classroom management')
+    st.title('🌱 Classroom management')
     st.write('Applications used in my classroom.')
 
     # Describing your apps briefly
