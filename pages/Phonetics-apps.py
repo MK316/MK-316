@@ -10,7 +10,7 @@ def phonetics_apps_page():
     """)
 
     # First row with five columns
-    col1, col2, col3, col4, col5 = st.columns(5)
+    col1, col2, col3= st.columns(3)
 
     with col1:
         st.image("images/ipa01.png", width=100)
