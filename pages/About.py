@@ -1,8 +1,8 @@
-import streamlit as sr
+import streamlit as st  # Corrected the import alias to 'st' from 'sr'
 
-sr.markdown("### ☕ About me...")
-sr.markdown(![](/images/profile-small.jpg)
-sr.markdown("\n\n")
-sr.markdown("- Github ID: MK316")
-sr.markdown("- Affiliation: Dept. of English Education, GNU ⛺ [Goto](https://englishedu.gnu.ac.kr)") 
-sr.markdown("- My digital classroom: [mrkim21.github.io](https://mrkim21.github.io)")
+st.markdown("### ☕ About me...")
+st.markdown("![Profile Image](/images/profile-small.jpg)")  # Correct markdown syntax for images
+st.markdown("\n\n")
+st.markdown("- Github ID: MK316")
+st.markdown("- Affiliation: Dept. of English Education, GNU ⛺ [Goto](https://englishedu.gnu.ac.kr)")
+st.markdown("- My digital classroom: [mrkim21.github.io](https://mrkim21.github.io)")
