@@ -5,13 +5,10 @@ st.image("https://github.com/MK316/MK-316/raw/main/images/mk316.png", caption=" 
 st.markdown("### _Welcome to my application gallery_")
 
 # Additional content
-st.markdown("This will be a digital app gallery for exploring innovative language learning applications powered by Streamlit! (Started on Oct. 14) The gallery is still under preparation, but in the meantime, feel free to explore my digital classroom at [mrkim21.github.io](https://mrkim21.github.io).")
+st.markdown("━ A space to discover innovative language learning applications powered by Streamlit! Launched on October 14, the gallery is currently being prepared. Meanwhile, you can visit my digital classroom at [mrkim21.github.io](https://mrkim21.github.io).")
 
 st.markdown("""
-I'm on a journey to learn coding to develop language apps that are **_customized_** and **_learner-centered_**, 
-rather than relying on solutions that don't necessarily fit my students and classroom. 
-
-My goal is to create **_simple_** but **_interactive_** tools that make language learning more engaging and effective. I'm excited to share this process with you as we explore new, impactful ways to teach languages.
+I am learning to code to develop customized, **_customized_**, **_learner-centered_** language apps that align with the specific needs of my students. My aim is to create **_simple, interactive_** tools that enhance the effectiveness and engagement of language learning. I look forward to exploring innovative and impactful teaching methods together.
 """)
 st.markdown("Since Oct. 14, 2024")
 
