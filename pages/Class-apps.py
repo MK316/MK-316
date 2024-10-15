@@ -14,18 +14,18 @@ def phonetics_apps_page():
     col1, col2, col3 = st.columns(3)  # Define columns for the first row
 
     with col1:
-        st.image("images/button01.png", width=100)
+        st.image("images/qr.png", width=100)
         if st.button('App 1: QR Code', key='1'):
             st.markdown("🌀[App link](https://mk-316-qrcode.hf.space/): QR code generator", unsafe_allow_html=True)
             st.markdown("2024.10.14")
     with col2:
-        st.image("images/button01.png", width=100)
+        st.image("images/stopwatch.png", width=100)
         if st.button('App 2: Stopwatch', key='2'):
             st.markdown("🌀[App link](https://mk-316-Stopwatch.hf.space/): Stopwatch with current time", unsafe_allow_html=True)
             st.markdown("2024.10.14")
     
     with col3:
-        st.image("images/button01.png", width=100)
+        st.image("images/grouping.png", width=100)
         if st.button('App 3: Grouping', key='3'):
             st.markdown("🌀[App link](https://mk-316-grouping.hf.space/): Group students for activities; roster", unsafe_allow_html=True)
             st.markdown("2024.1.24")
@@ -49,7 +49,7 @@ def phonetics_apps_page():
             st.markdown("2024.1.20")
 
     with col6:
-        st.image("images/button01.png", width=100)
+        st.image("images/wordcloud.png", width=100)
         if st.button('App 6: Wordcloud', key='6'):
             st.markdown("🌀[App link](https://mk-316-wordcloud.hf.space/): Generate a simple wordcloud image from texts", unsafe_allow_html=True)
             st.markdown("2024.04.14")
