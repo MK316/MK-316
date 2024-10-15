@@ -18,14 +18,14 @@ def phonetics_apps_page():
             st.markdown("🌀[App link](https://ipa-practice.streamlit.app/): IPA Quiz with phonetic descriptions; Scoring", unsafe_allow_html=True)
     
     with col2:
-        st.image("images/button01.png", width=100)
-        if st.button('App 2: Stopwatch', key='2'):
-            st.markdown("Click here to launch [App 2](https://MK-316-Stopwatch.hf.space)", unsafe_allow_html=True)
+        st.image("images/button03.png", width=100)
+        if st.button('App 2: Playsound', key='3'):
+            st.markdown("🌀[App link](https://playsound.streamlit.app/): Upload audio to play; Speed controller", unsafe_allow_html=True)
     
     with col3:
-        st.image("images/button03.png", width=100)
-        if st.button('App 3: Playsound', key='3'):
-            st.markdown("Click here to launch [App 3](https://playsound.streamlit.app/)", unsafe_allow_html=True)
+        st.image("images/button01.png", width=100)
+        if st.button('App 3: Distinctive features', key='3'):
+            st.markdown("🌀[App link][App 3](https://mk-316-featureapp01.hf.space/): Phonology, Sound grouping from distinctive features", unsafe_allow_html=True)
     
 
     # Add some space before the second row
