@@ -12,11 +12,12 @@ html, body, [class*="css"] {{
 """
 st.markdown(css, unsafe_allow_html=True)
 
-st.title("🌾 MK316 - Language Learning AppHub")
+st.title("🌾 MK316")
+st.markdown("- Language Learning AppHub")
 
 # Additional content
 st.markdown("""
-### Welcome to MK316 - your hub for exploring innovative language learning applications powered by Streamlit! Dive into our projects, or explore my digital classroom at [mrkim21.github.io](https://mrkim21.github.io).
+Welcome to MK316 - your hub for exploring innovative language learning applications powered by Streamlit! Dive into our projects, or explore my digital classroom at [mrkim21.github.io](https://mrkim21.github.io).
 """)
 
 st.markdown("""
