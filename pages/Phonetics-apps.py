@@ -27,13 +27,6 @@ def phonetics_apps_page():
         if st.button('App 3: Playsound', key='3'):
             st.markdown("Click here to launch [App 3](https://playsound.streamlit.app/)", unsafe_allow_html=True)
     
-    with col4:
-        st.image("images/ipa01.png", width=100)  # Assuming additional apps or placeholders
-        st.write("App 4 Placeholder")
-    
-    with col5:
-        st.image("images/ipa01.png", width=100)  # Assuming additional apps or placeholders
-        st.write("App 5 Placeholder")
 
     # Add some space before the second row
     st.write("\n\n")  # Adjust the number of new lines as needed
