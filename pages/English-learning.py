@@ -6,7 +6,7 @@ image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
 st.image(image_url, caption="\"Every student can learn, just not on the same day, or the same way.\" – George Evans", use_column_width=True)
 
 def elearning_apps_page():
-    st.title('📙 English Learning')
+    st.title('✏️ English Learning')
     st.write('Applications for English learners.')
 
     # Describing your apps briefly
