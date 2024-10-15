@@ -2,7 +2,7 @@ import streamlit as st
 
 
 # URL to the raw image on GitHub
-image_url = "https://github.com/MK316/MK-316/blob/cec2786befe66ab9c59a8a1ff5e037e1931bb18f/images/bg2.png"
+image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
 
 # Display the image
 st.image(image_url, caption="My Image", use_column_width=True)
