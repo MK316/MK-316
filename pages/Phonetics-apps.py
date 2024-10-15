@@ -18,13 +18,13 @@ def phonetics_apps_page():
             st.markdown("Click here to launch [App 1](https://ipa-practice.streamlit.app/)", unsafe_allow_html=True)
     
     with col2:
-        st.image("path_to_icon2.png", width=100)
+        st.image("images/ipa01.png", width=100)
         if st.button('Launch App 2', key='2'):
-            st.markdown("Click here to launch [App 2](https://your-second-app-url.com)", unsafe_allow_html=True)
+            st.markdown("Click here to launch [App 2](https://MK-316-Stopwatch.hf.space)", unsafe_allow_html=True)
     
     with col3:
-        st.image("path_to_icon3.png", width=100)
+        st.image("images/ipa01.png", width=100)
         if st.button('Launch App 3', key='3'):
-            st.markdown("Click here to launch [App 3](https://your-third-app-url.com)", unsafe_allow_html=True)
+            st.markdown("Click here to launch [App 3](https://playsound.streamlit.app/)", unsafe_allow_html=True)
 
 phonetics_apps_page()
