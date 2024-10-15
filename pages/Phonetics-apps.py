@@ -13,17 +13,18 @@ def phonetics_apps_page():
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.image("images/ipa01.png", width=100)
+        # Linking directly on the image
+        st.markdown(f'<a href="https://ipa-practice.streamlit.app/" target="_blank"><img src="images/ipa01.png" width="100"></a>', unsafe_allow_html=True)
         st.markdown("[App 1](https://ipa-practice.streamlit.app/)")
         st.caption("#phonetics #learning")
 
     with col2:
-        st.image("path_to_icon2.png", width=100)
+        st.markdown(f'<a href="https://your-second-app-url.com" target="_blank"><img src="path_to_icon2.png" width="100"></a>', unsafe_allow_html=True)
         st.markdown("[App 2](https://your-second-app-url.com)")
         st.caption("#speech #analysis")
 
     with col3:
-        st.image("path_to_icon3.png", width=100)
+        st.markdown(f'<a href="https://your-third-app-url.com" target="_blank"><img src="path_to_icon3.png" width="100"></a>', unsafe_allow_html=True)
         st.markdown("[App 3](https://your-third-app-url.com)")
         st.caption("#interactive #training")
 
