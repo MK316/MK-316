@@ -9,11 +9,10 @@ def elearning_apps_page():
     st.title('📙 English Language Learning Apps')
     st.write('Applications for English learners.')
 
-# Describing your apps briefly
-st.markdown("""
-Explore our selection of English learning apps designed specifically for learners. These applications use interactive and innovative tools to improve vocabulary knowledge, pronunciation, listening skills, and phonetic awareness, providing effective resources and exercises.
-""")
-
+    # Describing your apps briefly
+    st.markdown("""
+    Explore our selection of English learning apps designed specifically for learners. These applications use interactive and innovative tools to improve vocabulary knowledge, pronunciation, listening skills, and phonetic awareness, providing effective resources and exercises.
+    """)
 
     # First row with three columns
     col1, col2, col3 = st.columns(3)  # Define columns for the first row
