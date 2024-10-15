@@ -1,7 +1,5 @@
 import streamlit as st
 
-# Display the image
-st.image(image_url, caption="\"Wannna really learn coding? Give teaching a go!\"", use_column_width=True)
 
 st.image("https://github.com/MK316/MK-316/raw/main/images/mk316.png", caption="MK316 logo", width = 200)
 st.markdown("### _Welcome to my application gallery_")
