@@ -13,16 +13,17 @@ def phonetics_apps_page():
     col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
-        if st.button('App1: IPA quiz', key='1'):
+        st.image("images/ipa01.png", width=100)
+        if st.button('App 1: IPA quiz', key='1'):
             st.markdown("[Open the app](https://ipa-practice.streamlit.app/) \n IPA symbols, Quiz, Phonetic description", unsafe_allow_html=True)
     with col2:
         st.image("images/ipa01.png", width=100)
-        if st.button('Launch App 2', key='2'):
+        if st.button('App 2: Stopwatch', key='2'):
             st.markdown("Click here to launch [App 2](https://MK-316-Stopwatch.hf.space)", unsafe_allow_html=True)
     
     with col3:
         st.image("images/ipa01.png", width=100)
-        if st.button('Launch App 3', key='3'):
+        if st.button('App 3: Playsound', key='3'):
             st.markdown("Click here to launch [App 3](https://playsound.streamlit.app/)", unsafe_allow_html=True)
             
     with col4:
