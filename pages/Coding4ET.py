@@ -8,7 +8,7 @@ def main():
 
     # Static content for other tabs
     for i, tab in enumerate(tabs):
-        if i != 3:  # Skip index 3 for Lesson 3
+        if i != 3:
             with tab:
                 st.write("To be updated.")
 
@@ -26,15 +26,11 @@ def main():
 
         # Initialize session state for current video
         if 'current_video' not in st.session_state:
-            st.session_state.current_video = video_links['Lesson 3.1']  # Set default video
+            st.session_state.current_video = video_links['Lesson 3.1']
 
-        # Video placeholder to update video
-        video_placeholder = st.empty()
-
-        # Immediately load the video based on session state (correctly place this before buttons)
-        video_placeholder.html(
-            get_iframe(st.session_state.current_video),
-            height=300
+        # Display the video using the session state URL
+        components.html(
+            get_iframe(st.session_state.current_video), height=300
         )
 
         # Create buttons in a single column that update the session state and video
@@ -42,10 +38,7 @@ def main():
         for lesson, url in video_links.items():
             if col.button(lesson):
                 st.session_state.current_video = url
-                video_placeholder.html(
-                    get_iframe(st.session_state.current_video),
-                    height=300
-                )
+                st.experimental_rerun()
 
 def get_iframe(video_url):
     """Generate HTML iframe code for embedding a YouTube video."""
