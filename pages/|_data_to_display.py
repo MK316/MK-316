@@ -37,7 +37,7 @@ if generate_button and user_input:  # Generate only when the button is clicked
     tab3.pyplot(fig)
 
 # Webpage embedding tab
-tab4.subheader("Embedded Webpage")
+tab4.subheader("MK316-digitalclassroom")
 tab4.write("Below is an embedded webpage:")
 # URL of the webpage you want to embed
 url = "https://mrkim21.github.io"
