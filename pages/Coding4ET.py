@@ -15,13 +15,13 @@ def main():
         st.markdown(readme_content, unsafe_allow_html=True)
 
     with tabs[1]:
-        st.subheader("Manual")
+        st.subheader("Lesson 1")
         readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson01.md'
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
 
-    with tabs[1]:
-        st.subheader("Manual")
+    with tabs[2]:
+        st.subheader("Lesson 2")
         readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson02.md'
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
