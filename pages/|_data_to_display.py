@@ -43,5 +43,16 @@ with tabs[2]:
 with tabs[3]:
     st.subheader("Tutorials")
     st.write("Below is an embedded video from YouTube: Coding basics")
-    video_url = "https://youtu.be/uigxMFBR0Wg"  # Replace INSERT_VIDEO_ID_HERE with your actual YouTube video ID
-    st.video(video_url, width=400, height=300)
+    video_url = "https://youtu.be/uigxMFBR0Wg"  # YouTube video ID
+    
+    # Custom CSS to set the size of the video player
+    css = """
+    <style>
+        .element-container:nth-child(3) > .stVideo > iframe {
+            width: 400px !important;
+            height: 300px !important;
+        }
+    </style>
+    """
+    st.markdown(css, unsafe_allow_html=True)  # Applying the custom CSS
+    st.video(video_url)
