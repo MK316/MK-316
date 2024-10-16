@@ -44,4 +44,4 @@ with tabs[3]:
     st.subheader("Tutorials")
     st.write("Below is an embedded video from YouTube: Coding basics")
     video_url = "https://youtu.be/uigxMFBR0Wg"  # Replace INSERT_VIDEO_ID_HERE with your actual YouTube video ID
-    st.video(video_url)
+    st.video(video_url, width=400, height=300)
