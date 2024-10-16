@@ -24,7 +24,7 @@ tab2.write(data)
 
 # Word cloud tab
 tab3.subheader("A tab with a word cloud")
-tab3.write("Please enter some text to generate a word cloud.")
+tab3.markdown("Please enter some text to generate a word cloud. [sample text](https://raw.githubusercontent.com/MK316/MK-316/refs/heads/main/data/sampletext.txt)")
 # Move the user input here to appear below the instruction
 user_input = tab3.text_input("Enter text to create a word cloud:")
 
