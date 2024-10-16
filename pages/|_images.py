@@ -1,6 +1,6 @@
 import streamlit as st
 
-tab1, tab2, tab3 = st.tabs(["image1", "image2", "image3"])
+tab1, tab2, tab3 = st.tabs(["gallery 1", "gallery 2", "gallery 3"])
 
 with tab1:
     st.header("A cat")
