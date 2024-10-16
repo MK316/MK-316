@@ -6,7 +6,7 @@ import streamlit.components.v1 as components
 
 # Creating the word cloud
 def create_wordcloud(text):
-    wordcloud = WordCloud(width=600, height=400, background_color='white').generate(text)
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
     return wordcloud
 
 # Streamlit tabs
@@ -39,20 +39,12 @@ with tabs[2]:
         ax.axis("off")
         st.pyplot(fig)
 
-# Webpage embedding tab - now embedding a YouTube video
+# Video embedding tab
 with tabs[3]:
     st.subheader("Tutorials")
     st.write("Below is an embedded video from YouTube: Coding basics")
-    video_url = "https://youtu.be/uigxMFBR0Wg"  # YouTube video ID
-    
-    # Custom CSS to set the size of the video player
-    css = """
-    <style>
-        .element-container:nth-child(3) > .stVideo > iframe {
-            width: 200px !important;
-            height: 100px !important;
-        }
-    </style>
+    # Embed YouTube video using HTML iframe
+    html_code = """
+    <iframe width="400" height="300" src="https://www.youtube.com/embed/uigxMFBR0Wg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     """
-    st.markdown(css, unsafe_allow_html=True)  # Applying the custom CSS
-    st.video(video_url)
+    components.html(html_code, height=300)
