@@ -10,7 +10,7 @@ def create_wordcloud(text):
     return wordcloud
 
 # Streamlit tabs
-tabs = st.tabs(["📈 Chart", "🗃 Data", "🌌 Word Cloud", "🌐 MK316-digitalclassroom"])
+tabs = st.tabs(["📈 Chart", "🗃 Data", "🌌 Word Cloud", "🎬 Videos"])
 
 # Random data for chart
 data = np.random.randn(10, 1)
@@ -41,7 +41,7 @@ with tabs[2]:
 
 # Webpage embedding tab - now embedding a YouTube video
 with tabs[3]:
-    st.subheader("MK316-digitalclassroom")
+    st.subheader("Tutorials")
     st.write("Below is an embedded video from YouTube: Coding basics")
     video_url = "https://youtu.be/uigxMFBR0Wg"  # Replace INSERT_VIDEO_ID_HERE with your actual YouTube video ID
     st.video(video_url)
