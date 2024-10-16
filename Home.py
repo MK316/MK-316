@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.write("Click > (Top-left)")
+st.write("Click > (Top-left) to expand or fold menu")
 st.image("https://github.com/MK316/MK-316/raw/main/images/mk316.png", caption=" ", width = 200)
 st.markdown("### _Welcome to my application gallery_")
 
