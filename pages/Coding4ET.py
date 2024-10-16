@@ -10,7 +10,7 @@ def main():
     # Manual tab content
     with tabs[0]:
         st.subheader("Manual")
-        readme_url = 'https://github.com/MK316/Coding4ET/blob/main/README.md'
+        readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/overview.md'
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
 
