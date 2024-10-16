@@ -10,7 +10,7 @@ def create_wordcloud(text):
     return wordcloud
 
 # Streamlit tabs
-tab1, tab2, tab3, tab4 = st.tabs(["📈 Chart", "🗃 Data", "🌌 Word Cloud", "🌐 Embed Web"])
+tab1, tab2, tab3, tab4 = st.tabs(["📈 Chart", "🗃 Data", "🌌 Word Cloud", "🌐 MK316-digitalclassroom"])
 
 # Random data for chart
 data = np.random.randn(10, 1)
@@ -40,6 +40,6 @@ if generate_button and user_input:  # Generate only when the button is clicked
 tab4.subheader("Embedded Webpage")
 tab4.write("Below is an embedded webpage:")
 # URL of the webpage you want to embed
-url = "https://padlet.com/mirankim316/message"
+url = "https://mrkim21.github.io"
 # Embed the webpage using an iframe
 components.iframe(url, height=600, scrolling=True)
