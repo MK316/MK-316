@@ -8,9 +8,10 @@ def main():
     tabs = st.tabs(["Manual", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5"])
     
     # Populate each tab except for Lesson 3 with a placeholder text
-    for tab, content in zip(tabs, ["To be updated"] * 5):
-        with tab:
-            st.write(content)
+    for index, tab in enumerate(tabs):
+        if index != 3:  # Skip index 3 as it's for Lesson 3
+            with tab:
+                st.write("To be updated.")
 
     # Handling the Lesson 3 with video links
     with tabs[3]:
@@ -24,16 +25,20 @@ def main():
             'Lesson 3.4': 'https://www.youtube.com/embed/vSsClackic4'
         }
 
-        # Initialize a video placeholder
-        video_placeholder = st.empty()
-        video_url = video_links['Lesson 3.1']  # Display the default video initially
-        video_placeholder.html(get_iframe(video_url), height=300)
+        # Initialize or get the current video from the session state
+        if 'current_video' not in st.session_state:
+            st.session_state['current_video'] = video_links['Lesson 3.1']  # Default video
 
-        # Create buttons for each lesson under Lesson 3 and update the video on click
-        for lesson in video_links:
+        # Display the video using the session state URL
+        components.html(
+            get_iframe(st.session_state['current_video']),
+            height=300
+        )
+
+        # Create buttons for each lesson under Lesson 3 and update the session state on click
+        for lesson, url in video_links.items():
             if st.button(lesson):
-                video_url = video_links[lesson]
-                video_placeholder.html(get_iframe(video_url), height=300)
+                st.session_state['current_video'] = url
 
 def get_iframe(video_url):
     """Return HTML iframe code for embedding a YouTube video."""
