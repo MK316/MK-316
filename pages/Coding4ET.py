@@ -1,9 +1,10 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 def main():
     st.title('Coding4ET Tutorials')
 
-    # Define video URLs
+    # Define video URLs (Use the "embed" link from YouTube)
     tutorial_links = {
         'Lesson 3.1': 'https://www.youtube.com/embed/link_for_lesson_3_1',
         'Lesson 3.2': 'https://www.youtube.com/embed/link_for_lesson_3_2',
@@ -14,8 +15,8 @@ def main():
     # Placeholder for the video iframe
     video_container = st.empty()
     default_video_url = tutorial_links['Lesson 3.1']  # Default video to display
-    video_container.html(
-        f"<iframe width='560' height='315' src='{default_video_url}' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>",
+    components.html(
+        f"<iframe width='560' height='315' src='{default_video_url}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
         height=315
     )
 
@@ -25,25 +26,25 @@ def main():
     # Button setup in columns
     with col1:
         if st.button('Lesson 3.1'):
-            video_container.html(
-                f"<iframe width='560' height='315' src='{tutorial_links['Lesson 3.1']}' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>",
-                height=315
+            components.html(
+                f"<iframe width='560' height='315' src='{tutorial_links['Lesson 3.1']}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+                height=315, key='1'
             )
         if st.button('Lesson 3.2'):
-            video_container.html(
-                f"<iframe width='560' height='315' src='{tutorial_links['Lesson 3.2']}' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>",
-                height=315
+            components.html(
+                f"<iframe width='560' height='315' src='{tutorial_links['Lesson 3.2']}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+                height=315, key='2'
             )
     with col2:
         if st.button('Lesson 3.3'):
-            video_container.html(
-                f"<iframe width='560' height='315' src='{tutorial_links['Lesson 3.3']}' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>",
-                height=315
+            components.html(
+                f"<iframe width='560' height='315' src='{tutorial_links['Lesson 3.3']}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+                height=315, key='3'
             )
         if st.button('Lesson 3.4'):
-            video_container.html(
-                f"<iframe width='560' height='315' src='{tutorial_links['Lesson 3.4']}' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>",
-                height=315
+            components.html(
+                f"<iframe width='560' height='315' src='{tutorial_links['Lesson 3.4']}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+                height=315, key='4'
             )
 
 if __name__ == "__main__":
