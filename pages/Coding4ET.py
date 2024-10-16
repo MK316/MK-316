@@ -12,13 +12,10 @@ def main():
         'Lesson 3.4': 'https://www.youtube.com/embed/link_for_lesson_3_4'
     }
 
-    # Create a placeholder for video
-    video_placeholder = st.empty()
-    default_video_url = tutorial_links['Lesson 3.1']  # Default video to display
-
-    # Initial display
-    video_placeholder.html(
-        f"<iframe width='560' height='315' src='{default_video_url}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+    # Create a placeholder for the initial display
+    video_url = tutorial_links['Lesson 3.1']  # Default video to display
+    video_frame = components.html(
+        f"<iframe width='560' height='315' src='{video_url}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
         height=315
     )
 
@@ -28,18 +25,18 @@ def main():
     # Setup buttons to update the video iframe
     with col1:
         if st.button('Lesson 3.1'):
-            update_video(video_placeholder, tutorial_links['Lesson 3.1'])
+            video_frame = update_video(tutorial_links['Lesson 3.1'])
         if st.button('Lesson 3.2'):
-            update_video(video_placeholder, tutorial_links['Lesson 3.2'])
+            video_frame = update_video(tutorial_links['Lesson 3.2'])
     with col2:
         if st.button('Lesson 3.3'):
-            update_video(video_placeholder, tutorial_links['Lesson 3.3'])
+            video_frame = update_video(tutorial_links['Lesson 3.3'])
         if st.button('Lesson 3.4'):
-            update_video(video_placeholder, tutorial_links['Lesson 3.4'])
+            video_frame = update_video(tutorial_links['Lesson 3.4'])
 
-def update_video(placeholder, video_url):
-    """Update the video in the placeholder with a new video URL."""
-    placeholder.html(
+def update_video(video_url):
+    """Return an HTML component with a new video URL."""
+    return components.html(
         f"<iframe width='560' height='315' src='{video_url}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
         height=315
     )
