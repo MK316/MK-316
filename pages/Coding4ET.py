@@ -19,10 +19,10 @@ def main():
         
         # Define video URLs using the correct YouTube embed links
         video_links = {
-            'Lesson 3.1': 'https://www.youtube.com/embed/uigxMFBR0Wg',
-            'Lesson 3.2': 'https://www.youtube.com/embed/gPIe1Tgie1Q',
-            'Lesson 3.3': 'https://www.youtube.com/embed/ofhRZ6k3Ryw',
-            'Lesson 3.4': 'https://www.youtube.com/embed/vSsClackic4'
+            'Lesson 3.1': 'https://www.youtube.com/embed/gPIe1Tgie1Q',
+            'Lesson 3.2': 'https://www.youtube.com/embed/ofhRZ6k3Ryw',
+            'Lesson 3.3': 'https://www.youtube.com/embed/vSsClackic4',
+            'Lesson 3.4': 'https://www.youtube.com/embed/uigxMFBR0Wg'
         }
 
         # Initialize or get the current video from the session state
