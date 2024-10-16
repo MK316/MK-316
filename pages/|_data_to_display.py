@@ -40,6 +40,6 @@ if generate_button and user_input:  # Generate only when the button is clicked
 tab4.subheader("Embedded Webpage")
 tab4.write("Below is an embedded webpage:")
 # URL of the webpage you want to embed
-url = "https://padlet.com/mirankim316/samples-lrhfyfktau0v9h82"
+url = "https://padlet.com/mirankim316/message"
 # Embed the webpage using an iframe
 components.iframe(url, height=400, scrolling=True)
