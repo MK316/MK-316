@@ -21,10 +21,10 @@ def main():
         st.subheader("Lesson 3 Videos")
         # Define video URLs
         tutorial_links = {
-            'Lesson 3.1': 'https://www.youtube.com/embed/link_for_lesson_3_1',
-            'Lesson 3.2': 'https://www.youtube.com/embed/link_for_lesson_3_2',
-            'Lesson 3.3': 'https://www.youtube.com/embed/link_for_lesson_3_3',
-            'Lesson 3.4': 'https://www.youtube.com/embed/link_for_lesson_3_4'
+            'Lesson 3.1': 'https://youtu.be/uigxMFBR0Wg',
+            'Lesson 3.2': 'https://youtu.be/gPIe1Tgie1Q',
+            'Lesson 3.3': 'https://youtu.be/ofhRZ6k3Ryw',
+            'Lesson 3.4': 'https://youtu.be/vSsClackic4'
         }
 
         # Create a placeholder for the video
