@@ -24,21 +24,14 @@ def main():
             'Lesson 3.4': 'https://www.youtube.com/embed/vSsClackic4'
         }
 
-        # Initialize session state for current video
-        if 'current_video' not in st.session_state:
-            st.session_state.current_video = video_links['Lesson 3.1']
-
-        # Display the video using the session state URL
-        components.html(
-            get_iframe(st.session_state.current_video), height=300
-        )
-
-        # Create buttons in a single column that update the session state and video
+        # Create buttons and placeholders in a single column
         col = st.columns(1)[0]
-        for lesson, url in video_links.items():
+        video_placeholders = {lesson: st.empty() for lesson in video_links}  # Dict to hold placeholders
+
+        for lesson in video_links:
             if col.button(lesson):
-                st.session_state.current_video = url
-                st.experimental_rerun()
+                # When a button is clicked, update only the corresponding video placeholder
+                video_placeholders[lesson].html(get_iframe(video_links[lesson]), height=300)
 
 def get_iframe(video_url):
     """Generate HTML iframe code for embedding a YouTube video."""
