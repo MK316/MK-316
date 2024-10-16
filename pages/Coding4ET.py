@@ -24,14 +24,13 @@ def main():
             'Lesson 3.4': 'https://www.youtube.com/embed/vSsClackic4'
         }
 
-        # Create buttons and placeholders in a single column
-        col = st.columns(1)[0]
-        video_placeholders = {lesson: st.empty() for lesson in video_links}  # Dict to hold placeholders
-
+        # Create buttons and placeholders dynamically
         for lesson in video_links:
-            if col.button(lesson):
-                # When a button is clicked, update only the corresponding video placeholder
-                video_placeholders[lesson].html(get_iframe(video_links[lesson]), height=300)
+            if st.button(lesson):
+                # Display the video directly below the button when clicked
+                components.html(
+                    get_iframe(video_links[lesson]), height=300
+                )
 
 def get_iframe(video_url):
     """Generate HTML iframe code for embedding a YouTube video."""
