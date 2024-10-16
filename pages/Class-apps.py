@@ -16,7 +16,7 @@ def class_apps_page():
     with col1:
         st.image("images/qr.png", width=100)
         if st.button('App 1: QR Code', key='1'):
-            st.markdown("🌀[App link](https://mk-316-qrcode.hf.space/): QR code generator", unsafe_allow_html=True)
+            st.markdown("🌀[App link](https://mk-316-QRcode-with-title.hf.space/): QR code generator", unsafe_allow_html=True)
             st.markdown("2024.10.14")
     with col2:
         st.image("images/stopwatch.png", width=100)
