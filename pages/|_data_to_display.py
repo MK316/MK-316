@@ -6,7 +6,7 @@ import streamlit.components.v1 as components
 
 # Creating the word cloud
 def create_wordcloud(text):
-    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+    wordcloud = WordCloud(width=400, height=300, background_color='white').generate(text)
     return wordcloud
 
 # Streamlit tabs
