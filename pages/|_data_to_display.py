@@ -39,9 +39,9 @@ with tabs[2]:
         ax.axis("off")
         st.pyplot(fig)
 
-# Webpage embedding tab
+# Webpage embedding tab - now embedding a YouTube video
 with tabs[3]:
     st.subheader("MK316-digitalclassroom")
-    st.write("Below is an embedded webpage:")
-    url = "https://mrkim21.github.io"
-    components.iframe(url, height=600, scrolling=True)
+    st.write("Below is an embedded video from YouTube: Coding basics")
+    video_url = "https://youtu.be/uigxMFBR0Wg"  # Replace INSERT_VIDEO_ID_HERE with your actual YouTube video ID
+    st.video(video_url)
