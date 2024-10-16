@@ -4,20 +4,20 @@ import streamlit.components.v1 as components
 def main():
     st.title('Coding4ET Tutorials')
 
-    # Create tabs for each section of the tutorial
+    # Tabs setup
     tabs = st.tabs(["Manual", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5"])
     
-    # Populate each tab except for Lesson 3 with a placeholder text
-    for index, tab in enumerate(tabs):
-        if index != 3:  # Skip index 3 as it's for Lesson 3
+    # Populate non-video tabs
+    for i, tab in enumerate(tabs):
+        if i != 3:
             with tab:
                 st.write("To be updated.")
 
-    # Handling the Lesson 3 with video links
+    # Special handling for Lesson 3
     with tabs[3]:
         st.subheader("Lesson 3 Videos")
-        
-        # Define video URLs using the correct YouTube embed links
+
+        # Define video URLs
         video_links = {
             'Lesson 3.1': 'https://www.youtube.com/embed/uigxMFBR0Wg',
             'Lesson 3.2': 'https://www.youtube.com/embed/gPIe1Tgie1Q',
@@ -25,23 +25,31 @@ def main():
             'Lesson 3.4': 'https://www.youtube.com/embed/vSsClackic4'
         }
 
-        # Use session state to manage the current video
+        # Initialize session state for video URL
         if 'current_video' not in st.session_state:
-            st.session_state.current_video = video_links['Lesson 3.1']  # Default video
+            st.session_state.current_video = video_links['Lesson 3.1']
 
-        # Initialize a video placeholder
-        video_placeholder = st.empty()
-        video_placeholder.html(get_iframe(st.session_state.current_video), height=300)
+        # Video display
+        components.html(
+            get_iframe(st.session_state.current_video), height=300
+        )
 
-        # Display buttons for each lesson under Lesson 3 and update the session state on click
-        for lesson in video_links:
-            if st.button(lesson):
-                st.session_state.current_video = video_links[lesson]
-                video_placeholder.html(get_iframe(st.session_state.current_video), height=300)
+        # Setup buttons to update the video
+        col = st.columns(1)[0]
+        for lesson, url in video_links.items():
+            if col.button(lesson):
+                st.session_state.current_video = url
+                components.html(
+                    get_iframe(st.session_state.current_video), height=300
+                )
 
 def get_iframe(video_url):
-    """Return HTML iframe code for embedding a YouTube video."""
-    return f"<iframe width='400' height='300' src='{video_url}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>"
+    """Generate an iframe HTML element for the given video URL."""
+    return f"""
+    <iframe width='400' height='300' src='{video_url}' 
+    frameborder='0' allow='accelerometer; autoplay; clipboard-write; 
+    encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
+    """
 
 if __name__ == "__main__":
     main()
