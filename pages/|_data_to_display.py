@@ -4,11 +4,12 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
 # Sample text data for the word cloud
-text = "Streamlit is an open-source app framework for Machine Learning and Data Science projects."
+#text = "Streamlit is an open-source app framework for Machine Learning and Data Science projects."
+user_input = st.text_input("Enter text to create a word cloud:")
 
 # Creating the word cloud
 def create_wordcloud(text):
-    wordcloud = WordCloud(width=800, height=400, background_color ='white').generate(text)
+    wordcloud = WordCloud(width=800, height=400, background_color ='white').generate(user_input)
     return wordcloud
 
 # Streamlit tabs
