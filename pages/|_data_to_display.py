@@ -47,4 +47,4 @@ with tabs[3]:
     html_code = """
     <iframe width="500" height="400" src="https://www.youtube.com/embed/uigxMFBR0Wg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     """
-    components.html(html_code, height=300)
+    components.html(html_code, height=500)
