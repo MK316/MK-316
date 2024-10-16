@@ -13,30 +13,33 @@ def main():
     }
 
     # Create a placeholder for the initial display
-    video_url = tutorial_links['Lesson 3.1']  # Default video to display
-    video_frame = components.html(
-        f"<iframe width='560' height='315' src='{video_url}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+    video_placeholder = st.empty()  # Video placeholder, which will be updated
+    default_video_url = tutorial_links['Lesson 3.1']  # Default video to display
+
+    # Display the default video in the placeholder
+    video_placeholder.html(
+        f"<iframe width='560' height='315' src='{default_video_url}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
         height=315
     )
 
     # Two columns for buttons
     col1, col2 = st.columns(2)
 
-    # Setup buttons to update the video iframe
+    # Setup buttons to update the video iframe, updating the SAME placeholder
     with col1:
         if st.button('Lesson 3.1'):
-            video_frame = update_video(tutorial_links['Lesson 3.1'])
+            update_video(video_placeholder, tutorial_links['Lesson 3.1'])
         if st.button('Lesson 3.2'):
-            video_frame = update_video(tutorial_links['Lesson 3.2'])
+            update_video(video_placeholder, tutorial_links['Lesson 3.2'])
     with col2:
         if st.button('Lesson 3.3'):
-            video_frame = update_video(tutorial_links['Lesson 3.3'])
+            update_video(video_placeholder, tutorial_links['Lesson 3.3'])
         if st.button('Lesson 3.4'):
-            video_frame = update_video(tutorial_links['Lesson 3.4'])
+            update_video(video_placeholder, tutorial_links['Lesson 3.4'])
 
-def update_video(video_url):
-    """Return an HTML component with a new video URL."""
-    return components.html(
+def update_video(placeholder, video_url):
+    """Update the existing placeholder with a new video URL."""
+    placeholder.html(
         f"<iframe width='560' height='315' src='{video_url}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
         height=315
     )
