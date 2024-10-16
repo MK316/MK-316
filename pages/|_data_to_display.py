@@ -39,7 +39,6 @@ if generate_button and user_input:  # Generate only when the button is clicked
 # Webpage embedding tab
 tab4.subheader("MK316-digitalclassroom")
 tab4.write("Below is an embedded webpage:")
-# URL of the webpage you want to embed
-url = "https://mrkim21.github.io"
-# Embed the webpage using an iframe
-components.iframe(url, height=600, scrolling=True)
+if tab4:  # Ensure that this iframe only loads when tab4 is active
+    url = "https://mrkim21.github.io"
+    components.iframe(url, height=600, scrolling=True)
