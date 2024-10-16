@@ -3,13 +3,12 @@ import numpy as np
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
-# Sample text data for the word cloud
-#text = "Streamlit is an open-source app framework for Machine Learning and Data Science projects."
+# Ask for user input
 user_input = st.text_input("Enter text to create a word cloud:")
 
 # Creating the word cloud
 def create_wordcloud(text):
-    wordcloud = WordCloud(width=800, height=400, background_color ='white').generate(user_input)
+    wordcloud = WordCloud(width=800, height=400, background_color ='white').generate(text)
     return wordcloud
 
 # Streamlit tabs
@@ -27,9 +26,13 @@ tab2.subheader("A tab with the data")
 tab2.write(data)
 
 # Word cloud tab
-tab3.subheader("A tab with a word cloud")
-wordcloud = create_wordcloud(text)
-fig, ax = plt.subplots()
-ax.imshow(wordcloud, interpolation='bilinear')
-ax.axis("off")
-tab3.pyplot(fig)
+if user_input:  # Check if there is user input before generating the word cloud
+    tab3.subheader("A tab with a word cloud")
+    wordcloud = create_wordcloud(user_input)
+    fig, ax = plt.subplots()
+    ax.imshow(wordcloud, interpolation='bilinear')
+    ax.axis("off")
+    tab3.pyplot(fig)
+else:
+    tab3.subheader("A tab with a word cloud")
+    tab3.write("Please enter some text to generate a word cloud.")
