@@ -12,11 +12,9 @@ def main():
             with tab:
                 st.write("To be updated.")
 
-    # Special handling for Lesson 3
+    # Handling Lesson 3
     with tabs[3]:
         st.subheader("Lesson 3 Videos")
-
-        # Define video URLs using correct YouTube embed links
         video_links = {
             'Lesson 3.1': 'https://www.youtube.com/embed/uigxMFBR0Wg',
             'Lesson 3.2': 'https://www.youtube.com/embed/gPIe1Tgie1Q',
@@ -24,24 +22,25 @@ def main():
             'Lesson 3.4': 'https://www.youtube.com/embed/vSsClackic4'
         }
 
-        # Initialize session state for current video
+        # Use session state for current video
         if 'current_video' not in st.session_state:
-            st.session_state.current_video = video_links['Lesson 3.1']
+            st.session_state.current_video = video_links['Lesson 3.1']  # default video
 
-        # Display the video using the session state URL
+        # Display the video
         components.html(
             get_iframe(st.session_state.current_video), height=300
         )
 
-        # Create buttons in a single column that update the session state and video
+        # Buttons to change video
         col = st.columns(1)[0]
         for lesson, url in video_links.items():
             if col.button(lesson):
                 st.session_state.current_video = url
+                # Only rerun if needed, after updating the state
                 st.experimental_rerun()
 
 def get_iframe(video_url):
-    """Generate HTML iframe code for embedding a YouTube video."""
+    """Generate iframe HTML for video."""
     return f"<iframe width='400' height='300' src='{video_url}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>"
 
 if __name__ == "__main__":
