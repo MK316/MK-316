@@ -10,3 +10,4 @@ gTTS
 pandas
 pydub
 scipy
+plotly
