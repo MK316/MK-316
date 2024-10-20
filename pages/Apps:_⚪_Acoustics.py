@@ -15,12 +15,27 @@ def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     return tone_int16, t, tone
 
 def plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max):
-    """Load an audio file and plot its spectrogram."""
     try:
         y, sr = librosa.load(audio_path, sr=None)
+        if y.size == 0:
+            st.error("Loaded audio is empty. Please check the file and try again.")
+            return
+        
         start_sample = int(time_min * sr)
         end_sample = int(time_max * sr)
+
+        if start_sample >= end_sample:
+            st.error("End time must be greater than start time.")
+            return
+        if end_sample > len(y):
+            st.error("End time exceeds the audio duration.")
+            return
+        
         y_segment = y[start_sample:end_sample]
+
+        if y_segment.size == 0:
+            st.error("Selected audio segment is empty.")
+            return
 
         D = np.abs(librosa.stft(y_segment))
         S_dB = librosa.amplitude_to_db(D, ref=np.max)
@@ -30,19 +45,20 @@ def plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max):
         plt.colorbar(format='%+2.0f dB')
         plt.title('Frequency Spectrogram in Hz')
         plt.xlim([0, time_max - time_min])  # Adjust the x-axis to the duration of the segment
-        plt.ylim([freq_min, freq_max])  # Frequency limits in Hz
+        plt.ylim([freq_min, freq_max])
         plt.xlabel('Time (s)')
         plt.ylabel('Frequency (Hz)')
         plt.tight_layout()
         st.pyplot(plt)
 
-        # Audio playback
         buffer = BytesIO()
         write(buffer, sr, y_segment.astype(np.int16))
         buffer.seek(0)
         st.audio(buffer, format='audio/wav')
+
     except Exception as e:
         st.error(f"An error occurred while generating the spectrogram: {str(e)}")
+
 
 def main():
     st.title('Acoustics')
