@@ -1,8 +1,7 @@
 import streamlit as st
 import numpy as np
-from scipy.io.wavfile import write, read
+from scipy.io.wavfile import write
 from io import BytesIO
-import plotly.graph_objects as go
 import librosa
 import librosa.display
 import matplotlib.pyplot as plt
@@ -13,11 +12,11 @@ def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     tone = amplitude * np.sin(2 * np.pi * frequency * t)
     return np.int16(tone / np.max(np.abs(tone)) * 32767), t, tone
 
-def plot_spectrogram(audio_path):
-    """Load an audio file and plot its spectrogram using matplotlib."""
+def plot_spectrogram(audio_path, n_mels, hop_length):
+    """Load an audio file and plot its spectrogram."""
     try:
-        y, sr = librosa.load(audio_path, sr=None)  # Load the audio file
-        S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128, hop_length=512)
+        y, sr = librosa.load(audio_path, sr=None)
+        S = librosa.feature.melspectrogram(y, sr=sr, n_mels=n_mels, hop_length=hop_length)
         S_dB = librosa.power_to_db(S, ref=np.max)
 
         plt.figure(figsize=(10, 4))
@@ -31,7 +30,7 @@ def plot_spectrogram(audio_path):
 
 def main():
     st.title('Acoustics')
-    tabs = st.tabs(["Introduction", "Generate Tone", "Tab 3", "Upload and Analyze Spectrogram"])
+    tabs = st.tabs(["Introduction", "Generate Tone", "Upload and Analyze Spectrogram"])
 
     with tabs[0]:
         st.write("Welcome to the Acoustics module. This module allows you to explore various aspects of sound.")
@@ -46,27 +45,18 @@ def main():
             buffer = BytesIO()
             write(buffer, 44100, data)
             buffer.seek(0)
-            st.session_state['audio_buffer'] = buffer
-            st.session_state['waveform_data'] = (t, waveform)
-            st.session_state['freq_input'] = freq_input
+            st.audio(buffer, format='audio/wav', start_time=0)
 
-        if 'audio_buffer' in st.session_state:
-            st.audio(st.session_state['audio_buffer'], format='audio/wav', start_time=0)
+            fig = go.Figure(data=go.Scatter(x=t, y=waveform))
+            fig.update_layout(
+                title=f"Waveform of the Generated Tone at {freq_input} Hz",
+                xaxis_title='Time [s]',
+                yaxis_title='Amplitude',
+                xaxis_rangeslider_visible=True
+            )
+            st.plotly_chart(fig, use_container_width=True)
 
-        if 'waveform_data' in st.session_state:
-            display_waveform_button = st.button('Display Waveform')
-            if display_waveform_button:
-                t, waveform = st.session_state['waveform_data']
-                fig = go.Figure(data=go.Scatter(x=t, y=waveform))
-                fig.update_layout(
-                    title=f"Waveform of the Generated Tone at {st.session_state['freq_input']} Hz",
-                    xaxis_title='Time [s]',
-                    yaxis_title='Amplitude',
-                    xaxis_rangeslider_visible=True
-                )
-                st.plotly_chart(fig, use_container_width=True)
-
-    with tabs[3]:
+    with tabs[2]:
         st.header("Upload and Analyze Spectrogram")
         uploaded_file = st.file_uploader("Upload your audio file (WAV format)", type=['wav'])
 
@@ -75,10 +65,12 @@ def main():
             with open(audio_path, 'wb') as f:
                 f.write(uploaded_file.getbuffer())
             st.success("File uploaded successfully!")
-            try:
-                plot_spectrogram(audio_path)
-            except Exception as e:
-                st.error(f"An error occurred: {str(e)}")
+
+            n_mels = st.slider('Number of Mel Bands', min_value=16, max_value=256, value=128, step=16)
+            hop_length = st.slider('Hop Length', min_value=256, max_value=2048, value=512, step=128)
+
+            if st.button('Generate Spectrogram'):
+                plot_spectrogram(audio_path, n_mels, hop_length)
 
 if __name__ == "__main__":
     main()
