@@ -16,19 +16,20 @@ def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
 def plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max):
     try:
         y, sr = librosa.load(audio_path, sr=None)
-        S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)
-        S_dB = librosa.power_to_db(S, ref=np.max)
+        # Generate a Short-Time Fourier Transform (STFT) spectrogram
+        D = np.abs(librosa.stft(y))
+        # Convert power spectrogram (amplitude squared) to decibel (dB) units
+        S_dB = librosa.amplitude_to_db(D, ref=np.max)
 
         plt.figure(figsize=(10, 4))
-        librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='mel', hop_length=512)
+        # We use specshow to display a spectrogram with a linear frequency axis
+        librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='linear', hop_length=512)
         plt.colorbar(format='%+2.0f dB')
-        plt.title('Mel-frequency Spectrogram')
+        plt.title('Frequency Spectrogram in Hz')
         
-        # Setting the x-axis and y-axis limits correctly
-        plt.xlim([time_min, time_max])  # Time limits
-        mel_min = librosa.hz_to_mel(freq_min)  # Convert Hz to Mel for lower limit
-        mel_max = librosa.hz_to_mel(freq_max)  # Convert Hz to Mel for upper limit
-        plt.ylim([mel_min, mel_max])  # Frequency limits
+        # Apply the user-selected axis limits
+        plt.xlim([time_min, time_max])  # Set time axis limits
+        plt.ylim([freq_min, freq_max])  # Set frequency axis limits directly in Hz
 
         plt.xlabel('Time (s)')
         plt.ylabel('Frequency (Hz)')
