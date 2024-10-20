@@ -13,33 +13,21 @@ def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     tone = amplitude * np.sin(2 * np.pi * frequency * t)
     return np.int16(tone / np.max(np.abs(tone)) * 32767), t, tone
 
-import librosa
-import librosa.display
-import matplotlib.pyplot as plt
-import numpy as np
-
-def plot_spectrogram():
-    # Generate a simple tone to test the spectrogram function
-    sr = 22050  # Sample rate
-    t = np.linspace(0, 1, sr)  # Generate time axis
-    audio = 0.5 * np.sin(2 * np.pi * 440 * t)  # Generate a 440 Hz sine wave
-
-    # Generate the spectrogram
+def plot_spectrogram(audio_path):
+    """Load an audio file and plot its spectrogram using matplotlib."""
     try:
-        S = librosa.feature.melspectrogram(y=audio, sr=sr, n_mels=128, hop_length=512)
+        y, sr = librosa.load(audio_path, sr=None)  # Load the audio file
+        S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128, hop_length=512)
         S_dB = librosa.power_to_db(S, ref=np.max)
 
         plt.figure(figsize=(10, 4))
         librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='mel')
         plt.colorbar(format='%+2.0f dB')
-        plt.title('Mel-frequency spectrogram')
+        plt.title('Mel-frequency Spectrogram')
         plt.tight_layout()
-        plt.show()
+        st.pyplot(plt)
     except Exception as e:
-        print(f"An error occurred: {e}")
-
-plot_spectrogram()
-
+        st.error(f"An error occurred while generating the spectrogram: {str(e)}")
 
 def main():
     st.title('Acoustics')
@@ -87,8 +75,10 @@ def main():
             with open(audio_path, 'wb') as f:
                 f.write(uploaded_file.getbuffer())
             st.success("File uploaded successfully!")
-            plot_spectrogram(audio_path)
+            try:
+                plot_spectrogram(audio_path)
+            except Exception as e:
+                st.error(f"An error occurred: {str(e)}")
 
 if __name__ == "__main__":
     main()
-
