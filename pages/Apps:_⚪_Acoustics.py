@@ -11,33 +11,38 @@ def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     """Generate a pure tone based on the frequency."""
     t = np.linspace(0, duration, int(sample_rate * duration), False)
     tone = amplitude * np.sin(2 * np.pi * frequency * t)
-    return np.int16(tone / np.max(np.abs(tone)) * 32767), t, tone
+    tone_int16 = np.int16(tone / np.max(np.abs(tone)) * 32767)  # Convert to 16-bit data
+    return tone_int16, t, tone
 
 def plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max):
+    """Load an audio file and plot its spectrogram."""
     try:
         y, sr = librosa.load(audio_path, sr=None)
-        # Generate a Short-Time Fourier Transform (STFT) spectrogram
-        D = np.abs(librosa.stft(y))
-        # Convert power spectrogram (amplitude squared) to decibel (dB) units
+        start_sample = int(time_min * sr)
+        end_sample = int(time_max * sr)
+        y_segment = y[start_sample:end_sample]
+
+        D = np.abs(librosa.stft(y_segment))
         S_dB = librosa.amplitude_to_db(D, ref=np.max)
 
         plt.figure(figsize=(10, 4))
-        # We use specshow to display a spectrogram with a linear frequency axis
         librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='linear', hop_length=512)
         plt.colorbar(format='%+2.0f dB')
         plt.title('Frequency Spectrogram in Hz')
-        
-        # Apply the user-selected axis limits
-        plt.xlim([time_min, time_max])  # Set time axis limits
-        plt.ylim([freq_min, freq_max])  # Set frequency axis limits directly in Hz
-
+        plt.xlim([0, time_max - time_min])  # Adjust the x-axis to the duration of the segment
+        plt.ylim([freq_min, freq_max])  # Frequency limits in Hz
         plt.xlabel('Time (s)')
         plt.ylabel('Frequency (Hz)')
         plt.tight_layout()
         st.pyplot(plt)
+
+        # Audio playback
+        buffer = BytesIO()
+        write(buffer, sr, y_segment.astype(np.int16))
+        buffer.seek(0)
+        st.audio(buffer, format='audio/wav')
     except Exception as e:
         st.error(f"An error occurred while generating the spectrogram: {str(e)}")
-
 
 def main():
     st.title('Acoustics')
@@ -49,14 +54,15 @@ def main():
     with tabs[1]:
         st.write("Generate a pure tone based on a specified frequency.")
         freq_input = st.number_input('Enter a frequency (50 to 500 Hz):', min_value=50, max_value=500, value=100, step=1)
+        duration_input = st.slider('Duration (seconds):', min_value=0.1, max_value=5.0, value=1.0, step=0.1)
         generate_button = st.button('Generate Tone')
 
         if generate_button:
-            data, t, waveform = generate_tone(freq_input)
+            data, t, waveform = generate_tone(freq_input, duration=duration_input)
             buffer = BytesIO()
             write(buffer, 44100, data)
             buffer.seek(0)
-            st.audio(buffer, format='audio/wav', start_time=0)
+            st.audio(buffer, format='audio/wav')
 
             fig = go.Figure(data=go.Scatter(x=t, y=waveform))
             fig.update_layout(
@@ -77,8 +83,8 @@ def main():
                 f.write(uploaded_file.getbuffer())
             st.success("File uploaded successfully!")
 
-            time_min = st.slider('Start Time (s)', min_value=0.0, max_value=10.0, value=0.0, step=0.1)
-            time_max = st.slider('End Time (s)', min_value=0.0, max_value=10.0, value=10.0, step=0.1)
+            time_min = st.slider('Start Time (s)', min_value=0.0, max_value=30.0, value=0.0, step=0.1)
+            time_max = st.slider('End Time (s)', min_value=0.1, max_value=30.0, value=5.0, step=0.1)
             freq_min = st.slider('Min Frequency (Hz)', min_value=0, max_value=8000, value=0, step=100)
             freq_max = st.slider('Max Frequency (Hz)', min_value=1000, max_value=20000, value=8000, step=100)
 
