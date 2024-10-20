@@ -11,3 +11,4 @@ pandas
 pydub
 scipy
 plotly
+streamlit-audio-recorder
