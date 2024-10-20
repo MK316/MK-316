@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 from scipy.io.wavfile import write
 from io import BytesIO
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
 def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     """Generate a pure tone based on the frequency."""
@@ -30,13 +30,15 @@ def main():
             buffer.seek(0)
             st.audio(buffer, format='audio/wav', start_time=0)
 
-            # Plotting the waveform
-            fig, ax = plt.subplots()
-            ax.plot(t, waveform)
-            ax.set_title(f"Waveform of the Generated Tone at {freq_input} Hz")
-            ax.set_xlabel('Time [s]')
-            ax.set_ylabel('Amplitude')
-            st.pyplot(fig)
+            # Plotting the waveform using Plotly
+            fig = go.Figure(data=go.Scatter(x=t, y=waveform))
+            fig.update_layout(
+                title=f"Waveform of the Generated Tone at {freq_input} Hz",
+                xaxis_title='Time [s]',
+                yaxis_title='Amplitude',
+                xaxis_rangeslider_visible=True  # This enables the range slider for x-axis
+            )
+            st.plotly_chart(fig, use_container_width=True)
 
     with tabs[2]:
         st.write("Details for Tab 3 will go here.")
