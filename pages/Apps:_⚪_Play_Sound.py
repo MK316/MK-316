@@ -2,10 +2,15 @@ import streamlit as st
 from pydub import AudioSegment
 import io
 
-def speed_change(sound, speed=1.0):
-    # Change the playback speed of the audio without changing the pitch
-    new_frame_rate = int(sound.frame_rate * speed)
-    return sound._spawn(sound.raw_data, overrides={'frame_rate': new_frame_rate})
+def convert_to_wav(audio_file):
+    try:
+        sound = AudioSegment.from_mp3(audio_file)
+        buffer = io.BytesIO()
+        sound.export(buffer, format="wav")
+        buffer.seek(0)
+        return buffer
+    except Exception as e:
+        st.error(f"An error occurred: {str(e)}. This format may require external dependencies not available in this environment.")
 
 def phonetics_apps_page():
     st.title('🐾 Play sound Apps')
@@ -14,7 +19,7 @@ def phonetics_apps_page():
     Here is a selection of audio-related applications specifically designed to enhance phonetics learning. These tools cater to various needs, such as playing audio files, converting file formats, and utilizing Text-to-Speech technology. They offer interactive exercises to improve pronunciation, develop listening skills, and heighten phonetic awareness, making them invaluable resources for learners and educators alike.
     """)
 
-    tab1, tab2, tab3 = st.tabs(["Audio Speed Adjuster", "MP3-to-wav", "Multi-TTS"])
+    tab1, tab2, tab3 = st.tabs(["Audio Speed Adjuster", "MP3-to-WAV", "Multi-TTS"])
 
     with tab1:
         st.header("Audio Speed Adjuster")
@@ -33,12 +38,17 @@ def phonetics_apps_page():
                 buffer.seek(0)
                 st.audio(buffer, format='audio/wav')
             except Exception as e:
-                st.error(f"An error occurred: {e}")
+                st.error(f"An error occurred: {str(e)}")
                 st.error("Please ensure the file is a WAV format.")
 
     with tab2:
-        st.image("images/button03.png", width=100)
-        st.markdown("🌀 [App link](https://mk-316-mp3towav.hf.space/): Convert mp3 to wav file", unsafe_allow_html=True)
+        st.header("MP3 to WAV Converter")
+        audio_file = st.file_uploader("Upload MP3 file", type=['mp3'])
+
+        if audio_file is not None:
+            wav_buffer = convert_to_wav(audio_file)
+            if wav_buffer is not None:
+                st.audio(wav_buffer, format='audio/wav')
 
     with tab3:
         st.header("Multi-Text to Speech Application")
