@@ -20,23 +20,21 @@ def main_content():
         st.write("Adjust your settings here.")
 
 # Initialize session state for passcode if not already present
-if 'passcode' not in st.session_state:
-    st.session_state['passcode'] = None
+if 'authenticated' not in st.session_state:
+    st.session_state['authenticated'] = False
 
-# Handle passcode input and verification
-def check_passcode():
-    input_passcode = st.text_input("Enter the passcode to access the page:", type="password", key="passcode_input")
-    submit_button = st.button("Submit")
+# Create a passcode input field and button if not authenticated
+if not st.session_state['authenticated']:
+    with st.form("passcode_form"):
+        input_passcode = st.text_input("Enter the passcode to access the page:", type="password")
+        submit_button = st.form_submit_button("Submit")
 
-    if submit_button:
-        if input_passcode == correct_passcode:
-            st.session_state['passcode'] = input_passcode  # Update session state to correct passcode
-            st.experimental_rerun()  # Rerun the script to refresh the page and display the main content
-        else:
-            st.error("Incorrect passcode, please try again.")
-
-# Display passcode input or main content based on the passcode verification
-if st.session_state['passcode'] == correct_passcode:
-    main_content()
+        if submit_button:
+            if input_passcode == correct_passcode:
+                st.session_state['authenticated'] = True  # Update session state to authenticated
+                st.experimental_rerun()  # Rerun the script to refresh the page
+            else:
+                st.error("Incorrect passcode, please try again.")
 else:
-    check_passcode()
+    # Display the content directly if authenticated
+    main_content()
