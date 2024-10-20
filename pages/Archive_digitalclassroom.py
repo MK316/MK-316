@@ -6,7 +6,7 @@ def main():
     st.write("This page displays the archived digital classroom.")
 
     # URL of the webpage you want to embed
-    url = "https://mrkim21.github.io"
+    url = "https://github.com/mk316"
     
     # Embed the webpage using an iframe
     components.iframe(url, height=600, scrolling=True)
