@@ -17,7 +17,8 @@ def plot_spectrogram(audio_path):
     """Load an audio file and plot its spectrogram."""
     try:
         y, sr = librosa.load(audio_path, sr=None)  # Use the original sampling rate
-        S = librosa.feature.melspectrogram(y, sr=sr, n_mels=128)
+        # Generate a Mel-scaled spectrogram
+        S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)
         S_dB = librosa.power_to_db(S, ref=np.max)
 
         plt.figure(figsize=(10, 4))
