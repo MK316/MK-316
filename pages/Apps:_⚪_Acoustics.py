@@ -10,26 +10,28 @@ import matplotlib.pyplot as plt
 def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     """Generate a pure tone based on the frequency."""
     t = np.linspace(0, duration, int(sample_rate * duration), False)
-    tone = amplitude * np.sin(2 * np.pi * frequency * t)  # Adjust amplitude here
+    tone = amplitude * np.sin(2 * np.pi * frequency * t)
     return np.int16(tone / np.max(np.abs(tone)) * 32767), t, tone
 
 def plot_spectrogram(audio_path):
-    # Load audio file
-    y, sr = librosa.load(audio_path, sr=None)  # Use the original sampling rate
-    # Generate a spectrogram
-    S = librosa.feature.melspectrogram(y, sr=sr, n_mels=128)
-    S_dB = librosa.power_to_db(S, ref=np.max)
+    """Load an audio file and plot its spectrogram."""
+    try:
+        y, sr = librosa.load(audio_path, sr=None)  # Use the original sampling rate
+        S = librosa.feature.melspectrogram(y, sr=sr, n_mels=128)
+        S_dB = librosa.power_to_db(S, ref=np.max)
 
-    plt.figure(figsize=(10, 4))
-    librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='mel')
-    plt.colorbar(format='%+2.0f dB')
-    plt.title('Mel-frequency spectrogram')
-    plt.tight_layout()
-    st.pyplot(plt)  # Display the plot in Streamlit
-    
+        plt.figure(figsize=(10, 4))
+        librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='mel')
+        plt.colorbar(format='%+2.0f dB')
+        plt.title('Mel-frequency spectrogram')
+        plt.tight_layout()
+        st.pyplot(plt)  # Display the plot in Streamlit
+    except Exception as e:
+        st.error(f"An error occurred while generating spectrogram: {e}")
+
 def main():
     st.title('Acoustics')
-    tabs = st.tabs(["Introduction", "Generate Tone", "Tab 3", "Tab 4"])
+    tabs = st.tabs(["Introduction", "Generate Tone", "Tab 3", "Upload and Analyze Spectrogram"])
 
     with tabs[0]:
         st.write("Welcome to the Acoustics module. This module allows you to explore various aspects of sound.")
@@ -41,17 +43,14 @@ def main():
 
         if generate_button:
             data, t, waveform = generate_tone(freq_input)
-            # Write to a buffer
             buffer = BytesIO()
             write(buffer, 44100, data)
             buffer.seek(0)
-            # Store audio and waveform data in session state
             st.session_state['audio_buffer'] = buffer
             st.session_state['waveform_data'] = (t, waveform)
             st.session_state['freq_input'] = freq_input
 
         if 'audio_buffer' in st.session_state:
-            # Re-play the audio using the stored buffer
             st.audio(st.session_state['audio_buffer'], format='audio/wav', start_time=0)
 
         if 'waveform_data' in st.session_state:
@@ -67,15 +66,11 @@ def main():
                 )
                 st.plotly_chart(fig, use_container_width=True)
 
-    with tabs[2]:
-        st.write("Details for Tab 3 will go here.")
-
     with tabs[3]:
         st.header("Upload and Analyze Spectrogram")
         uploaded_file = st.file_uploader("Upload your audio file (WAV format)", type=['wav'])
 
         if uploaded_file is not None:
-            # Save uploaded file to disk
             audio_path = 'temp_audio.wav'
             with open(audio_path, 'wb') as f:
                 f.write(uploaded_file.getbuffer())
