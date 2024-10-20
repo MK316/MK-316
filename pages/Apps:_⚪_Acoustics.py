@@ -17,7 +17,7 @@ def plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max):
     """Load an audio file and plot its spectrogram."""
     try:
         y, sr = librosa.load(audio_path, sr=None)
-        S = librosa.feature.melspectrogram(y, sr=sr, n_mels=128)
+        S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)
         S_dB = librosa.power_to_db(S, ref=np.max)
 
         plt.figure(figsize=(10, 4))
@@ -62,21 +62,22 @@ def main():
             st.plotly_chart(fig, use_container_width=True)
 
     with tabs[2]:
-    st.header("Upload and Analyze Spectrogram")
-    uploaded_file = st.file_uploader("Upload your audio file (WAV format)", type=['wav'])
+        st.header("Upload and Analyze Spectrogram")
+        uploaded_file = st.file_uploader("Upload your audio file (WAV format)", type=['wav'])
 
-    if uploaded_file is not None:
-        audio_path = 'temp_audio.wav'
-        with open(audio_path, 'wb') as f:
-            f.write(uploaded_file.getbuffer())
-        st.success("File uploaded successfully!")
+        if uploaded_file is not None:
+            audio_path = 'temp_audio.wav'
+            with open(audio_path, 'wb') as f:
+                f.write(uploaded_file.getbuffer())
+            st.success("File uploaded successfully!")
 
-        if st.button('Analyze'):
             time_min = st.slider('Start Time (s)', min_value=0.0, max_value=10.0, value=0.0, step=0.1)
             time_max = st.slider('End Time (s)', min_value=0.0, max_value=10.0, value=10.0, step=0.1)
             freq_min = st.slider('Min Frequency (Hz)', min_value=0, max_value=8000, value=0, step=100)
             freq_max = st.slider('Max Frequency (Hz)', min_value=1000, max_value=20000, value=8000, step=100)
-            plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max)
+
+            if st.button('Generate Spectrogram'):
+                plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max)
 
 if __name__ == "__main__":
     main()
