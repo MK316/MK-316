@@ -4,10 +4,10 @@ def phonetics_apps_page():
     st.title('🐾 Play sound Apps')
     st.write('Applications used to teach Phonetics.')
 
-    # Describing your apps briefly
     st.markdown("""
-    Here is a selection of applications designed to enhance phonetics learning through interactive and innovative tools. These apps provide resources and exercises to improve pronunciation, listening skills, and phonetic awareness.
+    Here is a selection of audio-related applications specifically designed to enhance phonetics learning. These tools cater to various needs, such as playing audio files, converting file formats, and utilizing Text-to-Speech technology. They offer interactive exercises to improve pronunciation, develop listening skills, and heighten phonetic awareness, making them invaluable resources for learners and educators alike.
     """)
+
 
     # Using tabs instead of buttons
     tab1, tab2 = st.tabs(["Play audio", "MP3-to-wav"])
