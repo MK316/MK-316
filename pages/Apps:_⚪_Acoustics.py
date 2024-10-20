@@ -1,60 +1,42 @@
 import streamlit as st
+import parselmouth
 import numpy as np
-from scipy.io.wavfile import write
-from io import BytesIO
-import plotly.graph_objects as go
+import plotly.express as px
+from streamlit_audio_recorder import st_audio_recorder
 
-def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
-    """Generate a pure tone based on the frequency."""
-    t = np.linspace(0, duration, int(sample_rate * duration), False)
-    tone = amplitude * np.sin(2 * np.pi * frequency * t)  # Adjust amplitude here
-    return np.int16(tone / np.max(np.abs(tone)) * 32767), t, tone
+def analyze_formants(audio_file):
+    sound = parselmouth.Sound(audio_file)
+    formant = sound.to_formant_burg()
+    f1 = formant.get_value_at_time(1, 0.5)  # Get F1 at midpoint of the sound
+    f2 = formant.get_value_at_time(2, 0.5)  # Get F2 at midpoint of the sound
+    return f1, f2
 
 def main():
     st.title('Acoustics')
-    tabs = st.tabs(["Introduction", "Generate Tone", "Tab 3", "Tab 4"])
-
-    with tabs[0]:
-        st.write("Welcome to the Acoustics module. This module allows you to explore various aspects of sound.")
-
-    with tabs[1]:
-        st.write("Generate a pure tone based on a specified frequency.")
-        freq_input = st.number_input('Enter a frequency (50 to 500 Hz):', min_value=50, max_value=500, value=100, step=1)
-        generate_button = st.button('Generate Tone')
-
-        if generate_button:
-            data, t, waveform = generate_tone(freq_input)
-            # Write to a buffer
-            buffer = BytesIO()
-            write(buffer, 44100, data)
-            buffer.seek(0)
-            # Store audio and waveform data in session state
-            st.session_state['audio_buffer'] = buffer
-            st.session_state['waveform_data'] = (t, waveform)
-            st.session_state['freq_input'] = freq_input
-
-        if 'audio_buffer' in st.session_state:
-            # Re-play the audio using the stored buffer
-            st.audio(st.session_state['audio_buffer'], format='audio/wav', start_time=0)
-
-        if 'waveform_data' in st.session_state:
-            display_waveform_button = st.button('Display Waveform')
-            if display_waveform_button:
-                t, waveform = st.session_state['waveform_data']
-                fig = go.Figure(data=go.Scatter(x=t, y=waveform))
-                fig.update_layout(
-                    title=f"Waveform of the Generated Tone at {st.session_state['freq_input']} Hz",
-                    xaxis_title='Time [s]',
-                    yaxis_title='Amplitude',
-                    xaxis_rangeslider_visible=True
-                )
-                st.plotly_chart(fig, use_container_width=True)
+    tabs = st.tabs(["Introduction", "Generate Tone", "Record Vowels", "Tab 4"])
 
     with tabs[2]:
-        st.write("Details for Tab 3 will go here.")
+        st.header("Record and Analyze Vowels")
+        st.write("Record four vowels and analyze their formant frequencies.")
 
-    with tabs[3]:
-        st.write("Details for Tab 4 will go here.")
+        # Record audio
+        audio_data = st_audio_recorder(recorder_id="vowel_recorder", time_limit=5000)
+        
+        if audio_data["recording"]:
+            # Save the recording
+            with open("temp_audio.wav", "wb") as f:
+                f.write(audio_data["recording"])
+            st.success("Recording saved!")
+
+        analyze_button = st.button('Analyze Vowels')
+        if analyze_button and "temp_audio.wav":
+            # Perform analysis
+            f1, f2 = analyze_formants("temp_audio.wav")
+            # Plot formants
+            formants = {"Vowels": ["Vowel"], "F1": [f1], "F2": [f2]}
+            fig = px.scatter(formants, x="F1", y="F2", text="Vowels", labels={"F1": "Formant 1 (Hz)", "F2": "Formant 2 (Hz)"})
+            fig.update_traces(textposition='top center')
+            st.plotly_chart(fig, use_container_width=True)
 
 if __name__ == "__main__":
     main()
