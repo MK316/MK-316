@@ -28,17 +28,27 @@ def main():
             buffer = BytesIO()
             write(buffer, 44100, data)
             buffer.seek(0)
-            st.audio(buffer, format='audio/wav', start_time=0)
+            # Store audio and waveform data in session state
+            st.session_state['audio_buffer'] = buffer
+            st.session_state['waveform_data'] = (t, waveform)
+            st.session_state['freq_input'] = freq_input
 
-            # Plotting the waveform using Plotly
-            fig = go.Figure(data=go.Scatter(x=t, y=waveform))
-            fig.update_layout(
-                title=f"Waveform of the Generated Tone at {freq_input} Hz",
-                xaxis_title='Time [s]',
-                yaxis_title='Amplitude',
-                xaxis_rangeslider_visible=True  # This enables the range slider for x-axis
-            )
-            st.plotly_chart(fig, use_container_width=True)
+        if 'audio_buffer' in st.session_state:
+            # Re-play the audio using the stored buffer
+            st.audio(st.session_state['audio_buffer'], format='audio/wav', start_time=0)
+
+        if 'waveform_data' in st.session_state:
+            display_waveform_button = st.button('Display Waveform')
+            if display_waveform_button:
+                t, waveform = st.session_state['waveform_data']
+                fig = go.Figure(data=go.Scatter(x=t, y=waveform))
+                fig.update_layout(
+                    title=f"Waveform of the Generated Tone at {st.session_state['freq_input']} Hz",
+                    xaxis_title='Time [s]',
+                    yaxis_title='Amplitude',
+                    xaxis_rangeslider_visible=True
+                )
+                st.plotly_chart(fig, use_container_width=True)
 
     with tabs[2]:
         st.write("Details for Tab 3 will go here.")
