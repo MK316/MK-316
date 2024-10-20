@@ -11,5 +11,4 @@ pandas
 pydub
 scipy
 plotly
-streamlit-audio-recorder
-praat-parselmouth
+
