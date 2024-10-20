@@ -14,24 +14,29 @@ def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     return np.int16(tone / np.max(np.abs(tone)) * 32767), t, tone
 
 def plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max):
-    """Load an audio file and plot its spectrogram."""
     try:
         y, sr = librosa.load(audio_path, sr=None)
         S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)
         S_dB = librosa.power_to_db(S, ref=np.max)
 
         plt.figure(figsize=(10, 4))
-        librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='mel')
+        librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='mel', hop_length=512)
         plt.colorbar(format='%+2.0f dB')
         plt.title('Mel-frequency Spectrogram')
-        plt.xlim(time_min, time_max)
-        plt.ylim(librosa.hz_to_mel(freq_min), librosa.hz_to_mel(freq_max))
+        
+        # Setting the x-axis and y-axis limits correctly
+        plt.xlim([time_min, time_max])  # Time limits
+        mel_min = librosa.hz_to_mel(freq_min)  # Convert Hz to Mel for lower limit
+        mel_max = librosa.hz_to_mel(freq_max)  # Convert Hz to Mel for upper limit
+        plt.ylim([mel_min, mel_max])  # Frequency limits
+
         plt.xlabel('Time (s)')
         plt.ylabel('Frequency (Hz)')
         plt.tight_layout()
         st.pyplot(plt)
     except Exception as e:
         st.error(f"An error occurred while generating the spectrogram: {str(e)}")
+
 
 def main():
     st.title('Acoustics')
