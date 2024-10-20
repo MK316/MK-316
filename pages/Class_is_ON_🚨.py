@@ -6,7 +6,7 @@ correct_passcode = "1234"
 # Function to display the main content of the page
 def main_content():
     st.title("This is a protected Page, as I use personal data for apps.")
-    st.write("Welcome to the protected content!")
+    st.write("Explore other pages :-)")
 
 # Check if 'passcode' is in the session state (persistent between reruns)
 if 'passcode' not in st.session_state:
