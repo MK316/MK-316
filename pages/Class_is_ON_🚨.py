@@ -5,7 +5,7 @@ correct_passcode = "1234"
 
 # Function to display the main content of the page
 def main_content():
-    st.caption("This is a protected page as some of the apps use personal data :-) ")
+    st.caption("Protected Page")
     tab1, tab2, tab3 = st.tabs(["Home", "Data", "Settings"])
 
     with tab1:
@@ -20,21 +20,21 @@ def main_content():
         st.header("Settings")
         st.write("Adjust your settings here.")
 
-# Check if 'passcode' is in the session state (persistent between reruns)
+# Initialize passcode in session state if not already present
 if 'passcode' not in st.session_state:
-    st.session_state['passcode'] = None  # Initialize it with None
+    st.session_state['passcode'] = None
 
-# Create a passcode input field
-input_passcode = st.text_input("Enter the passcode to access the page:", type="password")
+# Create a passcode input field if the correct passcode hasn't been entered yet
+if st.session_state['passcode'] != correct_passcode:
+    input_passcode = st.text_input("Enter the passcode to access the page:", type="password")
+    submit_button = st.button("Submit")
 
-# Button to submit the passcode
-if st.button("Submit"):
-    if input_passcode == correct_passcode:
-        st.session_state['passcode'] = input_passcode  # Set the session state
-        main_content()  # Display the main content if passcode is correct
-    else:
-        st.error("Incorrect passcode, please try again.")
-
-# If the passcode in session state is correct, directly display the content
-if st.session_state['passcode'] == correct_passcode:
+    if submit_button:
+        if input_passcode == correct_passcode:
+            st.session_state['passcode'] = input_passcode  # Update session state to correct passcode
+            main_content()  # Display the main content if passcode is correct
+        else:
+            st.error("Incorrect passcode, please try again.")
+else:
+    # Display the content directly if passcode is already correct
     main_content()
