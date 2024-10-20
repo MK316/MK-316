@@ -1,8 +1,11 @@
 import streamlit as st
 import numpy as np
-from scipy.io.wavfile import write
+from scipy.io.wavfile import write, read
 from io import BytesIO
 import plotly.graph_objects as go
+import librosa
+import librosa.display
+import matplotlib.pyplot as plt
 
 def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     """Generate a pure tone based on the frequency."""
@@ -10,6 +13,20 @@ def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     tone = amplitude * np.sin(2 * np.pi * frequency * t)  # Adjust amplitude here
     return np.int16(tone / np.max(np.abs(tone)) * 32767), t, tone
 
+def plot_spectrogram(audio_path):
+    # Load audio file
+    y, sr = librosa.load(audio_path, sr=None)  # Use the original sampling rate
+    # Generate a spectrogram
+    S = librosa.feature.melspectrogram(y, sr=sr, n_mels=128)
+    S_dB = librosa.power_to_db(S, ref=np.max)
+
+    plt.figure(figsize=(10, 4))
+    librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='mel')
+    plt.colorbar(format='%+2.0f dB')
+    plt.title('Mel-frequency spectrogram')
+    plt.tight_layout()
+    st.pyplot(plt)  # Display the plot in Streamlit
+    
 def main():
     st.title('Acoustics')
     tabs = st.tabs(["Introduction", "Generate Tone", "Tab 3", "Tab 4"])
@@ -54,7 +71,16 @@ def main():
         st.write("Details for Tab 3 will go here.")
 
     with tabs[3]:
-        st.write("Details for Tab 4 will go here.")
+        st.header("Upload and Analyze Spectrogram")
+        uploaded_file = st.file_uploader("Upload your audio file (WAV format)", type=['wav'])
+
+        if uploaded_file is not None:
+            # Save uploaded file to disk
+            audio_path = 'temp_audio.wav'
+            with open(audio_path, 'wb') as f:
+                f.write(uploaded_file.getbuffer())
+            st.success("File uploaded successfully!")
+            plot_spectrogram(audio_path)
 
 if __name__ == "__main__":
     main()
