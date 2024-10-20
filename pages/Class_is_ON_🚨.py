@@ -1,42 +1,27 @@
 import streamlit as st
+import webbrowser
 
 # Define the correct passcode
 correct_passcode = "1234"
+redirect_url = "https://huggingface.co/spaces/MK-316/mytimer"  # This URL should be the page you want to open upon successful login
 
-def main_content():
-    st.title("Protected Page")
-    tab1, tab2, tab3 = st.tabs(["Home", "Data", "Settings"])
-
-    with tab1:
-        st.header("Home")
-        st.write("Welcome to the home page!")
-
-    with tab2:
-        st.header("Data")
-        st.write("Here you can view data.")
-
-    with tab3:
-        st.header("Settings")
-        st.write("Adjust your settings here.")
-
-# Initialize session state for authentication if not already present
-if 'authenticated' not in st.session_state:
-    st.session_state['authenticated'] = False
-
-# Debug print to help trace the flow
-st.write(f"Authenticated: {st.session_state['authenticated']}")
-
-# Create a passcode input field and button if not authenticated
-if not st.session_state['authenticated']:
-    input_passcode = st.text_input("Enter the passcode to access the page:", type="password", key="passcode_input")
+def show_passcode_input():
+    st.title("Passcode Required")
+    input_passcode = st.text_input("Enter the passcode to access the page:", type="password")
     submit_button = st.button("Submit")
     
     if submit_button:
         if input_passcode == correct_passcode:
-            st.session_state['authenticated'] = True  # Update session state to authenticated
-            st.experimental_rerun()  # Rerun the script to refresh the page and display main content
+            # Open a new page if the passcode is correct
+            webbrowser.open_new_tab(redirect_url)
         else:
-            st.error("Incorrect passcode, please try again.")
+            st.error("You don't seem to have permission!")
+
+if 'authenticated' not in st.session_state:
+    st.session_state['authenticated'] = False
+
+if not st.session_state['authenticated']:
+    show_passcode_input()
 else:
-    # Display the content directly if authenticated
-    main_content()
+    # Optionally handle other content, but normally this would not execute as we redirect on success
+    st.write("You are already authenticated!")
