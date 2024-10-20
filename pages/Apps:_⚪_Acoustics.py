@@ -5,6 +5,7 @@ from io import BytesIO
 import librosa
 import librosa.display
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
 def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     """Generate a pure tone based on the frequency."""
@@ -16,7 +17,8 @@ def plot_spectrogram(audio_path, n_mels, hop_length):
     """Load an audio file and plot its spectrogram."""
     try:
         y, sr = librosa.load(audio_path, sr=None)
-        S = librosa.feature.melspectrogram(y, sr=sr, n_mels=n_mels, hop_length=hop_length)
+        # Ensure all parameters are passed as keyword arguments
+        S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=n_mels, hop_length=hop_length)
         S_dB = librosa.power_to_db(S, ref=np.max)
 
         plt.figure(figsize=(10, 4))
@@ -70,7 +72,7 @@ def main():
             hop_length = st.slider('Hop Length', min_value=256, max_value=2048, value=512, step=128)
 
             if st.button('Generate Spectrogram'):
-                plot_spectrogram(audio_path, n_mels, hop_length)
+                plot_spectrogram(audio_path, n_mels=n_mels, hop_length=hop_length)
 
 if __name__ == "__main__":
     main()
