@@ -19,7 +19,7 @@ def main_content():
         st.header("Settings")
         st.write("Adjust your settings here.")
 
-# Initialize session state for passcode if not already present
+# Initialize session state for authentication if not already present
 if 'authenticated' not in st.session_state:
     st.session_state['authenticated'] = False
 
@@ -32,7 +32,6 @@ if not st.session_state['authenticated']:
         if submit_button:
             if input_passcode == correct_passcode:
                 st.session_state['authenticated'] = True  # Update session state to authenticated
-                st.experimental_rerun()  # Rerun the script to refresh the page
             else:
                 st.error("Incorrect passcode, please try again.")
 else:
