@@ -1,85 +1,50 @@
 import streamlit as st
+import numpy as np
+from scipy.io.wavfile import write
 from io import BytesIO
-import base64
+import plotly.graph_objects as go
+
+def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
+    """Generate a pure tone based on the frequency."""
+    t = np.linspace(0, duration, int(sample_rate * duration), False)
+    tone = amplitude * np.sin(2 * np.pi * frequency * t)  # Adjust amplitude here
+    return np.int16(tone / np.max(np.abs(tone)) * 32767), t, tone
 
 def main():
     st.title('Acoustics')
-    tabs = st.tabs(["Introduction", "Generate Tone", "Record Vowels", "Tab 4"])
+    tabs = st.tabs(["Introduction", "Generate Tone", "Tab 3", "Tab 4"])
+
+    with tabs[0]:
+        st.write("Welcome to the Acoustics module. This module allows you to explore various aspects of sound.")
+
+    with tabs[1]:
+        st.write("Generate a pure tone based on a specified frequency.")
+        freq_input = st.number_input('Enter a frequency (50 to 500 Hz):', min_value=50, max_value=500, value=100, step=1)
+        generate_button = st.button('Generate Tone')
+
+        if generate_button:
+            data, t, waveform = generate_tone(freq_input)
+            # Write to a buffer
+            buffer = BytesIO()
+            write(buffer, 44100, data)
+            buffer.seek(0)
+            st.audio(buffer, format='audio/wav', start_time=0)
+
+            # Plotting the waveform using Plotly
+            fig = go.Figure(data=go.Scatter(x=t, y=waveform))
+            fig.update_layout(
+                title=f"Waveform of the Generated Tone at {freq_input} Hz",
+                xaxis_title='Time [s]',
+                yaxis_title='Amplitude',
+                xaxis_rangeslider_visible=True  # This enables the range slider for x-axis
+            )
+            st.plotly_chart(fig, use_container_width=True)
 
     with tabs[2]:
-        st.header("Record Vowels")
-        st.write("Click the button to record a vowel sound.")
-        components.html("""
-            <html>
-            <body>
-            
-            <!-- Include a button to start recording -->
-            <button onclick="startRecording(this)">Record</button>
-            <button onclick="stopRecording(this)" disabled>Stop</button>
-            
-            <script>
-            var audio_context;
-            var recorder;
+        st.write("Details for Tab 3 will go here.")
 
-            function startUserMedia(stream) {
-                var input = audio_context.createMediaStreamSource(stream);
-                recorder = new Recorder(input);
-            }
+    with tabs[3]:
+        st.write("Details for Tab 4 will go here.")
 
-            function startRecording(button) {
-                recorder && recorder.record();
-                button.disabled = true;
-                button.nextElementSibling.disabled = false;
-            }
-
-            function stopRecording(button) {
-                recorder && recorder.stop();
-                button.disabled = true;
-                button.previousElementSibling.disabled = false;
-
-                // Create WAV download link using audio data blob
-                createDownloadLink();
-                
-                recorder.clear();
-            }
-
-            function createDownloadLink() {
-                recorder && recorder.exportWAV(function(blob) {
-                    var url = URL.createObjectURL(blob);
-                    var au = document.createElement('audio');
-                    var hf = document.createElement('a');
-                    
-                    au.controls = true;
-                    au.src = url;
-                    hf.href = url;
-                    hf.download = new Date().toISOString() + '.wav';
-                    hf.innerHTML = hf.download;
-                    document.body.appendChild(au);
-                    document.body.appendChild(hf);
-                });
-            }
-
-            window.onload = function init() {
-                try {
-                    // webkit shim
-                    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-                    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
-                    window.URL = window.URL || window.webkitURL;
-                    
-                    audio_context = new AudioContext;
-                } catch (e) {
-                    alert('No web audio support in this browser!');
-                }
-                
-                navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
-                    alert('No live audio input: ' + e);
-                });
-            };
-            </script>
-
-            </body>
-            </html>
-        """, height=200)
-        
 if __name__ == "__main__":
     main()
