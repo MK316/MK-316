@@ -11,4 +11,5 @@ pandas
 pydub
 scipy
 plotly
+librosa
 
