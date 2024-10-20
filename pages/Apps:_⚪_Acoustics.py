@@ -14,17 +14,19 @@ def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     return np.int16(tone / np.max(np.abs(tone)) * 32767), t, tone
 
 def plot_spectrogram(audio_path, n_mels, hop_length):
-    """Load an audio file and plot its spectrogram."""
     try:
-        y, sr = librosa.load(audio_path, sr=None)
-        # Ensure all parameters are passed as keyword arguments
+        y, sr = librosa.load(audio_path, sr=None)  # Load audio
         S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=n_mels, hop_length=hop_length)
         S_dB = librosa.power_to_db(S, ref=np.max)
 
         plt.figure(figsize=(10, 4))
-        librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='mel')
+        # Displaying the spectrogram
+        librosa.display.specshow(S_dB, sr=sr, hop_length=hop_length, x_axis='time', y_axis='mel')
+        
         plt.colorbar(format='%+2.0f dB')
         plt.title('Mel-frequency Spectrogram')
+        plt.xlabel('Time (s)')
+        plt.ylabel('Frequency (Mel)')
         plt.tight_layout()
         st.pyplot(plt)
     except Exception as e:
