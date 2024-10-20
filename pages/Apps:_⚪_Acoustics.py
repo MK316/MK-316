@@ -89,15 +89,19 @@ def main():
             )
             st.plotly_chart(fig, use_container_width=True)
 
-    with tabs[2]:
-        st.header("Upload and Analyze Spectrogram")
-        uploaded_file = st.file_uploader("Upload your audio file (WAV format)", type=['wav'])
+   with tabs[2]:
+    st.header("Upload and Analyze Spectrogram")
+    uploaded_file = st.file_uploader("Upload your audio file (WAV format)", type=['wav'])
 
-        if uploaded_file is not None:
-            audio_path = 'temp_audio.wav'
-            with open(audio_path, 'wb') as f:
-                f.write(uploaded_file.getbuffer())
-            st.success("File uploaded successfully!")
+    if uploaded_file is not None:
+        audio_path = 'temp_audio.wav'
+        with open(audio_path, 'wb') as f:
+            f.write(uploaded_file.getbuffer())
+        st.success("File uploaded successfully!")
+        
+        # Play the uploaded audio file immediately
+        st.audio(audio_path)  # <-- Added this line to play audio immediately after upload
+
 
             time_min = st.slider('Start Time (s)', min_value=0.0, max_value=30.0, value=0.0, step=0.1)
             time_max = st.slider('End Time (s)', min_value=0.1, max_value=30.0, value=5.0, step=0.1)
