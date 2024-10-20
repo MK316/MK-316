@@ -19,7 +19,7 @@ def phonetics_apps_page():
     Here is a selection of audio-related applications specifically designed to enhance phonetics learning. These tools cater to various needs, such as playing audio files, converting file formats, and utilizing Text-to-Speech technology. They offer interactive exercises to improve pronunciation, develop listening skills, and heighten phonetic awareness, making them invaluable resources for learners and educators alike.
     """)
 
-    tab1, tab2, tab3 = st.tabs(["Audio Speed Adjuster", "MP3-to-WAV", "Multi-TTS"])
+    tab1, tab2, tab3 = st.tabs(["🔎Audio Speed Adjuster", "🔎MP3-to-WAV", "🔎Multi-TTS"])
 
     with tab1:
         st.header("Audio Speed Adjuster")
