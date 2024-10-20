@@ -6,6 +6,7 @@ redirect_url = "https://coding4et.streamlit.app/Classapp"  # This URL should be 
 
 def show_passcode_input():
     st.title("Passcode Required")
+    st.caption("Click the button TWICE to see the page")
     # Using a form to handle inputs and button as a single action
     with st.form(key='PasscodeForm'):
         input_passcode = st.text_input("Enter the passcode to access the page:", type="password")
