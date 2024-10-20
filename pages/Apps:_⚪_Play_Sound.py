@@ -10,7 +10,7 @@ def phonetics_apps_page():
     """)
 
     # Using tabs instead of buttons
-    tab1, tab2 = st.tabs(["App 2: Playsound", "App 6: MP3-to-wav"])
+    tab1, tab2 = st.tabs(["Play audio", "MP3-to-wav"])
 
     with tab1:
         st.image("images/button03.png", width=100)
