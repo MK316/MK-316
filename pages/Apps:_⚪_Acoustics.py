@@ -1,42 +1,85 @@
 import streamlit as st
-import parselmouth
-import numpy as np
-import plotly.express as px
-from streamlit_audio_recorder import st_audio_recorder
-
-def analyze_formants(audio_file):
-    sound = parselmouth.Sound(audio_file)
-    formant = sound.to_formant_burg()
-    f1 = formant.get_value_at_time(1, 0.5)  # Get F1 at midpoint of the sound
-    f2 = formant.get_value_at_time(2, 0.5)  # Get F2 at midpoint of the sound
-    return f1, f2
+from io import BytesIO
+import base64
 
 def main():
     st.title('Acoustics')
     tabs = st.tabs(["Introduction", "Generate Tone", "Record Vowels", "Tab 4"])
 
     with tabs[2]:
-        st.header("Record and Analyze Vowels")
-        st.write("Record four vowels and analyze their formant frequencies.")
+        st.header("Record Vowels")
+        st.write("Click the button to record a vowel sound.")
+        components.html("""
+            <html>
+            <body>
+            
+            <!-- Include a button to start recording -->
+            <button onclick="startRecording(this)">Record</button>
+            <button onclick="stopRecording(this)" disabled>Stop</button>
+            
+            <script>
+            var audio_context;
+            var recorder;
 
-        # Record audio
-        audio_data = st_audio_recorder(recorder_id="vowel_recorder", time_limit=5000)
+            function startUserMedia(stream) {
+                var input = audio_context.createMediaStreamSource(stream);
+                recorder = new Recorder(input);
+            }
+
+            function startRecording(button) {
+                recorder && recorder.record();
+                button.disabled = true;
+                button.nextElementSibling.disabled = false;
+            }
+
+            function stopRecording(button) {
+                recorder && recorder.stop();
+                button.disabled = true;
+                button.previousElementSibling.disabled = false;
+
+                // Create WAV download link using audio data blob
+                createDownloadLink();
+                
+                recorder.clear();
+            }
+
+            function createDownloadLink() {
+                recorder && recorder.exportWAV(function(blob) {
+                    var url = URL.createObjectURL(blob);
+                    var au = document.createElement('audio');
+                    var hf = document.createElement('a');
+                    
+                    au.controls = true;
+                    au.src = url;
+                    hf.href = url;
+                    hf.download = new Date().toISOString() + '.wav';
+                    hf.innerHTML = hf.download;
+                    document.body.appendChild(au);
+                    document.body.appendChild(hf);
+                });
+            }
+
+            window.onload = function init() {
+                try {
+                    // webkit shim
+                    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+                    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+                    window.URL = window.URL || window.webkitURL;
+                    
+                    audio_context = new AudioContext;
+                } catch (e) {
+                    alert('No web audio support in this browser!');
+                }
+                
+                navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
+                    alert('No live audio input: ' + e);
+                });
+            };
+            </script>
+
+            </body>
+            </html>
+        """, height=200)
         
-        if audio_data["recording"]:
-            # Save the recording
-            with open("temp_audio.wav", "wb") as f:
-                f.write(audio_data["recording"])
-            st.success("Recording saved!")
-
-        analyze_button = st.button('Analyze Vowels')
-        if analyze_button and "temp_audio.wav":
-            # Perform analysis
-            f1, f2 = analyze_formants("temp_audio.wav")
-            # Plot formants
-            formants = {"Vowels": ["Vowel"], "F1": [f1], "F2": [f2]}
-            fig = px.scatter(formants, x="F1", y="F2", text="Vowels", labels={"F1": "Formant 1 (Hz)", "F2": "Formant 2 (Hz)"})
-            fig.update_traces(textposition='top center')
-            st.plotly_chart(fig, use_container_width=True)
-
 if __name__ == "__main__":
     main()
