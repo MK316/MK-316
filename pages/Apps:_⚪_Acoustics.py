@@ -28,15 +28,18 @@ def main():
             buffer = BytesIO()
             write(buffer, 44100, data)
             buffer.seek(0)
-            st.audio(buffer, format='audio/wav', start_time=0)
-
-            # Store waveform data in session state to use in another button action
+            # Store audio and waveform data in session state
+            st.session_state['audio_buffer'] = buffer
             st.session_state['waveform_data'] = (t, waveform)
             st.session_state['freq_input'] = freq_input
 
-        # Button to display waveform, only enabled if waveform_data is available
+        if 'audio_buffer' in st.session_state:
+            # Re-play the audio using the stored buffer
+            st.audio(st.session_state['audio_buffer'], format='audio/wav', start_time=0)
+
         if 'waveform_data' in st.session_state:
-            if st.button('Display Waveform'):
+            display_waveform_button = st.button('Display Waveform')
+            if display_waveform_button:
                 t, waveform = st.session_state['waveform_data']
                 fig = go.Figure(data=go.Scatter(x=t, y=waveform))
                 fig.update_layout(
