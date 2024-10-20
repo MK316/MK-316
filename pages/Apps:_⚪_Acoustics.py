@@ -13,20 +13,21 @@ def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     tone = amplitude * np.sin(2 * np.pi * frequency * t)
     return np.int16(tone / np.max(np.abs(tone)) * 32767), t, tone
 
-def plot_spectrogram(audio_path, n_mels, hop_length):
+def plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max):
+    """Load an audio file and plot its spectrogram."""
     try:
-        y, sr = librosa.load(audio_path, sr=None)  # Load audio
-        S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=n_mels, hop_length=hop_length)
+        y, sr = librosa.load(audio_path, sr=None)
+        S = librosa.feature.melspectrogram(y, sr=sr, n_mels=128)
         S_dB = librosa.power_to_db(S, ref=np.max)
 
         plt.figure(figsize=(10, 4))
-        # Displaying the spectrogram
-        librosa.display.specshow(S_dB, sr=sr, hop_length=hop_length, x_axis='time', y_axis='mel')
-        
+        librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='mel')
         plt.colorbar(format='%+2.0f dB')
         plt.title('Mel-frequency Spectrogram')
+        plt.xlim(time_min, time_max)
+        plt.ylim(librosa.hz_to_mel(freq_min), librosa.hz_to_mel(freq_max))
         plt.xlabel('Time (s)')
-        plt.ylabel('Frequency (Mel)')
+        plt.ylabel('Frequency (Hz)')
         plt.tight_layout()
         st.pyplot(plt)
     except Exception as e:
@@ -70,11 +71,13 @@ def main():
                 f.write(uploaded_file.getbuffer())
             st.success("File uploaded successfully!")
 
-            n_mels = st.slider('Number of Mel Bands', min_value=16, max_value=256, value=128, step=16)
-            hop_length = st.slider('Hop Length', min_value=256, max_value=2048, value=512, step=128)
+            time_min = st.slider('Start Time (s)', min_value=0.0, max_value=10.0, value=0.0, step=0.1)
+            time_max = st.slider('End Time (s)', min_value=0.0, max_value=10.0, value=10.0, step=0.1)
+            freq_min = st.slider('Min Frequency (Hz)', min_value=0, max_value=8000, value=0, step=100)
+            freq_max = st.slider('Max Frequency (Hz)', min_value=1000, max_value=20000, value=8000, step=100)
 
             if st.button('Generate Spectrogram'):
-                plot_spectrogram(audio_path, n_mels=n_mels, hop_length=hop_length)
+                plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max)
 
 if __name__ == "__main__":
     main()
