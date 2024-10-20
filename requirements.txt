@@ -9,3 +9,4 @@ pytz
 gTTS
 pandas
 pydub
+scipy
