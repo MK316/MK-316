@@ -10,7 +10,7 @@ def phonetics_apps_page():
     """)
 
     # First row with three columns
-    col1, col2, col3 = st.columns(3)  # Define columns for the first row
+    col1, col2 = st.columns(2)  # Define columns for the first row
 
     with col1:
         st.image("images/button01.png", width=100)
@@ -18,14 +18,8 @@ def phonetics_apps_page():
             st.markdown("🌀[App link](https://ipa-practice.streamlit.app/): IPA Quiz with phonetic descriptions; Scoring", unsafe_allow_html=True)
             st.markdown("2024.10.14")
     with col2:
-        st.image("images/button03.png", width=100)
-        if st.button('App 2: Playsound', key='2'):
-            st.markdown("🌀[App link](https://playsound.streamlit.app/): Upload audio to play; Speed controller", unsafe_allow_html=True)
-            st.markdown("2024.10.14")
-    
-    with col3:
         st.image("images/button01.png", width=100)
-        if st.button('App 3: Distinctive features', key='3'):
+        if st.button('App 2: Distinctive features', key='2'):
             st.markdown("🌀[App link](https://mk-316-featureapp01.hf.space/): Phonology, Sound grouping from distinctive features", unsafe_allow_html=True)
             st.markdown("2024.10.15")
     
@@ -33,25 +27,19 @@ def phonetics_apps_page():
     st.write("\n\n")
 
     # Second row with three columns
-    col4, col5, col6 = st.columns(3)  # Correct typo here
+    col3, col4 = st.columns(2)  # Correct typo here
 
-    with col4:
+    with col3:
         st.image("images/button01.png", width=100)
-        if st.button('App 4: List sounds', key='4'):
+        if st.button('App 3: List sounds', key='3'):
             st.markdown("🌀[App link](https://mk-316-ipaselect.hf.space/): Display sounds from phonetic descriptions", unsafe_allow_html=True)
             st.markdown("2024.10.14")
 
-    with col5:
+    with col4:
         st.image("images/button01.png", width=100)
-        if st.button('App 5: Feature Quiz', key='5'):
+        if st.button('App 5: Feature Quiz', key='4'):
             st.markdown("🌀[App link](https://mk-316-feature-practice.hf.space/): Phonology, Distinctive feature quiz", unsafe_allow_html=True)
             st.markdown("2024.10.14")
-
-    with col6:
-        st.image("images/button03.png", width=100)
-        if st.button('App 6: MP3-to-wav', key='6'):
-            st.markdown("🌀[App link](https://mk-316-mp3towav.hf.space/): Convert mp3 to wav file", unsafe_allow_html=True)
-            st.markdown("2024.10.15")
             
 phonetics_apps_page()
 
