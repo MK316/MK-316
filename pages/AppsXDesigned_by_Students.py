@@ -10,9 +10,13 @@ def main():
     # Display the image
     st.image(image_path, width=600)
 
-    # Explicitly handle the caption with proper line breaks
-    st.caption('"The mediocre teacher tells. The good teacher explains. \n'
-               'The superior teacher demonstrates. The great teacher inspires. - _W. A. Ward_"')
+    # Display the caption with HTML to ensure line breaks
+    st.markdown("""
+    <div style='text-align: center;'>
+        "The mediocre teacher tells. The good teacher explains.<br>
+        The superior teacher demonstrates. The great teacher inspires. - W. A. Ward"
+    </div>
+    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
