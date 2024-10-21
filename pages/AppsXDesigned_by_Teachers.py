@@ -2,9 +2,9 @@ import streamlit as st
 
 def main():
     st.title("💭 Language Tools X English Teachers")
-    st.st.write("Welcome to our curated showcase of language applications, thoughtfully created by active English teachers. These tools are developed with real classroom experiences in mind to enhance both learning and teaching of languages. Stay tuned—exciting new tools are on the way!")
+    st.write("Welcome to our curated showcase of language applications, thoughtfully created by active English teachers. These tools are developed with real classroom experiences in mind to enhance both learning and teaching of languages. Stay tuned—exciting new tools are on the way!")
     st.markdown("<br>", unsafe_allow_html=True)
-    st.write("(To be updated)")
+    st.markdown("_(To be updated)_")
     st.markdown("<br><br><br>", unsafe_allow_html=True)
     
     # Path to the image
