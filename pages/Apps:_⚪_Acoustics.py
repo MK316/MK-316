@@ -133,10 +133,11 @@ def main():
             wave3 = generate_wave(amp3, freq3, time)
             complex_wave = wave1 + wave2 + wave3
 
+            # add dash='dash' for each if you want
             fig = go.Figure()
-            fig.add_trace(go.Scatter(x=time, y=wave1, mode='lines', name='Wave 1', line=dict(color='orange', dash='dash')))
-            fig.add_trace(go.Scatter(x=time, y=wave2, mode='lines', name='Wave 2', line=dict(color='green', dash='dash')))
-            fig.add_trace(go.Scatter(x=time, y=wave3, mode='lines', name='Wave 3', line=dict(color='lightblue', dash='dash')))  # 'light blue' should be 'lightblue'
+            fig.add_trace(go.Scatter(x=time, y=wave1, mode='lines', name='Wave 1', line=dict(color='orange')))
+            fig.add_trace(go.Scatter(x=time, y=wave2, mode='lines', name='Wave 2', line=dict(color='green')))
+            fig.add_trace(go.Scatter(x=time, y=wave3, mode='lines', name='Wave 3', line=dict(color='lightblue')))  # 'light blue' should be 'lightblue'
             fig.add_trace(go.Scatter(x=time, y=complex_wave, mode='lines', name='Complex Wave', line=dict(color='gray', width=4)))
 
 
