@@ -125,6 +125,7 @@ def main():
         freq3 = col2.number_input('Frequency of Wave 3:', value=1.0, format="%.2f")
         
         t_max = st.slider("Select max time for the x-axis:", min_value=1, max_value=10, value=5, step=1)
+        
         if st.button('Generate a complex wave'):
             time = np.linspace(0, t_max, 1000)
             wave1 = generate_wave(amp1, freq1, time)
@@ -133,15 +134,14 @@ def main():
             complex_wave = wave1 + wave2 + wave3
 
             plt.figure(figsize=(10, 4))
-            plt.plot(time, complex_wave, label="Complex Wave")
-            plt.plot(time, wave1, '--', label="Wave 1")
-            plt.plot(time, wave2, '--', label="Wave 2")
-            plt.plot(time, wave3, '--', label="Wave 3")
+            plt.plot(time, wave1, label="Wave 1", linestyle='--')
+            plt.plot(time, wave2, label="Wave 2", linestyle='--')
+            plt.plot(time, wave3, label="Wave 3", linestyle='--')
+            plt.plot(time, complex_wave, label="Complex Wave", linewidth=2)
             plt.title("Complex Wave Formation")
             plt.xlabel("Time")
             plt.ylabel("Amplitude")
             plt.legend()
             st.pyplot(plt)
-
 if __name__ == "__main__":
     main()
