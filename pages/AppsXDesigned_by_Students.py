@@ -14,8 +14,8 @@ def main():
     st.markdown("""
     <div style='text-align: center; color: gray;'>
         "The mediocre teacher tells. The good teacher explains.<br>
-        The superior teacher demonstrates. The great teacher inspires. <br>
-        - <span style='font-style: italic;'>W. A. Ward</span>"
+        The superior teacher demonstrates. The great teacher inspires." <br>
+        - <span style='font-style: italic;'>W. A. Ward</span>
     </div>
     """, unsafe_allow_html=True)
 
