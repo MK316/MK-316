@@ -133,15 +133,18 @@ def main():
             wave3 = generate_wave(amp3, freq3, time)
             complex_wave = wave1 + wave2 + wave3
 
-            plt.figure(figsize=(10, 4))
-            plt.plot(time, wave1, label="Wave 1", linestyle='--')
-            plt.plot(time, wave2, label="Wave 2", linestyle='--')
-            plt.plot(time, wave3, label="Wave 3", linestyle='--')
-            plt.plot(time, complex_wave, label="Complex Wave", linewidth=2)
-            plt.title("Complex Wave Formation")
-            plt.xlabel("Time")
-            plt.ylabel("Amplitude")
-            plt.legend()
-            st.pyplot(plt)
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(x=time, y=wave1, mode='lines', name='Wave 1'))
+            fig.add_trace(go.Scatter(x=time, y=wave2, mode='lines', name='Wave 2'))
+            fig.add_trace(go.Scatter(x=time, y=wave3, mode='lines', name='Wave 3'))
+            fig.add_trace(go.Scatter(x=time, y=complex_wave, mode='lines', name='Complex Wave', line=dict(width=4)))
+
+            fig.update_layout(
+                title="Complex Wave Formation",
+                xaxis_title="Time",
+                yaxis_title="Amplitude",
+                xaxis_rangeslider_visible=True
+            )
+            st.plotly_chart(fig, use_container_width=True)
 if __name__ == "__main__":
     main()
