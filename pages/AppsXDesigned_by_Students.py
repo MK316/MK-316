@@ -10,9 +10,9 @@ def main():
     # Display the image
     st.image(image_path, width=600)
 
-    # Display the caption with HTML to ensure line breaks
+    # Display the caption with HTML for styling and line breaks
     st.markdown("""
-    <div style='text-align: center;'>
+    <div style='text-align: center; color: gray;'>
         "The mediocre teacher tells. The good teacher explains.<br>
         The superior teacher demonstrates. The great teacher inspires. - W. A. Ward"
     </div>
