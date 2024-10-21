@@ -134,10 +134,10 @@ def main():
             complex_wave = wave1 + wave2 + wave3
 
             fig = go.Figure()
-            fig.add_trace(go.Scatter(x=time, y=wave1, mode='lines', name='Wave 1'))
-            fig.add_trace(go.Scatter(x=time, y=wave2, mode='lines', name='Wave 2'))
-            fig.add_trace(go.Scatter(x=time, y=wave3, mode='lines', name='Wave 3'))
-            fig.add_trace(go.Scatter(x=time, y=complex_wave, mode='lines', name='Complex Wave', line=dict(width=4)))
+            fig.add_trace(go.Scatter(x=time, y=wave1, mode='lines', name='Wave 1', line=dict(color='orange')))
+            fig.add_trace(go.Scatter(x=time, y=wave2, mode='lines', name='Wave 2', line=dict(color='green')))
+            fig.add_trace(go.Scatter(x=time, y=wave3, mode='lines', name='Wave 3', line=dict(color='gray')))
+            fig.add_trace(go.Scatter(x=time, y=complex_wave, mode='lines', name='Complex Wave', line=dict(color='red', width=4)))
 
             fig.update_layout(
                 title="Complex Wave Formation",
@@ -146,5 +146,6 @@ def main():
                 xaxis_rangeslider_visible=True
             )
             st.plotly_chart(fig, use_container_width=True)
+
 if __name__ == "__main__":
     main()
