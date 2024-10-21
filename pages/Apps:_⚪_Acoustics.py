@@ -137,7 +137,7 @@ def main():
             fig.add_trace(go.Scatter(x=time, y=wave1, mode='lines', name='Wave 1', line=dict(color='orange', dash='dash')))
             fig.add_trace(go.Scatter(x=time, y=wave2, mode='lines', name='Wave 2', line=dict(color='green', dash='dash')))
             fig.add_trace(go.Scatter(x=time, y=wave3, mode='lines', name='Wave 3', line=dict(color='lightblue', dash='dash')))  # 'light blue' should be 'lightblue'
-            fig.add_trace(go.Scatter(x=time, y=complex_wave, mode='lines', name='Complex Wave', line=dict(color='black', width=4)))
+            fig.add_trace(go.Scatter(x=time, y=complex_wave, mode='lines', name='Complex Wave', line=dict(color='gray', width=4)))
 
 
             fig.update_layout(
