@@ -14,7 +14,7 @@ def main():
     st.markdown("""
     <div style='text-align: center; color: gray;'>
         "The mediocre teacher tells. The good teacher explains.<br>
-        The superior teacher demonstrates. The great teacher inspires. - W. A. Ward"
+        The superior teacher demonstrates. The great teacher inspires. - _W. A. Ward_"
     </div>
     """, unsafe_allow_html=True)
 
