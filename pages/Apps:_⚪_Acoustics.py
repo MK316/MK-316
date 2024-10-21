@@ -7,6 +7,10 @@ import librosa.display
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 
+def generate_wave(amplitude, frequency, time):
+    """Generate sinusoidal wave data based on amplitude, frequency, and time."""
+    return amplitude * np.sin(2 * np.pi * frequency * time)
+
 def generate_tone(frequency, duration=1, sample_rate=44100, amplitude=0.3):
     """Generate a pure tone based on the frequency."""
     t = np.linspace(0, duration, int(sample_rate * duration), False)
@@ -62,7 +66,7 @@ def plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max):
 
 def main():
     st.title('Acoustics')
-    tabs = st.tabs(["Introduction", "Generate Tone", "Upload and Analyze Spectrogram"])
+    tabs = st.tabs(["Introduction", "Generate Tone", "Upload and Analyze Spectrogram","Complex wave"])
 
     with tabs[0]:
         st.write("Welcome to the Acoustics module. This module allows you to explore various aspects of sound.")
@@ -107,6 +111,37 @@ def main():
 
             if st.button('Generate Spectrogram'):
                 plot_spectrogram(audio_path, time_min, time_max, freq_min, freq_max)
+
+    with tabs[3]:
+        st.subheader("Generate a Complex Wave")
+        col1, col2 = st.columns(2)
+        amp1 = col1.number_input('Amplitude of Wave 1:', value=1.0, format="%.2f")
+        freq1 = col2.number_input('Frequency of Wave 1:', value=1.0, format="%.2f")
+        
+        amp2 = col1.number_input('Amplitude of Wave 2:', value=1.0, format="%.2f")
+        freq2 = col2.number_input('Frequency of Wave 2:', value=1.0, format="%.2f")
+        
+        amp3 = col1.number_input('Amplitude of Wave 3:', value=1.0, format="%.2f")
+        freq3 = col2.number_input('Frequency of Wave 3:', value=1.0, format="%.2f")
+        
+        t_max = st.slider("Select max time for the x-axis:", min_value=1, max_value=10, value=5, step=1)
+        if st.button('Generate a complex wave'):
+            time = np.linspace(0, t_max, 1000)
+            wave1 = generate_wave(amp1, freq1, time)
+            wave2 = generate_wave(amp2, freq2, time)
+            wave3 = generate_wave(amp3, freq3, time)
+            complex_wave = wave1 + wave2 + wave3
+
+            plt.figure(figsize=(10, 4))
+            plt.plot(time, complex_wave, label="Complex Wave")
+            plt.plot(time, wave1, '--', label="Wave 1")
+            plt.plot(time, wave2, '--', label="Wave 2")
+            plt.plot(time, wave3, '--', label="Wave 3")
+            plt.title("Complex Wave Formation")
+            plt.xlabel("Time")
+            plt.ylabel("Amplitude")
+            plt.legend()
+            st.pyplot(plt)
 
 if __name__ == "__main__":
     main()
