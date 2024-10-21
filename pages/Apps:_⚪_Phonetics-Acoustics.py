@@ -135,10 +135,10 @@ def main():
 
             # add dash='dash' for each if you want
             fig = go.Figure()
-            fig.add_trace(go.Scatter(x=time, y=wave1, mode='lines', name='Wave 1', line=dict(color='orange')))
-            fig.add_trace(go.Scatter(x=time, y=wave2, mode='lines', name='Wave 2', line=dict(color='green')))
-            fig.add_trace(go.Scatter(x=time, y=wave3, mode='lines', name='Wave 3', line=dict(color='lightblue')))  # 'light blue' should be 'lightblue'
-            fig.add_trace(go.Scatter(x=time, y=complex_wave, mode='lines', name='Complex Wave', line=dict(color='purple', width=4)))
+            fig.add_trace(go.Scatter(x=time, y=wave1, mode='lines', name='Wave 1', line=dict(color='#f5c542')))
+            fig.add_trace(go.Scatter(x=time, y=wave2, mode='lines', name='Wave 2', line=dict(color='#69f542')))
+            fig.add_trace(go.Scatter(x=time, y=wave3, mode='lines', name='Wave 3', line=dict(color='#42d4f5')))  # 'light blue' should be 'lightblue'
+            fig.add_trace(go.Scatter(x=time, y=complex_wave, mode='lines', name='Complex Wave', line=dict(color='#520404', width=4)))
 
 
             fig.update_layout(
