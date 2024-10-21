@@ -134,10 +134,11 @@ def main():
             complex_wave = wave1 + wave2 + wave3
 
             fig = go.Figure()
-            fig.add_trace(go.Scatter(x=time, y=wave1, mode='lines', name='Wave 1', dash='dash', line=dict(color='orange')))
-            fig.add_trace(go.Scatter(x=time, y=wave2, mode='lines', name='Wave 2', dash='dash', line=dict(color='yellow')))
-            fig.add_trace(go.Scatter(x=time, y=wave3, mode='lines', name='Wave 3', dash='dash', line=dict(color='light blue')))
+            fig.add_trace(go.Scatter(x=time, y=wave1, mode='lines', name='Wave 1', line=dict(color='orange', dash='dash')))
+            fig.add_trace(go.Scatter(x=time, y=wave2, mode='lines', name='Wave 2', line=dict(color='yellow', dash='dash')))
+            fig.add_trace(go.Scatter(x=time, y=wave3, mode='lines', name='Wave 3', line=dict(color='lightblue', dash='dash')))  # 'light blue' should be 'lightblue'
             fig.add_trace(go.Scatter(x=time, y=complex_wave, mode='lines', name='Complex Wave', line=dict(color='red', width=4)))
+
 
             fig.update_layout(
                 title="Complex Wave Formation",
