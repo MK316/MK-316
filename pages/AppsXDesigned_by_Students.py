@@ -8,7 +8,7 @@ def main():
     image_path = 'https://github.com/MK316/MK-316/raw/main/images/octocat-2-line.png'
 
     # Display the image
-    st.image(image_path, caption='"The mediocre teacher tells. The good teacher explains. The superior teacher demonstrates. The great teacher inspires."', width=600)
+    st.image(image_path, caption='"The mediocre teacher tells. The good teacher explains. \nThe superior teacher demonstrates. The great teacher inspires. - W. A. Ward"', width=600)
 
 if __name__ == "__main__":
     main()
