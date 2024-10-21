@@ -11,7 +11,7 @@ def main():
     st.image(image_path, width=600)
 
     # Explicitly handle the caption with proper line breaks
-    st.caption('"The mediocre teacher tells. The good teacher explains.\n'
+    st.caption('"The mediocre teacher tells. The good teacher explains. \n'
                'The superior teacher demonstrates. The great teacher inspires. - _W. A. Ward_"')
 
 if __name__ == "__main__":
