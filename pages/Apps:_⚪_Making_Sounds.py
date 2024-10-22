@@ -15,26 +15,33 @@ def convert_to_wav(audio_file):
     except Exception as e:
         st.error(f"An error occurred: {str(e)}. This format may require external dependencies not available in this environment.")
 
-# Text to Speech function
 def text_to_speech(text, language):
     lang_code = {
-        "🇰🇷 Korean": "ko",
-        "🇺🇸 English (AmE)": "en",
-        "🇬🇧 English (BrE)": "en",
-        "🇫🇷 French": "fr",
-        "🇪🇸 Spanish": "es",
-        "🇨🇳 Chinese": "zh",
-        "🇯🇵 Japanese": "ja"
+        "🇰🇷 Korean": {"lang": "ko", "tld": None},
+        "🇺🇸 English (AmE)": {"lang": "en", "tld": "us"},
+        "🇬🇧 English (BrE)": {"lang": "en", "tld": "co.uk"},  # Use tld for UK English
+        "🇫🇷 French": {"lang": "fr", "tld": None},
+        "🇪🇸 Spanish": {"lang": "es", "tld": None},
+        "🇨🇳 Chinese": {"lang": "zh", "tld": None},
+        "🇯🇵 Japanese": {"lang": "ja", "tld": None}
     }
 
     try:
-        tts = gTTS(text=text, lang=lang_code[language])
-        temp_file = tempfile.NamedTemporaryFile(delete=False)  # Create a temporary file
-        tts.save(temp_file.name)  # Save without appending '.mp3'
-        return temp_file.name  # Return the actual file name
+        lang = lang_code[language]["lang"]
+        tld = lang_code[language]["tld"]
+
+        if tld:
+            tts = gTTS(text=text, lang=lang, tld=tld)
+        else:
+            tts = gTTS(text=text, lang=lang)
+
+        temp_file = tempfile.NamedTemporaryFile(delete=False)
+        tts.save(temp_file.name)
+        return temp_file.name
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
         return None
+
 
 # Phonetics Apps Page
 def phonetics_apps_page():
