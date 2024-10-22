@@ -12,5 +12,5 @@ pydub
 scipy
 plotly
 librosa
-soundfiles
+soundfile
 
