@@ -10,7 +10,7 @@ st.title("Your voice pitch")
 st.caption("Fundamental Frequency (F0) Estimation")
 st.write("Record the following sentence and upload the audio in wav.")
 
-st.markdown("### _Moments of meaning emerge when we listen to the sound of the heart._")
+st.markdown("### '_Moments of meaning emerge when we listen to the sound of the heart._'")
          
 # Create two tabs: Upload and View Results
 tab1, tab2 = st.tabs(["Upload Audio", "View Results"])
