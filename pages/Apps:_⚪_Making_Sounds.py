@@ -3,9 +3,13 @@ from gtts import gTTS
 import io
 
 # Function to handle text-to-speech conversion
-def text_to_speech(text, language, tld):
+def text_to_speech(text, language, tld=None):
     try:
-        tts = gTTS(text=text, lang=language, tld=tld)
+        if tld:  # Use tld only if it's specified
+            tts = gTTS(text=text, lang=language, tld=tld)
+        else:  # For languages like Korean and Japanese, tld is not needed
+            tts = gTTS(text=text, lang=language)
+        
         buffer = io.BytesIO()
         tts.write_to_fp(buffer)
         buffer.seek(0)
@@ -15,26 +19,18 @@ def text_to_speech(text, language, tld):
 
 # Function to convert language and dialect choices
 def get_language_tld(language_choice):
-    if language_choice == "🇰🇷 Korean":
-        return 'ko', 'ko'
+    if language_choice == "🇺🇸 English (United States)":
+        return 'en', 'us'
     elif language_choice == "🇬🇧 English (United Kingdom)":
         return 'en', 'co.uk'
-    elif language_choice == "🇺🇸 English (United States)":
-        return 'en', 'us'
-    elif language_choice == "🇨🇦 English (Canada)":
-        return 'en', 'ca'
-    elif language_choice == "🇦🇺 English (Australia)":
-        return 'en', 'com.au'
     elif language_choice == "🇮🇳 English (India)":
         return 'en', 'co.in'
-    elif language_choice == "🇿🇦 English (South Africa)":
-        return 'en', 'co.za'
-    elif language_choice == "🇳🇬 English (Nigeria)":
-        return 'en', 'com.ng'
-    elif language_choice == "🇫🇷 French (France)":
-        return 'fr', 'fr'
-    elif language_choice == "🇨🇳 Mandarin (China Mainland)":
-        return 'zh-CN', 'any'
+    elif language_choice == "🇫🇷 French":
+        return 'fr', None  # French does not need TLD
+    elif language_choice == "🇯🇵 Japanese":
+        return 'ja', None  # Japanese does not need TLD
+    elif language_choice == "🇰🇷 Korean":
+        return 'ko', None  # Korean does not need TLD
     else:
         return 'en', 'us'  # Default to US English
 
@@ -48,10 +44,8 @@ user_input = st.text_area("Enter text here...")
 # Language selection with dialect options
 language_choice = st.selectbox(
     "Choose a language and dialect",
-    ["🇰🇷 Korean", "🇬🇧 English (United Kingdom)", "🇺🇸 English (United States)", 
-     "🇨🇦 English (Canada)", "🇦🇺 English (Australia)", "🇮🇳 English (India)", 
-     "🇿🇦 English (South Africa)", "🇳🇬 English (Nigeria)", "🇫🇷 French (France)", 
-     "🇨🇳 Mandarin (China Mainland)"]
+    ["🇺🇸 English (United States)", "🇬🇧 English (United Kingdom)", "🇮🇳 English (India)", 
+     "🇫🇷 French", "🇯🇵 Japanese", "🇰🇷 Korean"]
 )
 
 # Submit button
