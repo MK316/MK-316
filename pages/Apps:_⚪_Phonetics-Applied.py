@@ -8,8 +8,8 @@ import soundfile as sf
 # Title of the app
 st.title("Fundamental Frequency (F0) Estimation")
 
-# Create tabs for different sections
-tab1, tab2, tab3 = st.tabs(["Upload Audio", "Process Audio", "View Results"])
+# Create two tabs: Upload and View Results
+tab1, tab2 = st.tabs(["Upload Audio", "View Results"])
 
 # Step 1: Upload or record audio file
 with tab1:
@@ -24,19 +24,9 @@ with tab1:
         
         st.audio(temp_file_path, format="audio/wav")
         
-        # Store uploaded file in session state
-        st.session_state['audio_path'] = temp_file_path
-
-# Step 2: Process the uploaded audio file (in tab 2)
-with tab2:
-    st.header("Processing the audio to estimate F0")
-    
-    if 'audio_path' in st.session_state:
-        audio_path = st.session_state['audio_path']
-        
         # Load audio data using librosa
         try:
-            audio_data, sr = librosa.load(audio_path, sr=None)  # Load without resampling
+            audio_data, sr = librosa.load(temp_file_path, sr=None)  # Load without resampling
             
             # Compute the fundamental frequency (F0)
             fmin = 50  # Minimum expected frequency (e.g., typical human pitch range)
@@ -51,11 +41,9 @@ with tab2:
             
         except Exception as e:
             st.error(f"An error occurred while processing the audio: {e}")
-    else:
-        st.write("Please upload a valid .wav audio file in the first tab to proceed.")
 
-# Step 3: View the Results in tab 3
-with tab3:
+# Step 2: View the Results in tab 2
+with tab2:
     st.header("Results")
 
     if 'f0' in st.session_state:
@@ -81,4 +69,4 @@ with tab3:
         else:
             st.write("F0 could not be estimated from the audio.")
     else:
-        st.write("No results to display. Please upload and process audio in the previous tabs.")
+        st.write("No results to display. Please upload and process audio in the previous tab.")
