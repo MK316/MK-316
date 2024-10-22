@@ -15,30 +15,26 @@ def text_to_speech(text, language, tld):
 
 # Function to convert language and dialect choices
 def get_language_tld(language_choice):
-    if language_choice == "🇦🇺 English (Australia)":
-        return 'en', 'com.au'
+    if language_choice == "🇰🇷 Korean":
+        return 'ko', 'ko'
     elif language_choice == "🇬🇧 English (United Kingdom)":
         return 'en', 'co.uk'
     elif language_choice == "🇺🇸 English (United States)":
         return 'en', 'us'
     elif language_choice == "🇨🇦 English (Canada)":
         return 'en', 'ca'
+    elif language_choice == "🇦🇺 English (Australia)":
+        return 'en', 'com.au'
     elif language_choice == "🇮🇳 English (India)":
         return 'en', 'co.in'
-    elif language_choice == "🇮🇪 English (Ireland)":
-        return 'en', 'ie'
     elif language_choice == "🇿🇦 English (South Africa)":
         return 'en', 'co.za'
     elif language_choice == "🇳🇬 English (Nigeria)":
         return 'en', 'com.ng'
     elif language_choice == "🇫🇷 French (France)":
         return 'fr', 'fr'
-    elif language_choice == "🇨🇦 French (Canada)":
-        return 'fr', 'ca'
     elif language_choice == "🇨🇳 Mandarin (China Mainland)":
         return 'zh-CN', 'any'
-    elif language_choice == "🇹🇼 Mandarin (Taiwan)":
-        return 'zh-TW', 'any'
     else:
         return 'en', 'us'  # Default to US English
 
@@ -52,10 +48,10 @@ user_input = st.text_area("Enter text here...")
 # Language selection with dialect options
 language_choice = st.selectbox(
     "Choose a language and dialect",
-    ["🇦🇺 English (Australia)", "🇬🇧 English (United Kingdom)", "🇺🇸 English (United States)", 
-     "🇨🇦 English (Canada)", "🇮🇳 English (India)", "🇮🇪 English (Ireland)", 
+    ["🇰🇷 Korean", "🇬🇧 English (United Kingdom)", "🇺🇸 English (United States)", 
+     "🇨🇦 English (Canada)", "🇦🇺 English (Australia)", "🇮🇳 English (India)", 
      "🇿🇦 English (South Africa)", "🇳🇬 English (Nigeria)", "🇫🇷 French (France)", 
-     "🇨🇦 French (Canada)", "🇨🇳 Mandarin (China Mainland)", "🇹🇼 Mandarin (Taiwan)"]
+     "🇨🇳 Mandarin (China Mainland)""]
 )
 
 # Submit button
