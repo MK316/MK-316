@@ -6,12 +6,12 @@ from io import BytesIO
 import soundfile as sf
 
 # Title of the app
-st.title("Your voice pitch")
+st.title("Your Voice Pitch")
 st.caption("Fundamental Frequency (F0) Estimation")
-st.write("Record the following sentence and upload the audio in wav.")
+st.write("Record the following sentence and upload the audio in wav format:")
 
 st.markdown("### '_Moments of meaning emerge when we listen to the sound of the heart._'")
-         
+
 # Create two tabs: Upload and View Results
 tab1, tab2 = st.tabs(["Upload Audio", "View Results"])
 
@@ -42,7 +42,8 @@ with tab1:
             st.session_state['f0'] = f0
             st.session_state['sr'] = sr
             st.session_state['audio_data'] = audio_data
-            
+            st.success("Audio processed successfully. Check the 'View Results' tab for details.")
+
         except Exception as e:
             st.error(f"An error occurred while processing the audio: {e}")
 
