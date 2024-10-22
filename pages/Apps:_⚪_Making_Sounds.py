@@ -23,7 +23,8 @@ def text_to_speech(text, language):
         "🇬🇧 English (BrE)": "en",
         "🇫🇷 French": "fr",
         "🇪🇸 Spanish": "es",
-        "🇨🇳 Chinese": "zh"
+        "🇨🇳 Chinese": "zh",
+        "🇯🇵 Japanese: "ja""
     }
 
     try:
@@ -81,7 +82,7 @@ def phonetics_apps_page():
         st.header("Multi-Text to Speech Application")
         st.write("Enter text and choose a language to generate the corresponding audio.")
         user_input = st.text_area("Enter text here...")
-        language = st.selectbox("Language", ["🇰🇷 Korean", "🇺🇸 English (AmE)", "🇬🇧 English (BrE)", "🇫🇷 French", "🇪🇸 Spanish", "🇨🇳 Chinese"])
+        language = st.selectbox("Language", ["🇰🇷 Korean", "🇺🇸 English (AmE)", "🇬🇧 English (BrE)", "🇫🇷 French", "🇪🇸 Spanish", "🇨🇳 Chinese", "🇯🇵 Japanese"])
         submit_button = st.button('Generate Speech')
 
         if submit_button:
