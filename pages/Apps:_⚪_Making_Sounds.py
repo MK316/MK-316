@@ -51,7 +51,7 @@ language_choice = st.selectbox(
     ["🇰🇷 Korean", "🇬🇧 English (United Kingdom)", "🇺🇸 English (United States)", 
      "🇨🇦 English (Canada)", "🇦🇺 English (Australia)", "🇮🇳 English (India)", 
      "🇿🇦 English (South Africa)", "🇳🇬 English (Nigeria)", "🇫🇷 French (France)", 
-     "🇨🇳 Mandarin (China Mainland)""]
+     "🇨🇳 Mandarin (China Mainland)"]
 )
 
 # Submit button
