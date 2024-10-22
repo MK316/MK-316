@@ -24,14 +24,14 @@ def text_to_speech(text, language):
         "🇫🇷 French": "fr",
         "🇪🇸 Spanish": "es",
         "🇨🇳 Chinese": "zh",
-        "🇯🇵 Japanese: "ja",
+        "🇯🇵 Japanese": "ja"
     }
 
     try:
         tts = gTTS(text=text, lang=lang_code[language])
-        temp_file = tempfile.NamedTemporaryFile(delete=False)
-        tts.save(temp_file.name + ".mp3")
-        return temp_file.name + ".mp3"
+        temp_file = tempfile.NamedTemporaryFile(delete=False)  # Create a temporary file
+        tts.save(temp_file.name)  # Save without appending '.mp3'
+        return temp_file.name  # Return the actual file name
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
         return None
@@ -89,8 +89,8 @@ def phonetics_apps_page():
             if user_input:
                 audio_file_path = text_to_speech(user_input, language)
                 if audio_file_path:
-                    audio_file = open(audio_file_path, "rb")
-                    st.audio(audio_file, format='audio/mp3')
+                    with open(audio_file_path, "rb") as audio_file:
+                        st.audio(audio_file, format='audio/mp3')
 
 # Run the phonetics apps page
 phonetics_apps_page()
