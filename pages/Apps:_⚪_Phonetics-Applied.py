@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import librosa
-import matplotlib.pyplot as plt
+import plotly.graph_objs as go
 from io import BytesIO
 import soundfile as sf
 
@@ -42,12 +42,10 @@ with tab1:
             st.session_state['f0'] = f0
             st.session_state['sr'] = sr
             st.session_state['audio_data'] = audio_data
-            st.success("Audio processed successfully. Check the 'View Results' tab for details.")
-
+            
         except Exception as e:
             st.error(f"An error occurred while processing the audio: {e}")
 
-# Step 2: View the Results in tab 2
 # Step 2: View the Results in tab 2
 with tab2:
     st.header("Results")
@@ -56,21 +54,22 @@ with tab2:
         f0 = st.session_state['f0']
         sr = st.session_state['sr']
 
-        # Plot the fundamental frequency (F0)
+        # Prepare the plot using Plotly for interactivity
         times = librosa.times_like(f0, sr=sr)
-        fig, ax = plt.subplots()
-        ax.set(title='Fundamental Frequency (F0)')
-        ax.plot(times, f0, label='F0 (Fundamental Frequency)', color='r')
-        ax.set_xlabel("Time (s)")
-        ax.set_ylabel("Frequency (Hz)")
+        fig = go.Figure()
+
+        fig.add_trace(go.Scatter(x=times, y=f0, mode='lines', name='F0 (Fundamental Frequency)', line=dict(color='red')))
         
-        # Set y-axis limit to display between 0 and 300 Hz
-        ax.set_ylim([0, 300])
+        fig.update_layout(
+            title="Fundamental Frequency (F0)",
+            xaxis_title="Time (s)",
+            yaxis_title="Frequency (Hz)",
+            yaxis_range=[0, 300],  # Limiting y-axis to 0 to 300 Hz
+            xaxis_rangeslider_visible=True  # Enable range slider to scroll over time
+        )
 
-        ax.legend()
-
-        # Show the plot
-        st.pyplot(fig)
+        # Display the interactive plot using Plotly
+        st.plotly_chart(fig)
 
         # Display approximate average F0
         if np.any(f0):
