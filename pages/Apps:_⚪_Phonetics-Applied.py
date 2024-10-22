@@ -8,7 +8,7 @@ import soundfile as sf
 # Title of the app
 st.title("Your voice pitch")
 st.caption("Fundamental Frequency (F0) Estimation")
-st.write("Record the following sentence and upload the audio in wav."
+st.write("Record the following sentence and upload the audio in wav.")
 
 st.markdown("<br>")
 st.write("Moments of meaning emerge when we listen to the sound of the heart.")
