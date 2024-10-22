@@ -1,7 +1,10 @@
 import streamlit as st
 from pydub import AudioSegment
 import io
+from gtts import gTTS  # Google Text-to-Speech
+import tempfile
 
+# Convert MP3 to WAV function
 def convert_to_wav(audio_file):
     try:
         sound = AudioSegment.from_mp3(audio_file)
@@ -12,6 +15,27 @@ def convert_to_wav(audio_file):
     except Exception as e:
         st.error(f"An error occurred: {str(e)}. This format may require external dependencies not available in this environment.")
 
+# Text to Speech function with dialectal variation
+def text_to_speech(text, language):
+    lang_code = {
+        "🇰🇷 Korean": "ko",
+        "🇺🇸 English (AmE)": "en",  # American English
+        "🇬🇧 English (BrE)": "en-GB",  # British English
+        "🇫🇷 French": "fr",
+        "🇪🇸 Spanish": "es",
+        "🇨🇳 Chinese": "zh"
+    }
+
+    try:
+        tts = gTTS(text=text, lang=lang_code[language])
+        temp_file = tempfile.NamedTemporaryFile(delete=False)
+        tts.save(temp_file.name + ".mp3")
+        return temp_file.name + ".mp3"
+    except Exception as e:
+        st.error(f"An error occurred: {str(e)}")
+        return None
+
+# Phonetics Apps Page
 def phonetics_apps_page():
     st.title('🐾 Play sound Apps')
     st.write('Applications used to teach Phonetics.')
@@ -21,6 +45,7 @@ def phonetics_apps_page():
 
     tab1, tab2, tab3 = st.tabs(["🔎Audio Speed Adjuster", "🔎MP3-to-WAV", "🔎Multi-TTS"])
 
+    # Tab 1: Audio Speed Adjuster
     with tab1:
         st.header("Audio Speed Adjuster")
         st.write("Please upload WAV files only for speed adjustment.")
@@ -31,7 +56,7 @@ def phonetics_apps_page():
             try:
                 sound = AudioSegment.from_file(uploaded_file, format='wav')
                 speed = st.slider("Adjust Speed", 0.5, 2.0, 1.0, step=0.1)
-                modified_sound = speed_change(sound, speed=speed)
+                modified_sound = sound.speedup(playback_speed=speed)
 
                 buffer = io.BytesIO()
                 modified_sound.export(buffer, format="wav")
@@ -41,6 +66,7 @@ def phonetics_apps_page():
                 st.error(f"An error occurred: {str(e)}")
                 st.error("Please ensure the file is a WAV format.")
 
+    # Tab 2: MP3 to WAV Converter
     with tab2:
         st.header("MP3 to WAV Converter")
         audio_file = st.file_uploader("Upload MP3 file", type=['mp3'])
@@ -50,16 +76,20 @@ def phonetics_apps_page():
             if wav_buffer is not None:
                 st.audio(wav_buffer, format='audio/wav')
 
+    # Tab 3: Multi-Text to Speech Application with Dialectal Variation
     with tab3:
         st.header("Multi-Text to Speech Application")
-        st.write("Enter text and choose a language to generate the corresponding audio.")
+        st.write("Enter text and choose a language or dialect to generate the corresponding audio.")
         user_input = st.text_area("Enter text here...")
         language = st.selectbox("Language", ["🇰🇷 Korean", "🇺🇸 English (AmE)", "🇬🇧 English (BrE)", "🇫🇷 French", "🇪🇸 Spanish", "🇨🇳 Chinese"])
         submit_button = st.button('Generate Speech')
 
         if submit_button:
             if user_input:
-                audio_file = text_to_speech(user_input, language)
-                st.audio(audio_file, format='audio/mp3', start_time=0)
+                audio_file_path = text_to_speech(user_input, language)
+                if audio_file_path:
+                    audio_file = open(audio_file_path, "rb")
+                    st.audio(audio_file, format='audio/mp3')
 
+# Run the phonetics apps page
 phonetics_apps_page()
