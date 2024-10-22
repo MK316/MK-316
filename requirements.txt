@@ -13,6 +13,5 @@ scipy
 plotly
 librosa
 librosa.display
-scipy.io.wavfile import write
 soundfiles
 
