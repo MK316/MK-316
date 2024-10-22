@@ -48,6 +48,7 @@ with tab1:
             st.error(f"An error occurred while processing the audio: {e}")
 
 # Step 2: View the Results in tab 2
+# Step 2: View the Results in tab 2
 with tab2:
     st.header("Results")
 
@@ -62,6 +63,10 @@ with tab2:
         ax.plot(times, f0, label='F0 (Fundamental Frequency)', color='r')
         ax.set_xlabel("Time (s)")
         ax.set_ylabel("Frequency (Hz)")
+        
+        # Set y-axis limit to display between 0 and 300 Hz
+        ax.set_ylim([0, 300])
+
         ax.legend()
 
         # Show the plot
