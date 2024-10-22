@@ -6,8 +6,13 @@ from io import BytesIO
 import soundfile as sf
 
 # Title of the app
-st.title("Fundamental Frequency (F0) Estimation")
+st.title("Your voice pitch")
+st.caption("Fundamental Frequency (F0) Estimation")
+st.write("Record the following sentence and upload the audio in wav."
 
+st.markdown("<br>")
+st.write("Moments of meaning emerge when we listen to the sound of the heart.")
+         
 # Create two tabs: Upload and View Results
 tab1, tab2 = st.tabs(["Upload Audio", "View Results"])
 
