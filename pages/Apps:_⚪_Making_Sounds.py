@@ -24,7 +24,7 @@ def text_to_speech(text, language):
         "🇫🇷 French": "fr",
         "🇪🇸 Spanish": "es",
         "🇨🇳 Chinese": "zh",
-        "🇯🇵 Japanese: "ja""
+        "🇯🇵 Japanese: "ja"
     }
 
     try:
