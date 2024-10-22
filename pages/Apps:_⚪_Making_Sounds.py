@@ -1,95 +1,73 @@
 import streamlit as st
-from pydub import AudioSegment
+from gtts import gTTS
 import io
-from gtts import gTTS  # Google Text-to-Speech
-import tempfile
 
-# Convert MP3 to WAV function
-def convert_to_wav(audio_file):
+# Function to handle text-to-speech conversion
+def text_to_speech(text, language, tld):
     try:
-        sound = AudioSegment.from_mp3(audio_file)
+        tts = gTTS(text=text, lang=language, tld=tld)
         buffer = io.BytesIO()
-        sound.export(buffer, format="wav")
+        tts.write_to_fp(buffer)
         buffer.seek(0)
         return buffer
     except Exception as e:
-        st.error(f"An error occurred: {str(e)}. This format may require external dependencies not available in this environment.")
+        st.error(f"An error occurred: {e}")
 
-# Text to Speech function with dialectal variation
-def text_to_speech(text, language):
-    lang_code = {
-        "🇰🇷 Korean": "ko",
-        "🇺🇸 English (AmE)": "en",  # American English
-        "🇬🇧 English (BrE)": "en-GB",  # British English
-        "🇫🇷 French": "fr",
-        "🇪🇸 Spanish": "es",
-        "🇨🇳 Chinese": "zh"
-    }
+# Function to convert language and dialect choices
+def get_language_tld(language_choice):
+    if language_choice == "🇦🇺 English (Australia)":
+        return 'en', 'com.au'
+    elif language_choice == "🇬🇧 English (United Kingdom)":
+        return 'en', 'co.uk'
+    elif language_choice == "🇺🇸 English (United States)":
+        return 'en', 'us'
+    elif language_choice == "🇨🇦 English (Canada)":
+        return 'en', 'ca'
+    elif language_choice == "🇮🇳 English (India)":
+        return 'en', 'co.in'
+    elif language_choice == "🇮🇪 English (Ireland)":
+        return 'en', 'ie'
+    elif language_choice == "🇿🇦 English (South Africa)":
+        return 'en', 'co.za'
+    elif language_choice == "🇳🇬 English (Nigeria)":
+        return 'en', 'com.ng'
+    elif language_choice == "🇫🇷 French (France)":
+        return 'fr', 'fr'
+    elif language_choice == "🇨🇦 French (Canada)":
+        return 'fr', 'ca'
+    elif language_choice == "🇨🇳 Mandarin (China Mainland)":
+        return 'zh-CN', 'any'
+    elif language_choice == "🇹🇼 Mandarin (Taiwan)":
+        return 'zh-TW', 'any'
+    else:
+        return 'en', 'us'  # Default to US English
 
-    try:
-        tts = gTTS(text=text, lang=lang_code[language])
-        temp_file = tempfile.NamedTemporaryFile(delete=False)
-        tts.save(temp_file.name + ".mp3")
-        return temp_file.name + ".mp3"
-    except Exception as e:
-        st.error(f"An error occurred: {str(e)}")
-        return None
+# Main Streamlit app
+st.title("Multi-Text to Speech Application")
+st.write("Enter text and choose a language to generate the corresponding audio.")
 
-# Phonetics Apps Page
-def phonetics_apps_page():
-    st.title('🐾 Play sound Apps')
-    st.write('Applications used to teach Phonetics.')
-    st.markdown("""
-    Here is a selection of audio-related applications specifically designed to enhance phonetics learning. These tools cater to various needs, such as playing audio files, converting file formats, and utilizing Text-to-Speech technology. They offer interactive exercises to improve pronunciation, develop listening skills, and heighten phonetic awareness, making them invaluable resources for learners and educators alike.
-    """)
+# User input for text
+user_input = st.text_area("Enter text here...")
 
-    tab1, tab2, tab3 = st.tabs(["🔎Audio Speed Adjuster", "🔎MP3-to-WAV", "🔎Multi-TTS"])
+# Language selection with dialect options
+language_choice = st.selectbox(
+    "Choose a language and dialect",
+    ["🇦🇺 English (Australia)", "🇬🇧 English (United Kingdom)", "🇺🇸 English (United States)", 
+     "🇨🇦 English (Canada)", "🇮🇳 English (India)", "🇮🇪 English (Ireland)", 
+     "🇿🇦 English (South Africa)", "🇳🇬 English (Nigeria)", "🇫🇷 French (France)", 
+     "🇨🇦 French (Canada)", "🇨🇳 Mandarin (China Mainland)", "🇹🇼 Mandarin (Taiwan)"]
+)
 
-    # Tab 1: Audio Speed Adjuster
-    with tab1:
-        st.header("Audio Speed Adjuster")
-        st.write("Please upload WAV files only for speed adjustment.")
-        st.markdown("If you have MP3 or other audio formats, please first convert them to WAV using this tool: [MP3 to WAV Converter](https://huggingface.co/spaces/MK-316/mp3towav)")
-        uploaded_file = st.file_uploader("Upload an audio file", type=['wav'])
+# Submit button
+submit_button = st.button('Generate Speech')
 
-        if uploaded_file is not None:
-            try:
-                sound = AudioSegment.from_file(uploaded_file, format='wav')
-                speed = st.slider("Adjust Speed", 0.5, 2.0, 1.0, step=0.1)
-                modified_sound = sound.speedup(playback_speed=speed)
-
-                buffer = io.BytesIO()
-                modified_sound.export(buffer, format="wav")
-                buffer.seek(0)
-                st.audio(buffer, format='audio/wav')
-            except Exception as e:
-                st.error(f"An error occurred: {str(e)}")
-                st.error("Please ensure the file is a WAV format.")
-
-    # Tab 2: MP3 to WAV Converter
-    with tab2:
-        st.header("MP3 to WAV Converter")
-        audio_file = st.file_uploader("Upload MP3 file", type=['mp3'])
-
-        if audio_file is not None:
-            wav_buffer = convert_to_wav(audio_file)
-            if wav_buffer is not None:
-                st.audio(wav_buffer, format='audio/wav')
-
-    # Tab 3: Multi-Text to Speech Application with Dialectal Variation
-    with tab3:
-        st.header("Multi-Text to Speech Application")
-        st.write("Enter text and choose a language or dialect to generate the corresponding audio.")
-        user_input = st.text_area("Enter text here...")
-        language = st.selectbox("Language", ["🇰🇷 Korean", "🇺🇸 English (AmE)", "🇬🇧 English (BrE)", "🇫🇷 French", "🇪🇸 Spanish", "🇨🇳 Chinese"])
-        submit_button = st.button('Generate Speech')
-
-        if submit_button:
-            if user_input:
-                audio_file_path = text_to_speech(user_input, language)
-                if audio_file_path:
-                    audio_file = open(audio_file_path, "rb")
-                    st.audio(audio_file, format='audio/mp3')
-
-# Run the phonetics apps page
-phonetics_apps_page()
+if submit_button:
+    if user_input:
+        # Get language code and tld based on the choice
+        lang, tld = get_language_tld(language_choice)
+        
+        # Generate speech
+        audio_file = text_to_speech(user_input, lang, tld)
+        
+        # Play the audio file
+        st.audio(audio_file, format='audio/mp3', start_time=0)
