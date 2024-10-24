@@ -1,0 +1,1 @@
+If the number of different letters is more than the minimum as defined above, the transcription will not be a phonemic, but an allophonic one. Some of the phonemes, there is to say, will be represented by more than one different symbol. In other words, some allophones of some phonemes will be singled out for representation in the transcription, hence the term allophonic.
