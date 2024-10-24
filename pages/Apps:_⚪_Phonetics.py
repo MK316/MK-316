@@ -10,16 +10,21 @@ def phonetics_apps_page():
     """)
 
     # First row with three columns
-    col1, col2 = st.columns(2)  # Define columns for the first row
+    col1, col2, col3 = st.columns(3)  # Define columns for the first row
 
     with col1:
         st.image("images/button01.png", width=100)
-        if st.button('App 1: \nIPA quiz', key='1'):
+        if st.button('App 1: \nIPA practice', key='1'):
             st.markdown("🌀[App link](https://ipa-practice.streamlit.app/): IPA Quiz with phonetic descriptions; Scoring", unsafe_allow_html=True)
             st.markdown("2024.10.14")
     with col2:
         st.image("images/button01.png", width=100)
-        if st.button('App 2: Distinctive features', key='2'):
+        if st.button('App 2: IPA quiz', key='2'):
+            st.markdown("🌀[App link](https://ipa-quiz.streamlit.app/): Individual sound description quiz", unsafe_allow_html=True)
+            st.markdown("2024.10.20")
+    with col3:
+        st.image("images/button01.png", width=100)
+        if st.button('App 3: Distinctive features', key='3'):
             st.markdown("🌀[App link](https://mk-316-featureapp01.hf.space/): Phonology, Sound grouping from distinctive features", unsafe_allow_html=True)
             st.markdown("2024.10.15")
     
@@ -27,17 +32,17 @@ def phonetics_apps_page():
     st.write("\n\n")
 
     # Second row with three columns
-    col3, col4 = st.columns(2)  # Correct typo here
-
-    with col3:
-        st.image("images/button01.png", width=100)
-        if st.button('App 3: List sounds', key='3'):
-            st.markdown("🌀[App link](https://mk-316-ipaselect.hf.space/): Display sounds from phonetic descriptions", unsafe_allow_html=True)
-            st.markdown("2024.10.14")
+    col4, col5 = st.columns(2)  # Correct typo here
 
     with col4:
         st.image("images/button01.png", width=100)
-        if st.button('App 4: Feature Quiz', key='4'):
+        if st.button('App 3: List sounds', key='4'):
+            st.markdown("🌀[App link](https://mk-316-ipaselect.hf.space/): Display sounds from phonetic descriptions", unsafe_allow_html=True)
+            st.markdown("2024.10.14")
+
+    with col5:
+        st.image("images/button01.png", width=100)
+        if st.button('App 4: Feature Quiz', key='5'):
             st.markdown("🌀[App link](https://mk-316-feature-practice.hf.space/): Phonology, Distinctive feature quiz", unsafe_allow_html=True)
             st.markdown("2024.10.14")
             
