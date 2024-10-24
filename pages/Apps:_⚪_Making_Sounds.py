@@ -88,7 +88,7 @@ def phonetics_apps_page():
     with tab3:
         st.header("Multi-Text to Speech Application")
         st.write("Enter text and choose a language to generate the corresponding audio.")
-        st.markdown("[Sample text](If the number of different letters is more than the minimum as defined above, the transcription will not be a phonemic, but an allophonic one. Some of the phonemes, there is to say, will be represented by more than one different symbol. In other words, some allophones of some phonemes will be singled out for representation in the transcription, hence the term allophonic.)")
+        st.markdown("[Sample text](https://raw.githubusercontent.com/MK316/MK-316/refs/heads/main/data/transcriptiontext.txt)")
         user_input = st.text_area("Enter text here...")
         language = st.selectbox("Language", ["🇰🇷 Korean", "🇺🇸 English (AmE)", "🇬🇧 English (BrE)", "🇫🇷 French", "🇪🇸 Spanish", "🇨🇳 Chinese", "🇯🇵 Japanese"])
         submit_button = st.button('Generate Speech')
