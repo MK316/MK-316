@@ -23,8 +23,8 @@ def main():
         if user_input:
             word_count = count_words(user_input)
             sentence_count = count_sentences(user_input)
-            st.write(f"✏️**Word Count**: {word_count}")
-            st.write(f"✏️**Sentence Count**: {sentence_count}")
+            st.write(f"✏️ **Word Count**: {word_count}")
+            st.write(f"✏️ **Sentence Count**: {sentence_count}")
 
     with tabs[1]:  # Other Features tab
         st.header("Other Features")
