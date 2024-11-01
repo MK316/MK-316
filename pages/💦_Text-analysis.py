@@ -16,7 +16,8 @@ def main():
     tabs = st.tabs(["Word Count", "Other", "Application 3", "Application 4", "Application 5"])
 
     with tabs[0]:  # Word Count tab
-        st.header("Word and Sentence Counter")
+        st.header("🔍 Word and Sentence Counter")
+        st.caption("This application will display the number of words and sentences in your text. After pasting your text in the box below, hit Control + Enter key to see the result."
         user_input = st.text_area("Paste your text here:", height=300)
         
         if user_input:
