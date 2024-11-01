@@ -24,7 +24,7 @@ def main():
             word_count = count_words(user_input)
             sentence_count = count_sentences(user_input)
             st.write("Here's the text count summary:")
-            st.write("*"*50)
+
             st.write(f"✏️ **Word Count**: {word_count}")
             st.write(f"✏️ **Sentence Count**: {sentence_count}")
 
