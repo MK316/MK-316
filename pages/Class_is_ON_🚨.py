@@ -76,7 +76,7 @@ with tab1:
     if not st.session_state['authenticated']:
         show_passcode_input()
     else:
-        st.markdown(f"[Proceed to the Application]({redirect_url})", unsafe_allow_html=True)
+        st.markdown("Try agin", unsafe_allow_html=True)
         
         # Code for Midterm score lookup
         st.subheader("Phonology Midterm Score Lookup")
