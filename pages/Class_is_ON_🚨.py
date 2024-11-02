@@ -28,7 +28,7 @@ if 'authenticated' not in st.session_state:
     st.session_state['authenticated'] = False
 
 # Tabs for different sections of the app
-tab1, tab2, tab3, tab4 = st.tabs(["Midterm Lookup", "Tab 2", "Tab 3", "Tab 4"])
+tab1, tab2, tab3, tab4 = st.tabs(["Phonology Midterm", "Tab 2", "Tab 3", "Tab 4"])
 
 # First tab for Midterm score lookup
 with tab1:
@@ -40,7 +40,7 @@ with tab1:
         st.markdown(f"[Proceed to the Application]({redirect_url})", unsafe_allow_html=True)
         
         # Code for Midterm score lookup
-        st.subheader("Midterm Score Lookup")
+        st.subheader("Phonology Midterm Score Lookup")
         user_passcode = st.text_input("Enter your Passcode for Midterm Score:")
 
         # Check if the passcode is entered
