@@ -5,7 +5,7 @@ import pandas as pd
 data = pd.read_csv("https://drive.google.com/uc?export=download&id=1HN-uH4p7pSgiz88hh5eo0FrlnmFAWxjA")  # Replace with your actual file path
 
 # Define the correct passcode for main app access
-correct_passcode = "1234"
+correct_passcode = "7722190"
 redirect_url = "https://coding4et.streamlit.app/Classapp"  # Page to open upon successful login
 
 def show_passcode_input():
