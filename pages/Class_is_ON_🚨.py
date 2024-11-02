@@ -56,6 +56,16 @@ def display_dot_plot():
     # Display the plot
     st.pyplot(plt)
 
+# Define function to display boxplot of Midterm scores grouped by Group
+def display_group_boxplot():
+    plt.figure(figsize=(8, 6))
+    data.boxplot(column='Midterm', by='Group', grid=False)
+    plt.title("Boxplot of Midterm Scores by Group")
+    plt.suptitle("")  # Remove the automatic title to avoid duplication
+    plt.xlabel("Group")
+    plt.ylabel("Midterm Score")
+    st.pyplot(plt)
+
 # Tabs for different sections of the app
 tab1, tab2, tab3, tab4 = st.tabs(["Phonology Midterm", "Midterm Score Plot", "Tab 3", "Tab 4"])
 
@@ -83,7 +93,12 @@ with tab1:
             else:
                 st.write("Invalid Passcode for Midterm Score. Please try again.")
 
-# Second tab for Midterm score dot plot
+# Second tab for Midterm score dot plot and boxplot button
 with tab2:
     st.header("Midterm Score Dot Plot")
     display_dot_plot()
+
+    # Button to display the group boxplot
+    if st.button("Show Group Boxplot"):
+        st.header("Boxplot of Midterm Scores by Group")
+        display_group_boxplot()
