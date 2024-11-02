@@ -81,7 +81,7 @@ with tab1:
         # Code for Midterm score lookup
         st.subheader("Phonology Midterm Score Lookup")
         user_passcode = st.text_input("Enter your Passcode for Midterm Score:")
-        lookup_button = st.button("Lookup Score")
+        lookup_button = st.button("💫 Lookup My Score")
 
         # Check if the passcode is entered and 'Lookup Score' button is clicked
         if lookup_button and user_passcode:
