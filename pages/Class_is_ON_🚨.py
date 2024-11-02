@@ -79,7 +79,7 @@ with tab1:
         st.markdown("Try agin", unsafe_allow_html=True)
         
         # Code for Midterm score lookup
-        st.subheader("Phonology Midterm Score Lookup")
+        st.subheader("Fall 202: Phonology Midterm Score Lookup")
         user_passcode = st.text_input("Enter your Passcode for Midterm Score:")
         lookup_button = st.button("🙏 Lookup My Score")
 
