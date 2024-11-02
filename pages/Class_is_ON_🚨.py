@@ -1,8 +1,12 @@
 import streamlit as st
+import pandas as pd
 
-# Define the correct passcode
+# Load data from CSV file
+data = pd.read_csv("your_file.csv")  # Replace with your actual file path
+
+# Define the correct passcode for main app access
 correct_passcode = "1234"
-redirect_url = "https://coding4et.streamlit.app/Classapp"  # This URL should be the page you want to open upon successful login
+redirect_url = "https://coding4et.streamlit.app/Classapp"  # Page to open upon successful login
 
 def show_passcode_input():
     st.title("Passcode Required")
@@ -25,9 +29,30 @@ def show_passcode_input():
 if 'authenticated' not in st.session_state:
     st.session_state['authenticated'] = False
 
-# Display the passcode input form or the link based on the authentication status
-if not st.session_state['authenticated']:
-    show_passcode_input()
-else:
-    st.success("Access Granted")
-    st.markdown(f"[Proceed to the Application]({redirect_url})", unsafe_allow_html=True)
+# Tabs for different sections of the app
+tab1, tab2, tab3, tab4 = st.tabs(["Midterm Lookup", "Tab 2", "Tab 3", "Tab 4"])
+
+# First tab for Midterm score lookup
+with tab1:
+    # Display the passcode input form or the link based on the authentication status
+    if not st.session_state['authenticated']:
+        show_passcode_input()
+    else:
+        st.success("Access Granted")
+        st.markdown(f"[Proceed to the Application]({redirect_url})", unsafe_allow_html=True)
+        
+        # Code for Midterm score lookup
+        st.subheader("Midterm Score Lookup")
+        user_passcode = st.text_input("Enter your Passcode for Midterm Score:")
+
+        # Check if the passcode is entered
+        if user_passcode:
+            # Filter data for the entered passcode
+            filtered_data = data[data['Passcode'] == user_passcode]
+
+            # Display the Midterm score if the passcode is found
+            if not filtered_data.empty:
+                midterm_score = filtered_data['Midterm'].values[0]
+                st.write(f"Your Midterm score is: {midterm_score}")
+            else:
+                st.write("Invalid Passcode for Midterm Score. Please try again.")
