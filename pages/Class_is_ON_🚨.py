@@ -10,19 +10,17 @@ redirect_url = "https://coding4et.streamlit.app/Classapp"  # Page to open upon s
 
 def show_passcode_input():
     st.title("Passcode Required")
-    st.caption("Click the button TWICE to see the page")
+    st.caption("Enter passcode to access the page")
     # Using a form to handle inputs and button as a single action
     with st.form(key='PasscodeForm'):
-        input_passcode = st.text_input("Enter the passcode to access the page:", type="password")
+        input_passcode = st.text_input("Enter the passcode:", type="password")
         submit_button = st.form_submit_button("Submit")
         if submit_button:
             # Check the passcode directly within the form processing
             if input_passcode == correct_passcode:
-                # Directly update the session state to True if passcode is correct
                 st.session_state['authenticated'] = True
             else:
                 st.error("You don't seem to have permission!")
-                # Reset the session state to False if the passcode is incorrect
                 st.session_state['authenticated'] = False
 
 # Initialize the session state for 'authenticated' if it does not exist
