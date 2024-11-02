@@ -38,7 +38,7 @@ with tabs[0]:
 
         # Convert the QR code image to RGB format and resize
         qr_img = qr_img.convert('RGB')  # Convert to RGB to be compatible with st.image
-        qr_img = qr_img.resize((300, 300))  # Resize the image
+        qr_img = qr_img.resize((600, 600))  # Resize the image
 
         # Display the resized image using Streamlit
         st.image(qr_img, caption="Generated QR Code", use_column_width=False, width=250)
