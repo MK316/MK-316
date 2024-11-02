@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Load data from CSV file
-data = pd.read_csv("your_file.csv")  # Replace with your actual file path
+data = pd.read_csv("https://drive.google.com/file/d/1HN-uH4p7pSgiz88hh5eo0FrlnmFAWxjA/view?usp=drive_link")  # Replace with your actual file path
 
 # Define the correct passcode for main app access
 correct_passcode = "1234"
