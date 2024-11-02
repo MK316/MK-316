@@ -66,7 +66,6 @@ with tab1:
         show_passcode_input()
     else:
         st.success("Access Granted")
-        st.markdown(f"[Proceed to the Application]({redirect_url})", unsafe_allow_html=True)
         
         # Code for Midterm score lookup
         st.subheader("Phonology Midterm Score Lookup")
