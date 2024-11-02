@@ -91,7 +91,7 @@ with tab1:
             # Display the Midterm score if the passcode is found
             if not filtered_data.empty:
                 midterm_score = filtered_data['Midterm'].values[0]
-                st.write(f"Your Midterm score is: {midterm_score}")
+                st.write(f"Your Midterm score is: {midterm_score} out of 75 points")
             else:
                 st.write("Invalid Passcode for Midterm Score. Please try again.")
         
