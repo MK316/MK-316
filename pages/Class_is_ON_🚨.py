@@ -28,7 +28,7 @@ def show_passcode_input():
 if 'authenticated' not in st.session_state:
     st.session_state['authenticated'] = False
 
-# Define function for the dot plot in Tab2
+# Function to display dot plot of Midterm scores
 def display_dot_plot():
     # Sort data by Midterm scores in descending order
     sorted_data = data.sort_values(by='Midterm', ascending=False).reset_index(drop=True)
@@ -56,7 +56,7 @@ def display_dot_plot():
     # Display the plot
     st.pyplot(plt)
 
-# Define function to display boxplot of Midterm scores grouped by Group
+# Function to display boxplot of Midterm scores grouped by Group
 def display_group_boxplot():
     plt.figure(figsize=(8, 6))
     data.boxplot(column='Midterm', by='Group', grid=False)
@@ -67,15 +67,16 @@ def display_group_boxplot():
     st.pyplot(plt)
 
 # Tabs for different sections of the app
-tab1, tab2, tab3, tab4 = st.tabs(["Phonology Midterm", "Midterm Score Plot", "Tab 3", "Tab 4"])
+tab1, tab2, tab3, tab4 = st.tabs(["Phonology Midterm", "Tab 2", "Tab 3", "Tab 4"])
 
-# First tab for Midterm score lookup
+# First tab for Midterm score lookup and plot buttons
 with tab1:
     # Display the passcode input form or the link based on the authentication status
     if not st.session_state['authenticated']:
         show_passcode_input()
     else:
         st.success("Access Granted")
+        st.markdown(f"[Proceed to the Application]({redirect_url})", unsafe_allow_html=True)
         
         # Code for Midterm score lookup
         st.subheader("Phonology Midterm Score Lookup")
@@ -92,13 +93,12 @@ with tab1:
                 st.write(f"Your Midterm score is: {midterm_score}")
             else:
                 st.write("Invalid Passcode for Midterm Score. Please try again.")
-
-# Second tab for Midterm score dot plot and boxplot button
-with tab2:
-    st.header("Midterm Score Dot Plot")
-    display_dot_plot()
-
-    # Button to display the group boxplot
-    if st.button("Show Group Boxplot"):
-        st.header("Boxplot of Midterm Scores by Group")
-        display_group_boxplot()
+        
+        # Buttons for additional plots
+        if st.button("Show Midterm Score Dot Plot"):
+            st.header("Midterm Score Dot Plot")
+            display_dot_plot()
+        
+        if st.button("Show Boxplot of Scores by Group"):
+            st.header("Boxplot of Midterm Scores by Group")
+            display_group_boxplot()
