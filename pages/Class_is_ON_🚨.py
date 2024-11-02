@@ -96,10 +96,10 @@ with tab1:
                 st.write("Invalid Passcode for Midterm Score. Please try again.")
         
         # Buttons for additional plots
-        if st.button("Show Midterm Score Dot Plot"):
-            st.header("💫 Midterm Score Dot Plot")
+        if st.button("💫 Show Midterm Score Dot Plot"):
+            st.header("Midterm Score Dot Plot")
             display_dot_plot()
         
-        if st.button("Show Boxplot of Scores by Group"):
-            st.header("👪 Midterm Scores by Group")
+        if st.button("👪 Show Boxplot of Scores by Group"):
+            st.header("Midterm Scores by Group")
             display_group_boxplot()
