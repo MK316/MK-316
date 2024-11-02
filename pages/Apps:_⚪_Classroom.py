@@ -41,7 +41,7 @@ with tabs[0]:
         qr_img = qr_img.resize((600, 600))  # Resize the image
 
         # Display the resized image using Streamlit
-        st.image(qr_img, caption="Generated QR Code", use_column_width=False, width=500)
+        st.image(qr_img, caption="Generated QR Code", use_column_width=False, width=400)
 
 # Timer tab
 with tabs[1]:
