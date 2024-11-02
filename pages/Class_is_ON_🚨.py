@@ -12,17 +12,18 @@ redirect_url = "https://coding4et.streamlit.app/Classapp"  # Page to open upon s
 def show_passcode_input():
     st.title("Passcode Required")
     st.caption("Enter passcode to access the page")
-    # Using a form to handle inputs and button as a single action
-    with st.form(key='PasscodeForm'):
-        input_passcode = st.text_input("Enter the passcode:", type="password")
-        submit_button = st.form_submit_button("Submit")
-        if submit_button:
-            # Check the passcode directly within the form processing
-            if input_passcode == correct_passcode:
-                st.session_state['authenticated'] = True
-            else:
-                st.error("You don't seem to have permission!")
-                st.session_state['authenticated'] = False
+    # Text input for passcode and submit button
+    input_passcode = st.text_input("Enter the passcode:", type="password")
+    submit_button = st.button("Submit")
+    
+    # Check the passcode when the 'Submit' button is clicked
+    if submit_button:
+        if input_passcode == correct_passcode:
+            st.session_state['authenticated'] = True
+            st.success("Access Granted")
+        else:
+            st.error("You don't seem to have permission!")
+            st.session_state['authenticated'] = False
 
 # Initialize the session state for 'authenticated' if it does not exist
 if 'authenticated' not in st.session_state:
@@ -75,15 +76,15 @@ with tab1:
     if not st.session_state['authenticated']:
         show_passcode_input()
     else:
-        st.success("Access Granted")
         st.markdown(f"[Proceed to the Application]({redirect_url})", unsafe_allow_html=True)
         
         # Code for Midterm score lookup
         st.subheader("Phonology Midterm Score Lookup")
         user_passcode = st.text_input("Enter your Passcode for Midterm Score:")
+        lookup_button = st.button("Lookup Score")
 
-        # Check if the passcode is entered
-        if user_passcode:
+        # Check if the passcode is entered and 'Lookup Score' button is clicked
+        if lookup_button and user_passcode:
             # Filter data for the entered passcode
             filtered_data = data[data['Passcode'] == user_passcode]
 
