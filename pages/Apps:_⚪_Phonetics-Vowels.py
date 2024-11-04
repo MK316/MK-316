@@ -84,7 +84,7 @@ uploaded_data = None
 with tab2:
     st.title("Upload CSV File")
     st.write("Please upload a CSV file with columns: 'F1', 'F2', and 'word'.")
-    st.markdown("[sample csv](https://raw.githubusercontent.com/MK316/MK-316/refs/heads/main/data/evowelcsv.csv)
+    st.markdown("[sample csv](https://raw.githubusercontent.com/MK316/MK-316/refs/heads/main/data/evowelcsv.csv)")
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
     if uploaded_file is not None:
