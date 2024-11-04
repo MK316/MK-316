@@ -10,12 +10,12 @@ data2 = pd.read_csv("https://drive.google.com/uc?export=download&id=1pmKIKIr36kR
 correct_passcode = "7722190"
 redirect_url = "https://mk316home.streamlit.app/Classapp"
 
-def show_passcode_input():
+def show_passcode_input(tab_key):
     st.title("Passcode Required")
     st.caption("Enter passcode to access the page")
-    # Text input for passcode and submit button
-    input_passcode = st.text_input("Enter the passcode:", type="password")
-    submit_button = st.button("Submit")
+    # Text input for passcode and submit button with unique keys for each tab
+    input_passcode = st.text_input("Enter the passcode:", type="password", key=f"{tab_key}_passcode_input")
+    submit_button = st.button("Submit", key=f"{tab_key}_submit_button")
     
     # Check the passcode when the 'Submit' button is clicked
     if submit_button:
@@ -63,11 +63,11 @@ tab1, tab2, tab3, tab4 = st.tabs(["Phonology Midterm", "Phonetics", "Tab 3", "Ta
 # First tab for Phonology Midterm score lookup and plot buttons
 with tab1:
     if not st.session_state['authenticated']:
-        show_passcode_input()
+        show_passcode_input("tab1")
     else:
         st.subheader("Fall 202: Phonology Midterm Score Lookup")
-        user_passcode = st.text_input("Enter your Passcode for Midterm Score:")
-        lookup_button = st.button("🙏 Lookup My Score")
+        user_passcode = st.text_input("Enter your Passcode for Midterm Score:", key="tab1_user_passcode")
+        lookup_button = st.button("🙏 Lookup My Score", key="tab1_lookup_button")
 
         if lookup_button and user_passcode:
             filtered_data = data[data['Passcode'] == user_passcode]
@@ -77,22 +77,22 @@ with tab1:
             else:
                 st.write("Invalid Passcode for Midterm Score. Please try again.")
         
-        if st.button("💫 Show Midterm Score Dot Plot"):
+        if st.button("💫 Show Midterm Score Dot Plot", key="tab1_dotplot_button"):
             st.header("Midterm Score Dot Plot")
             display_dot_plot(data)
         
-        if st.button("👪 Show Boxplot of Scores by Group"):
+        if st.button("👪 Show Boxplot of Scores by Group", key="tab1_boxplot_button"):
             st.header("Midterm Scores by Group")
             display_group_boxplot(data)
 
 # Second tab for Phonetics score lookup and plot buttons using data2
 with tab2:
     if not st.session_state['authenticated']:
-        show_passcode_input()
+        show_passcode_input("tab2")
     else:
         st.subheader("Phonetics Midterm Score Lookup")
-        user_passcode = st.text_input("Enter your Passcode for Phonetics Midterm Score:", key="phonetics_passcode")
-        lookup_button = st.button("🔍 Lookup My Score (Phonetics)")
+        user_passcode = st.text_input("Enter your Passcode for Phonetics Midterm Score:", key="tab2_user_passcode")
+        lookup_button = st.button("🔍 Lookup My Score (Phonetics)", key="tab2_lookup_button")
 
         if lookup_button and user_passcode:
             filtered_data2 = data2[data2['Passcode'] == user_passcode]
@@ -102,10 +102,10 @@ with tab2:
             else:
                 st.write("Invalid Passcode for Phonetics Midterm Score. Please try again.")
         
-        if st.button("💫 Show Phonetics Score Dot Plot"):
+        if st.button("💫 Show Phonetics Score Dot Plot", key="tab2_dotplot_button"):
             st.header("Phonetics Score Dot Plot")
             display_dot_plot(data2)
         
-        if st.button("👪 Show Phonetics Boxplot by Group"):
+        if st.button("👪 Show Phonetics Boxplot by Group", key="tab2_boxplot_button"):
             st.header("Phonetics Scores by Group")
             display_group_boxplot(data2)
