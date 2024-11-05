@@ -20,9 +20,9 @@ def main():
     # Fall 2024 content
     with tabs[0]:
     #    st.subheader("Fall 2024 Courses")
-        fall_url = 'https://github.com/MK316/workshops/blob/main/README.md'
-        fall_content = fetch_github_readme(fall_url)
-        st.markdown(fall_content, unsafe_allow_html=True)
+        workshop_url = 'https://github.com/MK316/workshops/blob/main/README.md'
+        workshop_content = fetch_github_readme(workshop_url)
+        st.markdown(workshop_content, unsafe_allow_html=True)
 
     # Spring 2024 content
     with tabs[1]:
