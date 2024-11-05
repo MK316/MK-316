@@ -1,26 +1,29 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import requests
 
-# Function to fetch and display GitHub Markdown content
-def display_github_markdown(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        content = response.text
-        st.markdown(content, unsafe_allow_html=True)
-    else:
-        st.error("Failed to load content. Please check the URL.")
+def main():
+    st.title('Coding4ET Tutorials')
 
-# URLs for the GitHub Markdown files
-fall_url = "https://github.com/MK316/MK-316/blob/main/pages/fall2024.md"
-spring_url = "https://raw.githubusercontent.com/username/repository/branch/path/to/Spring2024.md"
+    tabs = st.tabs(["Fall2024", "Spring2024"])
 
-# Set up tabs in the Streamlit app
-tab1, tab2 = st.tabs(["Fall2024", "Spring2024"])
+    # Manual tab content
+    with tabs[0]:
+        st.subheader("")
+        readme_url = 'https://github.com/MK316/MK-316/blob/main/pages/fall2024.md'
+        readme_content = fetch_github_readme(readme_url)
+        st.markdown(readme_content, unsafe_allow_html=True)
 
-with tab1:
-    st.header("Fall 2024 Information")
-    display_github_markdown(fall_url)
+    with tabs[1]:
+        st.subheader("")
+        readme_url = 'https://github.com/MK316/MK-316/blob/main/pages/spring2024.md'
+        readme_content = fetch_github_readme(readme_url)
+        st.markdown(readme_content, unsafe_allow_html=True)
 
-with tab2:
-    st.header("Spring 2024 Information")
-    display_github_markdown(spring_url)
+    with tabs[2]:
+        st.subheader("")
+        # readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson02.md'
+        # readme_content = fetch_github_readme(readme_url)
+        # st.markdown(readme_content, unsafe_allow_html=True)
+
+ 
