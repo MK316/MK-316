@@ -3,7 +3,6 @@ import speech_recognition as sr
 from Levenshtein import ratio
 import tempfile
 import numpy as np
-import soundfile as sf
 import pandas as pd
 
 # Sample dataframe with sentences
@@ -104,9 +103,10 @@ with tab1:
 # Tab 2: Recording
 with tab2:
     st.subheader("Audio Recorder")
-    st.write("Click the record button below to capture your speech.")
-
-    audio_bytes = st.audio(st.file_uploader("Upload or record audio here"), format="audio/wav")
+    st.write("Use the upload option to provide your recording.")
+    
+    # Audio file uploader
+    audio_bytes = st.file_uploader("Upload or record audio here", type=["wav"])
     if audio_bytes:
         st.audio(audio_bytes, format='audio/wav')
         st.write("Recording uploaded successfully!")
