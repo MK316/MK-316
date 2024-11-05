@@ -1,8 +1,8 @@
 import streamlit as st
 import requests
 
-
-
+image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
+st.image(image_url, caption="\"Be curious, not judgmental.\" — Walt Whitman", use_column_width=True)
 # Function to fetch and display GitHub Markdown content
 def fetch_github_readme(url):
     # Convert GitHub page URL to raw content URL
@@ -45,4 +45,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-st.image(image_url, caption="\"Be curious, not judgmental.\" — Walt Whitman", use_column_width=True)
+
