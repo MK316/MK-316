@@ -18,5 +18,11 @@ with tab1:
     st.caption("This tool provides a vowel chart based on formants (F1, F2).")
 
 with tab2:
-    st.header("V-description app")
-    st.write("To be updated.")
+    st.header("Vowel description application 1")
+    st.markdown("Practice how to describe English vowels.")
+    
+    # Create a link styled as a button that opens the URL in a new tab
+    vowel_chart_url = "https://vowelpractice.streamlit.app"
+    st.markdown(f'<a href="{vowel_chart_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #006666; color: white; padding: 10px 20px; border-radius: 5px;">Open Vowel Charting App</a>', unsafe_allow_html=True)
+
+    st.caption("For General American Engilsh Vowels (e.g., 10 Monophthongs and 5 Diphthongs)")
