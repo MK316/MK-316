@@ -67,7 +67,7 @@ def calculate_average(name):
 st.title("Pronunciation Accuracy Feedback App")
 
 # Tabs
-tab1, tab2 = st.tabs(["Accuracy Feedback", "More apps"])
+tab1, tab2, tab3 = st.tabs(["Accuracy Feedback", "Recording", "More apps"])
 
 # Tab 1: Accuracy Feedback
 with tab1:
@@ -101,7 +101,17 @@ with tab1:
         else:
             st.warning("Please enter your name to calculate the average score.")
 
-# Tab 2: More apps placeholder
+# Tab 2: Recording
 with tab2:
+    st.subheader("Audio Recorder")
+    st.write("Click the record button below to capture your speech.")
+
+    audio_bytes = st.audio(st.file_uploader("Upload or record audio here"), format="audio/wav")
+    if audio_bytes:
+        st.audio(audio_bytes, format='audio/wav')
+        st.write("Recording uploaded successfully!")
+
+# Tab 3: More apps placeholder
+with tab3:
     st.subheader("More Apps")
     st.write("To be updated")
