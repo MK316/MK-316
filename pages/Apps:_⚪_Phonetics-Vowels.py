@@ -4,7 +4,7 @@ import streamlit as st
 st.title("Phonetics Tools")
 
 # Create two tabs: 'Vowel Chart' and 'V-description app'
-tab1, tab2 = st.tabs(["Vowel Chart", "V-description app"])
+tab1, tab2, tab3 = st.tabs(["Vowel Chart", "V-description app", "Rhotic vowels])
 
 # Define the content of each tab
 with tab1:
@@ -26,3 +26,8 @@ with tab2:
     st.markdown(f'<a href="{vowel_chart_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #006666; color: white; padding: 10px 20px; border-radius: 5px;">Open Vowel Charting App</a>', unsafe_allow_html=True)
 
     st.caption("For General American Engilsh Vowels (e.g., 10 Monophthongs and 5 Diphthongs)")
+
+with tab3:
+
+    st.header("Rhotic vowel description")
+    st.markdown("To be updated")
