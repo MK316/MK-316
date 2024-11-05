@@ -2,6 +2,7 @@ import streamlit as st  # Corrected the import alias to 'st' from 'sr'
 
 st.markdown("### About me...")
 st.markdown("![Profile Image](https://github.com/MK316/MK-316/raw/main/images/profile-small.jpg)")  # Correct markdown syntax for images
+st.caption("I teach phonetics and phonology to English education majors, focusing on advancing digital literacy for today’s evolving classrooms. My work emphasizes student-centered, technology-enhanced learning to equip future teachers with interactive, engaging methods that minimize reliance on commercial applications. Since February 2022, I have been learning foundational Python coding to enhance instructional approaches and am dedicated to developing professional courses for in-service teachers interested in integrating digital tools. I am also exploring coding-based language learning app development.")
 st.markdown("\n\n")
 st.markdown("- Linguist (Phonetics/Phonology) & educator")
 st.markdown("- Github ID: MK316")
