@@ -72,20 +72,19 @@ with tab1:
         if lookup_button and user_passcode:
             filtered_data = data[data['Passcode'] == user_passcode]
             if not filtered_data.empty:
+                # User's midterm score
+                midterm_score = filtered_data['Midterm'].values[0]
+
                 # Calculate mean, median, and rank
                 mean_score = data['Midterm'].mean()
                 median_score = data['Midterm'].median()
-                rank = (data['Midterm'] > midterm_score2).sum() + 1  # Rank in ascending order
+                rank = (data['Midterm'] > midterm_score).sum() + 1  # Rank in ascending order
                 
                 # Display user's score and statistics
-                st.write(f"Your Phonetics Midterm score is: {midterm_score2} out of 75 points ({(midterm_score2/75)*100:.1f}% accuracy)")
+                st.write(f"Your Phonology Midterm score is: {midterm_score} out of 75 points ({(midterm_score/75)*100:.1f}% accuracy)")
                 st.write(f"Class Average (Mean): {mean_score:.2f}")
                 st.write(f"Class Median: {median_score:.2f}")
                 st.write(f"Your Rank in Class: {rank}")
-
-                
-                midterm_score = filtered_data['Midterm'].values[0]
-                st.write(f"Your Midterm score is: {midterm_score} out of 75 points ({(midterm_score/75)*100:.1f}% of accuracy)")
                 
             else:
                 st.write("Invalid Passcode for Midterm Score. Please try again.")
@@ -137,4 +136,3 @@ with tab2:
         if st.button("👪 Show Phonetics Boxplot by Group", key="tab2_boxplot_button"):
             st.header("Phonetics Scores by Group")
             display_group_boxplot(data2)
-
