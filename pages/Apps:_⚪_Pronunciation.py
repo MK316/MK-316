@@ -74,10 +74,10 @@ def convert_to_wav(audio_file):
         st.error(f"An error occurred: {str(e)}. This format may require external dependencies not available in this environment.")
         
 # Streamlit app layout
-st.title("Pronunciation Accuracy Feedback App")
+st.title("Pronunciation Feedback")
 
 # Tabs
-tab1, tab2, tab3 = st.tabs(["Recording", "MP3-to-WAV", "Accuracy Feedback"])
+tab1, tab2, tab3 = st.tabs(["1. Recording", "2. MP3-to-WAV", "3. Accuracy Feedback"])
 
 
 # Tab 1: Recording
