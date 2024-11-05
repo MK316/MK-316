@@ -12,7 +12,7 @@ def fetch_github_readme(url):
         return "Error: Unable to load content from GitHub."
 
 def main():
-    st.title('Workshops')
+    st.title('Recent talks & Workshops')
 
     # Set up tabs
     tabs = st.tabs(["Archives", "Current", "Additional Content"])
