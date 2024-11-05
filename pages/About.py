@@ -35,7 +35,7 @@ def main():
     # Publications
     with tabs[1]:
         # URL to the raw image on GitHub
-        image_url = "https://github.com/MK316/MK316.github.io/blob/main/images/KeywordCloud_231129.png"
+        image_url = "https://github.com/MK316/MK316.github.io/raw/main/images/KeywordCloud_231129.png"
         # Display the image
         st.image(image_url, caption="Research keywords", use_column_width=True)
         spring_url = 'https://github.com/MK316/MK316.github.io/blob/main/res/publications.md'
