@@ -77,7 +77,7 @@ def convert_to_wav(audio_file):
 st.title("Pronunciation Accuracy Feedback App")
 
 # Tabs
-tab1, tab2, tab3 = st.tabs(["Accuracy Feedback", "Recording", "More apps"])
+tab1, tab2, tab3 = st.tabs(["Accuracy Feedback", "Recording", "MP3-to-WAV"])
 
 # Tab 1: Accuracy Feedback
 with tab1:
@@ -121,7 +121,7 @@ with tab2:
 
 
 # Tab 2: MP3 to WAV Converter
-with tab2:
+with tab3:
     st.header("MP3 to WAV Converter")
     audio_file = st.file_uploader("Upload MP3 file", type=['mp3'])
 
