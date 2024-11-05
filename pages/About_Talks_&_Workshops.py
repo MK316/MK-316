@@ -15,7 +15,6 @@ def fetch_github_readme(url):
 
 def main():
     
-    st.image(image_url, caption="\"Be curious, not judgmental.\" — Walt Whitman", use_column_width=True)
     # Set up tabs
     tabs = st.tabs(["Archives", "Current", "Additional Content"])
 
@@ -46,3 +45,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+st.image(image_url, caption="\"Be curious, not judgmental.\" — Walt Whitman", use_column_width=True)
