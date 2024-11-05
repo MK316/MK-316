@@ -62,6 +62,17 @@ def calculate_average(name):
         average_score = 0
     return f"Great job, {name}! Your average score is: {average_score:.2f}. Keep practicing to improve further!"
 
+# Convert MP3 to WAV function
+def convert_to_wav(audio_file):
+    try:
+        sound = AudioSegment.from_mp3(audio_file)
+        buffer = io.BytesIO()
+        sound.export(buffer, format="wav")
+        buffer.seek(0)
+        return buffer
+    except Exception as e:
+        st.error(f"An error occurred: {str(e)}. This format may require external dependencies not available in this environment.")
+        
 # Streamlit app layout
 st.title("Pronunciation Accuracy Feedback App")
 
@@ -109,7 +120,12 @@ with tab2:
     st.markdown(f'<a href="{mic_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #FF9933; color: white; padding: 10px 20px; border-radius: 5px;">Open Recorder App</a>', unsafe_allow_html=True)
 
 
-# Tab 3: MP3-to-WAV
-with tab3:
-    st.subheader("More Apps")
-    st.write("To be updated")
+# Tab 2: MP3 to WAV Converter
+with tab2:
+    st.header("MP3 to WAV Converter")
+    audio_file = st.file_uploader("Upload MP3 file", type=['mp3'])
+
+    if audio_file is not None:
+        wav_buffer = convert_to_wav(audio_file)
+        if wav_buffer is not None:
+             st.audio(wav_buffer, format='audio/wav')
