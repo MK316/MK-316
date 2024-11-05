@@ -67,4 +67,41 @@ def calculate_average(name):
 st.title("Pronunciation Accuracy Feedback App")
 
 # Tabs
-tab1, tab2 = st.tabs(["Accuracy Feedback",
+tab1, tab2 = st.tabs(["Accuracy Feedback", "More apps"])
+
+# Tab 1: Accuracy Feedback
+with tab1:
+    st.subheader("Check Your Pronunciation Accuracy")
+    
+    # User inputs
+    name = st.text_input("Enter your name", placeholder="Type your name here...")
+    sentence = st.selectbox("Select a Sentence", df['Sentences'].tolist())
+    st.write("Selected Sentence:", sentence)
+    
+    # Audio upload
+    audio_file = st.file_uploader("Upload your audio file (WAV format)", type=["wav"])
+
+    # Button to check pronunciation
+    if st.button("Check Pronunciation"):
+        if name and audio_file and sentence:
+            with tempfile.NamedTemporaryFile(delete=True, suffix=".wav") as tmpfile:
+                tmpfile.write(audio_file.read())
+                tmpfile.seek(0)
+                feedback, score = pronunciation_correction(name, sentence, tmpfile.name)
+                st.write("Pronunciation Feedback:", feedback)
+                st.write("Pronunciation Accuracy Score:", score)
+        else:
+            st.warning("Please enter your name, select a sentence, and upload an audio file.")
+    
+    # Button to show average score
+    if st.button("Show Average Score"):
+        if name:
+            avg_score = calculate_average(name)
+            st.write(avg_score)
+        else:
+            st.warning("Please enter your name to calculate the average score.")
+
+# Tab 2: More apps placeholder
+with tab2:
+    st.subheader("More Apps")
+    st.write("To be updated")
