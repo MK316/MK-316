@@ -77,10 +77,30 @@ def convert_to_wav(audio_file):
 st.title("Pronunciation Accuracy Feedback App")
 
 # Tabs
-tab1, tab2, tab3 = st.tabs(["Accuracy Feedback", "Recording", "MP3-to-WAV"])
+tab1, tab2, tab3 = st.tabs(["Recording", "MP3-to-WAV", "Accuracy Feedback"])
 
-# Tab 1: Accuracy Feedback
+
+# Tab 1: Recording
 with tab1:
+    st.caption("Make sure to give this app permission to access microphone in your device.")
+    
+    # Create a link styled as a button that opens the URL in a new tab
+    mic_url = "https://mk-316-recorder.hf.space/"
+    st.markdown(f'<a href="{mic_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #FF9933; color: white; padding: 10px 20px; border-radius: 5px;">Open Recorder App</a>', unsafe_allow_html=True)
+
+
+# Tab 2: MP3 to WAV Converter
+with tab2:
+    st.header("MP3 to WAV Converter")
+    audio_file = st.file_uploader("Upload MP3 file", type=['mp3'])
+
+    if audio_file is not None:
+        wav_buffer = convert_to_wav(audio_file)
+        if wav_buffer is not None:
+             st.audio(wav_buffer, format='audio/wav')
+
+# Tab 3: Accuracy Feedback
+with tab3:
     st.subheader("Check Your Pronunciation Accuracy")
     
     # User inputs
@@ -110,22 +130,3 @@ with tab1:
             st.write(avg_score)
         else:
             st.warning("Please enter your name to calculate the average score.")
-
-# Tab 2: Recording
-with tab2:
-    st.caption("Make sure to give this app permission to access microphone in your device.")
-    
-    # Create a link styled as a button that opens the URL in a new tab
-    mic_url = "https://mk-316-recorder.hf.space/"
-    st.markdown(f'<a href="{mic_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #FF9933; color: white; padding: 10px 20px; border-radius: 5px;">Open Recorder App</a>', unsafe_allow_html=True)
-
-
-# Tab 2: MP3 to WAV Converter
-with tab3:
-    st.header("MP3 to WAV Converter")
-    audio_file = st.file_uploader("Upload MP3 file", type=['mp3'])
-
-    if audio_file is not None:
-        wav_buffer = convert_to_wav(audio_file)
-        if wav_buffer is not None:
-             st.audio(wav_buffer, format='audio/wav')
