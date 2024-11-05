@@ -26,14 +26,19 @@ def main():
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
 
+    with tabs[3]:
+        st.subheader("")
+        readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson04.md'
+        readme_content = fetch_github_readme(readme_url)
+        st.markdown(readme_content, unsafe_allow_html=True)
+
+    with tabs[4]:
+        st.subheader("")
+        readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson05.md'
+        readme_content = fetch_github_readme(readme_url)
+        st.markdown(readme_content, unsafe_allow_html=True)
     # Static content for other tabs
-    for i, tab in enumerate(tabs):
-        if i > 2:
-            with tab:
-                if i == 3:  # Special handling for Lesson 3
-                    handle_lesson_3_videos()
-                else:
-                    st.write("To be updated.")
+
 
 def handle_lesson_3_videos():
     st.subheader("Lesson 3 Videos")
