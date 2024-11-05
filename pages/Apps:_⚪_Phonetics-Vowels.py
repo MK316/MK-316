@@ -13,10 +13,8 @@ with tab1:
     st.markdown("This tool provides a vowel chart for phonetics practice.")
     
     # Replace 'YOUR_APP_URL' with your actual Streamlit app URL for the vowel chart
-    YOUR_APP_URL = "https://vowelchart.streamlit.app"
-    
-    # Use an iframe to embed the app in the tab
-    st.components.v1.iframe(YOUR_APP_URL, height=600, width=800)
+    st.markdown("[Vowel charting](https://vowelchart.streamlit.app)")
+    st.caption("This tool provides a vowel chart based on formants (F1, F2).")
 
 with tab2:
     st.header("V-description app")
