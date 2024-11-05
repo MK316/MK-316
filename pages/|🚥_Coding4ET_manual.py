@@ -5,38 +5,45 @@ import requests
 def main():
     st.title('Coding4ET Tutorials')
 
-    tabs = st.tabs(["Manual", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5"])
+    tabs = st.tabs(["Table of contents", "Acknowledgment", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5"])
 
     # Manual tab content
     with tabs[0]:
+        st.subheader("")
+        readme_url = 'https://github.com/MK316/Coding4ET/blob/main/README.md'
+        readme_content = fetch_github_readme(readme_url)
+        st.markdown(readme_content, unsafe_allow_html=True)
+
+    
+    with tabs[1]:
         st.subheader("")
         readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/overview.md'
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
 
-    with tabs[1]:
+    with tabs[2]:
         st.subheader("")
         readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson01.md'
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
 
-    with tabs[2]:
+    with tabs[3]:
         st.subheader("")
         readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson02.md'
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
 
-    with tabs[3]:
+    with tabs[4]:
         st.subheader("Lesson 3 Videos")
         handle_lesson_3_videos()  # Display Lesson 3 video buttons
 
-    with tabs[4]:
+    with tabs[5]:
         st.subheader("")
         readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson04.md'
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
 
-    with tabs[5]:
+    with tabs[6]:
         st.subheader("")
         readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson05.md'
         readme_content = fetch_github_readme(readme_url)
