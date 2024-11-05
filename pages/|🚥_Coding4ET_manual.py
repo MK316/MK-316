@@ -27,21 +27,22 @@ def main():
         st.markdown(readme_content, unsafe_allow_html=True)
 
     with tabs[3]:
+        st.subheader("Lesson 3 Videos")
+        handle_lesson_3_videos()  # Display Lesson 3 video buttons
+
+    with tabs[4]:
         st.subheader("")
         readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson04.md'
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
 
-    with tabs[4]:
+    with tabs[5]:
         st.subheader("")
         readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson05.md'
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
-    # Static content for other tabs
-
 
 def handle_lesson_3_videos():
-    st.subheader("Lesson 3 Videos")
     video_links = {
         'Lesson 3.1': 'https://www.youtube.com/embed/uigxMFBR0Wg',
         'Lesson 3.2': 'https://www.youtube.com/embed/gPIe1Tgie1Q',
@@ -56,13 +57,11 @@ def get_iframe(video_url):
     return f"<iframe width='400' height='300' src='{video_url}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>"
 
 def fetch_github_readme(url):
-    # Assuming the README is public and raw content is accessible
-    # This is a simplified example and may need adjustments based on actual content access policies
     response = requests.get(url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/'))
     if response.status_code == 200:
         return response.text
     else:
-        return "Failed to load README. [View on GitHub](" + url + ")"
+        return f"Failed to load README. [View on GitHub]({url})"
 
 if __name__ == "__main__":
     main()
