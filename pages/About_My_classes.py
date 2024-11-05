@@ -15,7 +15,7 @@ def main():
     st.title('My Digital Classroom')
 
     # Set up tabs
-    tabs = st.tabs(["Fall 2024", "Spring 2024", "Fall 2023", "Additional Content"])
+    tabs = st.tabs(["Fall 2024", "Spring 2024", "Fall 2023", "Spring 2023", "Additional Content"])
 
     # Fall 2024 content
     with tabs[0]:
@@ -40,8 +40,17 @@ def main():
         additional_content = fetch_github_readme(fall2023_url)
         st.markdown(additional_content, unsafe_allow_html=True)
 
-    # Additional Content tab (optional)
+
     with tabs[3]:
+        # st.subheader("Spring 2023 Courses")
+        # Placeholder URL for additional content if needed
+        # Uncomment and update the URL if you have content for this tab
+        additional_url = 'https://github.com/MK316/Spring2023/blob/main/README.md'
+        additional_content = fetch_github_readme(additional_url)
+        st.markdown(additional_content, unsafe_allow_html=True)
+
+    # Additional Content tab (optional)
+    with tabs[4]:
         st.subheader("Additional Content")
         # Placeholder URL for additional content if needed
         # Uncomment and update the URL if you have content for this tab
