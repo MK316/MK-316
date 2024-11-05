@@ -44,7 +44,7 @@ def main():
 
     # Academic services
     with tabs[2]:
-        url = 'https://github.com/MK316/MK-316/blob/main/pages/academicservice.md'
+        url = 'https://github.com/MK316/MK-316/blob/main/pages/academicservices.md'
         additional_content = fetch_github_readme(url)
         st.markdown(additional_content, unsafe_allow_html=True)
 
