@@ -106,7 +106,7 @@ with tab2:
     
     # Create a link styled as a button that opens the URL in a new tab
     mic_url = "https://mk-316-recorder.hf.space/"
-    st.markdown(f'<a href="{vowel_chart_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #FF9933; color: white; padding: 10px 20px; border-radius: 5px;">Open Recorder App</a>', unsafe_allow_html=True)
+    st.markdown(f'<a href="{mic_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #FF9933; color: white; padding: 10px 20px; border-radius: 5px;">Open Recorder App</a>', unsafe_allow_html=True)
 
 
 # Tab 3: MP3-to-WAV
