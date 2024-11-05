@@ -13,4 +13,6 @@ scipy
 plotly
 librosa
 soundfile
+speechrecognition
+python-levenshtein
 
