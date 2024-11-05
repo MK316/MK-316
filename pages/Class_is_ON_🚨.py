@@ -36,17 +36,17 @@ def calculate_percentile_category(score, scores):
     if percentile <= 10:
         return "Top 10%"
     elif percentile <= 20:
-        return "Top 20%"
+        return "Top 10-20%"
     elif percentile <= 30:
-        return "Top 30%"
+        return "Top 20-30%"
     elif percentile <= 40:
-        return "Top 40%"
+        return "Top 30-40%"
     elif percentile <= 50:
-        return "Top 50%"
+        return "Top 40-50%"
     elif percentile <= 60:
-        return "Below Top 60%"
+        return "Below Top 50%"
     elif percentile <= 70:
-        return "Below Top 70%"
+        return "Below Top 60%"
     else:
         return "Below Top 70%"
 
