@@ -105,7 +105,7 @@ with tab2:
     st.caption("Make sure to give this app permission to access microphone in your device.")
     
     # Create a link styled as a button that opens the URL in a new tab
-   mic_url = "https://mk-316-recorder.hf.space/"
+    mic_url = "https://mk-316-recorder.hf.space/"
     st.markdown(f'<a href="{vowel_chart_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #FF9933; color: white; padding: 10px 20px; border-radius: 5px;">Open Recorder App</a>', unsafe_allow_html=True)
 
 
