@@ -1,29 +1,44 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import requests
+
+# Function to fetch and display GitHub Markdown content
+def fetch_github_readme(url):
+    # Convert GitHub page URL to raw content URL
+    raw_url = url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/')
+    response = requests.get(raw_url)
+    if response.status_code == 200:
+        return response.text
+    else:
+        return "Error: Unable to load content from GitHub."
 
 def main():
     st.title('Coding4ET Tutorials')
 
-    tabs = st.tabs(["Fall2024", "Spring2024"])
+    # Set up tabs
+    tabs = st.tabs(["Fall2024", "Spring2024", "Additional Content"])
 
-    # Manual tab content
+    # Fall 2024 content
     with tabs[0]:
-        st.subheader("")
-        readme_url = 'https://github.com/MK316/MK-316/blob/main/pages/fall2024.md'
-        readme_content = fetch_github_readme(readme_url)
-        st.markdown(readme_content, unsafe_allow_html=True)
+        st.subheader("Fall 2024")
+        fall_url = 'https://github.com/MK316/MK-316/blob/main/pages/fall2024.md'
+        fall_content = fetch_github_readme(fall_url)
+        st.markdown(fall_content, unsafe_allow_html=True)
 
+    # Spring 2024 content
     with tabs[1]:
-        st.subheader("")
-        readme_url = 'https://github.com/MK316/MK-316/blob/main/pages/spring2024.md'
-        readme_content = fetch_github_readme(readme_url)
-        st.markdown(readme_content, unsafe_allow_html=True)
+        st.subheader("Spring 2024")
+        spring_url = 'https://github.com/MK316/MK-316/blob/main/pages/spring2024.md'
+        spring_content = fetch_github_readme(spring_url)
+        st.markdown(spring_content, unsafe_allow_html=True)
 
+    # Additional Content tab (optional)
     with tabs[2]:
-        st.subheader("")
-        # readme_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson02.md'
-        # readme_content = fetch_github_readme(readme_url)
-        # st.markdown(readme_content, unsafe_allow_html=True)
+        st.subheader("Additional Content")
+        # Placeholder URL for additional content if needed
+        # Uncomment and update the URL if you have content for this tab
+        # additional_url = 'https://github.com/MK316/Coding4ET/blob/main/Lessons/Lesson02.md'
+        # additional_content = fetch_github_readme(additional_url)
+        # st.markdown(additional_content, unsafe_allow_html=True)
 
- 
+if __name__ == "__main__":
+    main()
