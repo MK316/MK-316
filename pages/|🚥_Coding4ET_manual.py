@@ -3,7 +3,7 @@ import streamlit.components.v1 as components
 import requests
 
 def main():
-    st.title('Coding4ET Tutorials')
+#    st.title('Coding4ET Tutorials')
 
     tabs = st.tabs(["Table of contents", "Acknowledgment", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5"])
 
