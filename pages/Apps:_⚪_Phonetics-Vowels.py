@@ -10,12 +10,10 @@ tab1, tab2 = st.tabs(["Vowel Chart", "V-description app"])
 with tab1:
     st.header("Vowel Chart")
     st.markdown("This tool provides a vowel chart for phonetics practice.")
-
-    # Create a button that opens the vowel chart link in a new tab
+    
+    # Create a link styled as a button that opens the URL in a new tab
     vowel_chart_url = "https://vowelchart.streamlit.app"
-    if st.button("Open Vowel Charting"):
-        js_code = f"window.open('{vowel_chart_url}');"
-        st.components.v1.html(f"<script>{js_code}</script>", height=0, width=0)
+    st.markdown(f'<a href="{vowel_chart_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 5px;">Open Vowel Charting</a>', unsafe_allow_html=True)
 
     st.caption("This tool provides a vowel chart based on formants (F1, F2).")
 
