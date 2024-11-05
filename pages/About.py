@@ -5,7 +5,7 @@ st.markdown("![Profile Image](https://github.com/MK316/MK-316/raw/main/images/pr
 st.markdown("\n\n")
 st.markdown("- Github ID: MK316")
 st.markdown("- Affiliation: Dept. of English Education, GNU ⛺ [Goto](https://englishedu.gnu.ac.kr)")
-st.markdown("- Archives - My digital classroom: [mrkim21.github.io](https://mrkim21.github.io)")
+st.markdown("- Archives (before 10. 14. 2024) - My digital classroom: [mrkim21.github.io](https://mrkim21.github.io)")
 
 # URL to the raw image on GitHub
 image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
