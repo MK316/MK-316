@@ -26,6 +26,7 @@ with tab2:
     st.markdown(f'<a href="{vowel_chart_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #006666; color: white; padding: 10px 20px; border-radius: 5px;">Open Vowel Charting App</a>', unsafe_allow_html=True)
 
     st.caption("For General American Engilsh Vowels (e.g., 10 Monophthongs and 5 Diphthongs)")
+    st.caption("This app will display a vowel IPA symbol. The user will choose the phonetic description of the given vowel in terms of vowel height, backness, roundedness, and tense/lax categories. Scores will be updated.")
 
 with tab3:
 
