@@ -44,11 +44,11 @@ def calculate_percentile_category(score, scores):
     elif percentile <= 50:
         return "Top 40-50%"
     elif percentile <= 60:
-        return "Below Top 50%"
+        return "Below the Top 50%"
     elif percentile <= 70:
-        return "Below Top 60%"
+        return "Below the Top 60%"
     else:
-        return "Below Top 70%"
+        return "Below the Top 70%"
 
 # Function to display dot plot of Midterm scores for the given dataset
 def display_dot_plot(data):
