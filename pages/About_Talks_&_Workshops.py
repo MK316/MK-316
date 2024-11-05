@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-st.image(image_url, caption="\"Be curious, not judgmental.\" — Walt Whitman", use_column_width=True)
+
 
 # Function to fetch and display GitHub Markdown content
 def fetch_github_readme(url):
@@ -15,7 +15,7 @@ def fetch_github_readme(url):
 
 def main():
     
-
+    st.image(image_url, caption="\"Be curious, not judgmental.\" — Walt Whitman", use_column_width=True)
     # Set up tabs
     tabs = st.tabs(["Archives", "Current", "Additional Content"])
 
