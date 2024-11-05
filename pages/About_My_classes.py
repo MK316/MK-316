@@ -11,7 +11,7 @@ def display_github_markdown(url):
         st.error("Failed to load content. Please check the URL.")
 
 # URLs for the GitHub Markdown files
-fall_url = "https://github.com/MK316/F2024/blob/main/README.md"
+fall_url = "https://github.com/MK316/MK-316/blob/main/pages/fall2024.md"
 spring_url = "https://raw.githubusercontent.com/username/repository/branch/path/to/Spring2024.md"
 
 # Set up tabs in the Streamlit app
