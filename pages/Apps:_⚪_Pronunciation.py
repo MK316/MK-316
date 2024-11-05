@@ -102,16 +102,14 @@ with tab1:
 
 # Tab 2: Recording
 with tab2:
-    st.subheader("Audio Recorder")
-    st.write("Use the upload option to provide your recording.")
+    st.caption("Make sure to give this app permission to access microphone in your device.")
     
-    # Audio file uploader
-    audio_bytes = st.file_uploader("Upload or record audio here", type=["wav"])
-    if audio_bytes:
-        st.audio(audio_bytes, format='audio/wav')
-        st.write("Recording uploaded successfully!")
+    # Create a link styled as a button that opens the URL in a new tab
+   mic_url = "https://mk-316-recorder.hf.space/"
+    st.markdown(f'<a href="{vowel_chart_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #FF9933; color: white; padding: 10px 20px; border-radius: 5px;">Open Recorder App</a>', unsafe_allow_html=True)
 
-# Tab 3: More apps placeholder
+
+# Tab 3: MP3-to-WAV
 with tab3:
     st.subheader("More Apps")
     st.write("To be updated")
