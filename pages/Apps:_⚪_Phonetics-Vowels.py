@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Title of the application
-st.title("Phonetics Tools")
+st.title("Phonetics Learning Tools")
 
 # Create two tabs: 'Vowel Chart' and 'V-description app'
 tab1, tab2, tab3 = st.tabs(["Vowel Chart", "V-description app", "Audio & stressed vowels"])
