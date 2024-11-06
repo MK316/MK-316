@@ -48,9 +48,9 @@ def phonetics_apps_page():
 
     with col6:
         st.image("images/button01.png", width=100)
-        if st.button('App 4: Feature Quiz 2', key='5'):
+        if st.button('App 4: Feature Quiz 2', key='6'):
             st.markdown("🌀[App link](https://mk-316-feature-quiz02.hf.space/): Phonology, Distinctive feature quiz (choose)", unsafe_allow_html=True)
-            st.markdown("2024.10.14")
+            st.markdown("2024.11.6")
 phonetics_apps_page()
 
 # URL to the raw image on GitHub
