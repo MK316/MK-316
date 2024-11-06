@@ -49,7 +49,7 @@ def phonetics_apps_page():
     with col6:
         st.image("images/button01.png", width=100)
         if st.button('App 6: Feature Quiz 2', key='6'):
-            st.markdown("🌀[App link](https://mk-316-feature-quiz02.hf.space/): Phonology, Distinctive feature quiz (choose)", unsafe_allow_html=True)
+            st.markdown("🌀[App link](https://feature-quiz02.streamlit.app/): Phonology, Distinctive feature quiz (choose)", unsafe_allow_html=True)
             st.markdown("2024.11.6")
 phonetics_apps_page()
 
