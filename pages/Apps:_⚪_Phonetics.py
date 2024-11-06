@@ -36,19 +36,19 @@ def phonetics_apps_page():
 
     with col4:
         st.image("images/button01.png", width=100)
-        if st.button('App 3: List sounds', key='4'):
+        if st.button('App 4: List sounds', key='4'):
             st.markdown("🌀[App link](https://mk-316-ipaselect.hf.space/): Display sounds from phonetic descriptions", unsafe_allow_html=True)
             st.markdown("2024.10.14")
 
     with col5:
         st.image("images/button01.png", width=100)
-        if st.button('App 4: Feature Quiz 1', key='5'):
+        if st.button('App 5: Feature Quiz 1', key='5'):
             st.markdown("🌀[App link](https://mk-316-feature-practice.hf.space/): Phonology, Distinctive feature quiz (click)", unsafe_allow_html=True)
             st.markdown("2024.10.14")
 
     with col6:
         st.image("images/button01.png", width=100)
-        if st.button('App 4: Feature Quiz 2', key='6'):
+        if st.button('App 6: Feature Quiz 2', key='6'):
             st.markdown("🌀[App link](https://mk-316-feature-quiz02.hf.space/): Phonology, Distinctive feature quiz (choose)", unsafe_allow_html=True)
             st.markdown("2024.11.6")
 phonetics_apps_page()
