@@ -77,7 +77,7 @@ def convert_to_wav(audio_file):
 st.title("Pronunciation Feedback")
 
 # Tabs
-tab1, tab2, tab3, tab4 = st.tabs(["🎵 Recording", "🎶 MP3-to-WAV", "Temporary", "🌀 Accuracy Feedback"])
+tab1, tab2, tab3, tab4 = st.tabs(["🎵 Recording", "🎶 MP3-to-WAV", "🌀 Accuracy Feedback", "Temporary"])
 
 
 # Tab 1: Recording
@@ -101,7 +101,14 @@ with tab2:
 
 # Tab 3: Accuracy Feedback
 with tab3:
-    st.subheader("Check Your Pronunciation Accuracy")
+    st.header("Simple pronunciation checker")
+    ext_url = "https://mk-316-pronunciationfeedback.hf.space"
+    st.markdown(f'<a href="{ext_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 5px;">Visit Example</a>', unsafe_allow_html=True)
+
+
+
+with tab4:
+    st.subheader("Temp: Check Your Pronunciation Accuracy")
     
     # User inputs
     name = st.text_input("Enter your name", placeholder="Type your name here...")
@@ -131,7 +138,3 @@ with tab3:
         else:
             st.warning("Please enter your name to calculate the average score.")
 
-with tab4:
-    st.header("Pronunciation checker")
-    ext_url = "https://mk-316-pronunciationfeedback.hf.space"
-    st.markdown(f'<a href="{ext_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 5px;">Visit Example</a>', unsafe_allow_html=True)
