@@ -77,7 +77,7 @@ def convert_to_wav(audio_file):
 st.title("Pronunciation Feedback")
 
 # Tabs
-tab1, tab2, tab3 = st.tabs(["🎵 Recording", "🎶 MP3-to-WAV", "🌀 Accuracy Feedback", "Test"])
+tab1, tab2, tab3, tab4 = st.tabs(["🎵 Recording", "🎶 MP3-to-WAV", "🌀 Accuracy Feedback", "Test"])
 
 
 # Tab 1: Recording
