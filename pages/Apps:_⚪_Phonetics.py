@@ -32,7 +32,7 @@ def phonetics_apps_page():
     st.write("\n\n")
 
     # Second row with three columns
-    col4, col5 = st.columns(2)  # Correct typo here
+    col4, col5, col6 = st.columns(3)  # Correct typo here
 
     with col4:
         st.image("images/button01.png", width=100)
@@ -42,10 +42,15 @@ def phonetics_apps_page():
 
     with col5:
         st.image("images/button01.png", width=100)
-        if st.button('App 4: Feature Quiz', key='5'):
-            st.markdown("🌀[App link](https://mk-316-feature-practice.hf.space/): Phonology, Distinctive feature quiz", unsafe_allow_html=True)
+        if st.button('App 4: Feature Quiz 1', key='5'):
+            st.markdown("🌀[App link](https://mk-316-feature-practice.hf.space/): Phonology, Distinctive feature quiz (click)", unsafe_allow_html=True)
             st.markdown("2024.10.14")
-            
+
+    with col6:
+        st.image("images/button01.png", width=100)
+        if st.button('App 4: Feature Quiz 2', key='5'):
+            st.markdown("🌀[App link](https://mk-316-feature-quiz02.hf.space/): Phonology, Distinctive feature quiz (choose)", unsafe_allow_html=True)
+            st.markdown("2024.10.14")
 phonetics_apps_page()
 
 # URL to the raw image on GitHub
