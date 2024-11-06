@@ -102,7 +102,7 @@ with tab2:
 # Tab 3: Accuracy Feedback
 with tab3:
     st.header("Accuracy feedback: Overview")
-    st.caption("When you click on the app below, you will be able to select a sentence and record it. After recording, pressing the 'submit' button will display simple feedback and a score. The scores range from 0 to 1, and a score of 0.9 or higher indicates that the sentence is clearly understandable. (Note: The scores are calculated using the Levenshtein distance.)")
+    st.caption("When you click on the app below, you will be able to select a sentence and record it. After recording, pressing the 'submit' button will display simple feedback and a score. The scores range from 0 to 1, and a score of 0.9 or higher indicates that the sentence is clearly recognizable. (Note: The scores are calculated using the Levenshtein distance.)")
     ext_url = "https://mk-316-pronunciationfeedback.hf.space"
     st.markdown(f'<a href="{ext_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 5px;">Click to Open Application</a>', unsafe_allow_html=True)
 
