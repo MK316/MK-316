@@ -130,3 +130,8 @@ with tab3:
             st.write(avg_score)
         else:
             st.warning("Please enter your name to calculate the average score.")
+
+with tab4:
+    st.header("Pronunciation checker")
+    ext_url = "https://mk-316-pronunciationfeedback.hf.space"
+    st.markdown(f'<a href="{ext_url}" target="_blank" style="display: inline-block; text-decoration: none; background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 5px;">Visit Example</a>', unsafe_allow_html=True)
