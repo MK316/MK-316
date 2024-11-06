@@ -50,7 +50,7 @@ def pronunciation_correction(name, expected_text, audio_file):
     feedback = "Excellent pronunciation!" if score >= 0.9 else \
                "Good pronunciation!" if score >= 0.7 else \
                "Needs improvement." if score >= 0.5 else \
-               "Poor pronunciation, try to focus more on clarity."
+               "Maybe you said something different? Try again focusing more on clarity."
     return feedback, score
 
 # Function to calculate average score
