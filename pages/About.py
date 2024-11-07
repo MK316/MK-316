@@ -23,7 +23,7 @@ def main():
         st.caption("I teach phonetics and phonology to English education majors, focusing on advancing digital literacy for today’s evolving classrooms. My work emphasizes student-centered, technology-enhanced learning to equip future teachers with interactive, engaging methods that minimize reliance on commercial applications. Since February 2022, I have been learning foundational Python coding to enhance instructional approaches and am dedicated to developing professional courses for in-service teachers interested in integrating digital tools. I am also exploring coding-based language learning app development. Welcome aboard!")
         st.markdown("\n\n")
         st.markdown("💧 Linguist (Phonetics/Phonology) & educator")
-        st.markdown("💧 Github ID: MK316")
+        st.markdown(":octocat: Github ID: MK316")
         st.markdown("💧 Affiliation: Dept. of English Education, GNU ⛺ [Goto](https://englishedu.gnu.ac.kr)")
         st.markdown("💧 Archives (before 10. 14. 2024) - My digital classroom: [mrkim21.github.io](https://mrkim21.github.io)")
 
