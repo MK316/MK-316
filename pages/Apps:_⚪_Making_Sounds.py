@@ -51,7 +51,7 @@ def phonetics_apps_page():
     Here is a selection of audio-related applications specifically designed to enhance phonetics learning. These tools cater to various needs, such as playing audio files, converting file formats, and utilizing Text-to-Speech technology. They offer interactive exercises to improve pronunciation, develop listening skills, and heighten phonetic awareness, making them invaluable resources for learners and educators alike.
     """)
 
-    tab1, tab2, tab3 = st.tabs(["🔎Audio Speed Adjuster", "🔎MP3-to-WAV", "🔎Multi-TTS"])
+    tab1, tab2, tab3 = st.tabs(["🔎Audio Speed Adjuster", "🔎MP3-to-WAV", "🔎Multi-TTS", "🔎Generating melody"])
 
     # Tab 1: Audio Speed Adjuster
     with tab1:
@@ -99,6 +99,11 @@ def phonetics_apps_page():
                 if audio_file_path:
                     with open(audio_file_path, "rb") as audio_file:
                         st.audio(audio_file, format='audio/mp3')
-
+    with tab4:
+        st.header("Generate your own melody")
+        st.caption("Using this app, the user can generate a downloadable audio file.")
+        st.caption("The sequence "do, re, mi, fa..." is called the solfege system, or solfège, a method used to teach pitch and sight singing in music. Each syllable corresponds to a note on a musical scale, allowing for easy vocalization and learning of musical notation.")
+        appurl="https://melody-play.streamlit.app/"
+        st.markdown(f'<a href="{url}" target="_blank">Click here to open the page in a new tab</a>', unsafe_allow_html=True)
 # Run the phonetics apps page
 phonetics_apps_page()
