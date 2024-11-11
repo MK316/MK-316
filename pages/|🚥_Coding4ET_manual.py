@@ -55,6 +55,7 @@ with tabs[7]:
     readme_url = 'https://wikidocs.net/book/4606'
     link_text = f"View the documentation [here]({readme_url})"
     st.markdown(link_text, unsafe_allow_html=True)
+    
 def handle_lesson_3_videos():
     video_links = {
         'Lesson 3.1': 'https://www.youtube.com/embed/uigxMFBR0Wg',
