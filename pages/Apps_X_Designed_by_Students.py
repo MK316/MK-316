@@ -23,17 +23,17 @@ def main():
     """, unsafe_allow_html=True)
 
     # Create multiple tabs for different sections
-    tab1, tab2, tab3, tab4 = st.tabs(["Tab 1: 1. Verb tense practice", "Tab 2: 2. Noun plurals", "Tab 3: Tools", "Tab 4: Inspiration"])
+    tab1, tab2, tab3, tab4 = st.tabs(["Tab 1: 1. Verb tense practice", "Tab 2: 2. Noun plurals", "Tab 3: TBA", "Tab 4: TBA"])
 
     # Content for Tab 1
     with tab1:
-        st.header("Welcome to Tab 1")
-        st.write("Explore the basics of our language applications and their goals.")
+        st.header("Practice verb froms Present - Past - Past Participle")
+        st.write("Team #1: This project aims to implement an application that allows practice of the three forms of basic verbs that appear in high school textbooks. (November 2024)")
 
     # Content for Tab 2
     with tab2:
-        st.header("Welcome to Tab 2")
-        st.write("Discover innovative teaching techniques and how to apply them effectively.")
+        st.header("Regular and irregular noun plural form practice")
+        st.write("Team #2: This project aims to implement an application that allows practice of plural forms of English nouns.")
 
     # Content for Tab 3
     with tab3:
