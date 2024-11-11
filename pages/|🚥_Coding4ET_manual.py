@@ -50,10 +50,11 @@ def main():
         st.markdown(readme_content, unsafe_allow_html=True)
 
     with tabs[7]:
-        st.subheader("Practical Python Manual by David Beazley (https://dabeaz.com)")
-        st.caption("This page will open in a new page.")
+        st.subheader("Practical Python Manual by David Beazley")
+        st.caption("Github source: https://github.com/dabeaz-course/practical-python.")
+        st.write("Click below to go to the manual page.")
         readme_url = 'https://wikidocs.net/book/4606'
-        link_text = f"View the documentation [here]({readme_url})"
+        link_text = f"View the manual [here]({readme_url})"
         st.markdown(link_text, unsafe_allow_html=True)
     
 def handle_lesson_3_videos():
