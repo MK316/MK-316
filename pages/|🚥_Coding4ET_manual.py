@@ -49,11 +49,12 @@ def main():
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
 
-    with tabs[7]:
-        st.subheader("")
-        readme_url = 'https://wikidocs.net/book/4606'
-        readme_content = fetch_github_readme(readme_url)
-        st.markdown(readme_content, unsafe_allow_html=True)
+with tabs[7]:
+    st.subheader("Practical Python Manual by David Beazley (https://dabeaz.com)")
+    st.caption("This page will open in a new page.")
+    readme_url = 'https://wikidocs.net/book/4606'
+    link_text = f"View the documentation [here]({readme_url})"
+    st.markdown(link_text, unsafe_allow_html=True)
 def handle_lesson_3_videos():
     video_links = {
         'Lesson 3.1': 'https://www.youtube.com/embed/uigxMFBR0Wg',
