@@ -1,7 +1,8 @@
 import streamlit as st
 
 def main():
-    st.title("🐾 Tools X Future Educators")
+    st.title("🐾 Tools X English Teachers")
+    st.caption("Since Fall 2024: App developed by teachers will be shared here.")
     st.write("Welcome to our dynamic showcase of language applications, creatively designed by aspiring English teachers. These applications are crafted to enrich language learning and teaching experiences. Stay tuned—exciting developments are on the way!")
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("_(To be updated)_")
