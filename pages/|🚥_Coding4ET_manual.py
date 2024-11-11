@@ -5,7 +5,7 @@ import requests
 def main():
 #    st.title('Coding4ET Tutorials')
 
-    tabs = st.tabs(["Table of contents", "Acknowledgment", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5", "Python manual by Beazley"])
+    tabs = st.tabs(["Table of contents", "Acknowledgment", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5", "Advncd. manual"])
 
     # Manual tab content
     with tabs[0]:
