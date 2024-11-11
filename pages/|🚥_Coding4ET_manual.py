@@ -5,7 +5,7 @@ import requests
 def main():
 #    st.title('Coding4ET Tutorials')
 
-    tabs = st.tabs(["Table of contents", "Acknowledgment", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5"])
+    tabs = st.tabs(["Table of contents", "Acknowledgment", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5", "Python manual by Beazley"])
 
     # Manual tab content
     with tabs[0]:
@@ -49,6 +49,11 @@ def main():
         readme_content = fetch_github_readme(readme_url)
         st.markdown(readme_content, unsafe_allow_html=True)
 
+    with tabs[7]:
+        st.subheader("")
+        readme_url = 'https://wikidocs.net/book/4606'
+        readme_content = fetch_github_readme(readme_url)
+        st.markdown(readme_content, unsafe_allow_html=True)
 def handle_lesson_3_videos():
     video_links = {
         'Lesson 3.1': 'https://www.youtube.com/embed/uigxMFBR0Wg',
