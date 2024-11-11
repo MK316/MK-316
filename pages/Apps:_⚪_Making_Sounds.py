@@ -103,7 +103,9 @@ def phonetics_apps_page():
         st.header("Generate your own melody")
         st.caption("Using this app, the user can generate a downloadable audio file.")
         st.caption("The sequence 'do, re, mi, fa...' is called the solfege system, or solfège, a method used to teach pitch and sight singing in music. Each syllable corresponds to a note on a musical scale, allowing for easy vocalization and learning of musical notation.")
-        appurl="https://melody-play.streamlit.app/"
-        st.markdown(f'<a href="{appurl}" target="_blank">Click here to open the page in a new tab</a>', unsafe_allow_html=True)
+        appurl = "https://melody-play.streamlit.app/"
+        button_html = f"<a href='{appurl}' target='_blank'><button style='color: black; background-color: #FF4B4B; border: none; padding: 10px 20px; text-align: center; display: inline-block; font-size: 16px;'>Open Melody App</button></a>"
+        st.markdown(button_html, unsafe_allow_html=True)
+
 # Run the phonetics apps page
 phonetics_apps_page()
