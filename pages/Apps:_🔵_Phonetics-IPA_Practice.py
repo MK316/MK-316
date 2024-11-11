@@ -17,7 +17,7 @@ def phonetics_apps_page():
         if st.button('App 1: \nIPA practice', key='1'):
             st.markdown("🌀[App link](https://ipa-practice.streamlit.app/): IPA Quiz with phonetic descriptions; Scoring", unsafe_allow_html=True)
             st.markdown("[Report](https://padlet.com/mirankim316/ipa) your record!")
-            st.markdown("[Ranking]()")
+            st.markdown("[Ranking](https://ipa-ranking.streamlit.app/)")
             st.markdown("2024.10.14")
     with col2:
         st.image("images/button01.png", width=100)
