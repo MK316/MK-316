@@ -19,8 +19,8 @@ def tce_apps_page():
             st.markdown("2024.02.05")
     with col2:
         st.image("images/TCE.png", width=100)
-        if st.button('App 2:Feedback practice', key='2'):
-            st.markdown("🌀[App link](https://feedback01.streamlit.app/):Giving feedback to students", unsafe_allow_html=True)
+        if st.button('App 2: Giving feedback (Audio)', key='2'):
+            st.markdown("🌀[App link](https://feedback01.streamlit.app/): Giving feedback to students", unsafe_allow_html=True)
             st.markdown("2024.11.14")
 
 # Call the function to generate the page content first
