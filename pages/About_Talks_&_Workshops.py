@@ -31,7 +31,7 @@ def main():
         st.subheader("2024. 제1회 경상 디지털교육 나눔 한마당")
         st.markdown("🌀 [Go to my presentation page]('https://241214.streamlit.app/')")
         st.write("AIED Symposium Session I: 현장교사를 위한 앱 개발 및 응용 사례")
-        st.markdown("+ Hosted by: G-DEAL, GNU \n+ Date & Time: 13:00~14:30, Dec.14 (Sat), 2024 \n+Location: GNU Convention Center")
+        st.markdown("+ Hosted by: G-DEAL, GNU \n+ Date & Time: 13:00~14:30, Dec.14 (Sat), 2024 \n+ Location: GNU Convention Center")
         st.caption("More information to be updated.")
 
      # Additional Content tab (optional)
