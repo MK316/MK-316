@@ -29,7 +29,7 @@ def main():
     # Spring 2024 content
     with tabs[1]:
         st.subheader("2024 제1회 경상 디지털교육 나눔 한마당")
-        st.markdown('<a href="https://241214.streamlit.app/" target="_blank">🌀 Go to</a> my presentation page', unsafe_allow_html=True)
+        st.markdown('🌀<a href="https://241214.streamlit.app/" target="_blank"> Go to</a> My presentation page', unsafe_allow_html=True)
 
         st.write("AIED Symposium Session I: 현장교사를 위한 앱 개발 및 응용 사례")
         st.markdown("+ Organized by: G-DEAL, GNU \n+ Hosted by: Gyeongsang National University \n+ Date & Time: 13:00~14:30, Dec.14 (Sat), 2024 \n+ Location: GNU Convention Center")
