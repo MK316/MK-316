@@ -29,10 +29,10 @@ def main():
     # Spring 2024 content
     with tabs[1]:
         st.subheader("Currently scheduled")
-       # spring_url = 'https://github.com/MK316/MK-316/blob/main/pages/spring2024.md'
-       # spring_content = fetch_github_readme(spring_url)
-       # st.markdown(spring_content, unsafe_allow_html=True)
-        st.caption("December 2024, TBA")
+        st.markdown("[2024. 제1회 경상 디지털교육 나눔 한마당]('https://241214.streamlit.app/', unsafe_allow_html=True)
+        st.write("Symposium Part I"
+        st.markdown("+ Hosted by: G-DEAL, GNU \n+ Time: 13:00~14:30")
+        st.caption("December 14, 2024")
 
      # Additional Content tab (optional)
     with tabs[2]:
