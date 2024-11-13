@@ -10,13 +10,18 @@ def tce_apps_page():
     """)
 
     # Define a single column
-    col1, = st.columns(1)  # Note the comma to unpack the column from the list
+    col1, col2 = st.columns(2)  # Note the comma to unpack the column from the list
 
     with col1:
         st.image("images/TCE.png", width=100)
         if st.button('App 1: TCE exam search', key='1'):
             st.markdown("🌀[App link](https://mk-316-TCE.hf.space/): Searchable exam questions in phonetics & phonology", unsafe_allow_html=True)
             st.markdown("2024.02.05")
+    with col2:
+        st.image("images/TCE.png", width=100)
+        if st.button('App 2:Feedback practice', key='2'):
+            st.markdown("🌀[App link](https://feedback01.streamlit.app/):Giving feedback to students", unsafe_allow_html=True)
+            st.markdown("2024.11.14")
 
 # Call the function to generate the page content first
 tce_apps_page()
