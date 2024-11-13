@@ -29,7 +29,7 @@ def main():
     # Spring 2024 content
     with tabs[1]:
         st.subheader("Currently scheduled")
-        st.markdown("[2024. 제1회 경상 디지털교육 나눔 한마당]('https://241214.streamlit.app/')", unsafe_allow_html=True)
+        st.markdown("[2024. 제1회 경상 디지털교육 나눔 한마당]('https://241214.streamlit.app/')")
         st.write("Symposium Part I"
         st.markdown("+ Hosted by: G-DEAL, GNU \n+ Time: 13:00~14:30")
         st.caption("December 14, 2024")
