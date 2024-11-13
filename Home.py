@@ -9,8 +9,8 @@ st.markdown("━ A space to discover innovative language learning applications p
 st.markdown("""
 I am learning to code to develop customized, **_customized_**, **_learner-centered_** language apps that align with the specific needs of my students. My aim is to create **_simple, interactive_** tools that enhance the effectiveness and engagement of language learning. I look forward to exploring innovative and impactful teaching methods together.
 """)
-st.markdown("Since Oct. 14, 2024")
-
+st.caption("Since Oct. 14, 2024")
+st.caption("Laste updated: Nov.14, 2024")
 # URL to the raw image on GitHub
 image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
 # Display the image
