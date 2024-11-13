@@ -22,7 +22,8 @@ def phonetics_apps_page():
     with col2:
         st.image("images/button01.png", width=100)
         if st.button('App 2: IPA quiz', key='2'):
-            st.markdown("🌀App link (To be linked): Individual sound description quiz", unsafe_allow_html=True)
+            st.markdown("🌀[App link](https://ipa-quiz2.streamlit.app/): Individual sound description quiz", unsafe_allow_html=True)
+            st.caption("24 consonants and 11 vowel symbols")
             st.markdown("2024.10.20")
     with col3:
         st.image("images/button01.png", width=100)
