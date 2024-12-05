@@ -42,10 +42,31 @@ def generate_text_and_audio(index, df, words_per_batch):
 
     return formatted_text, temp_file.name, end
 
+# Convert POS abbreviations to full forms
 def convert_pos(pos_abbreviations):
     """Convert POS abbreviations to full forms."""
     pos_list = [pos_mapping[abbreviation.strip()] for abbreviation in pos_abbreviations.split(",") if abbreviation.strip() in pos_mapping]
     return ", ".join(pos_list)
+
+# Add visual circles for stress patterns
+def add_stress_circles(stress):
+    """Generate Graphviz circles based on the stress pattern."""
+    graph = graphviz.Digraph(format="png")
+    
+    if stress == "ult":
+        graph.node("Circle1", "ult", shape="ellipse", style="filled", fillcolor="yellow", width="2", height="0.8")
+    elif stress == "penult":
+        graph.node("Circle1", "Penult", shape="ellipse", style="filled", fillcolor="yellow", width="2.5", height="1")
+        graph.node("Circle2", "", shape="ellipse", style="filled", fillcolor="lightgray", width="1", height="0.5")
+        graph.edge("Circle1", "Circle2")
+    elif stress == "antepenult":
+        graph.node("Circle1", "Antepenult", shape="ellipse", style="filled", fillcolor="yellow", width="3", height="1")
+        graph.node("Circle2", "", shape="ellipse", style="filled", fillcolor="lightgray", width="1.5", height="0.5")
+        graph.node("Circle3", "", shape="ellipse", style="filled", fillcolor="lightgray", width="1", height="0.5")
+        graph.edge("Circle1", "Circle2")
+        graph.edge("Circle2", "Circle3")
+    return graph
+    
 
 # Functions for Tab 2 (Syllable Structure Visualizer)
 def parse_syllables(syllable_input):
@@ -125,6 +146,7 @@ def create_syllable_tree(syllable_data, syllable_number):
 # Multi-tab layout
 tabs = st.tabs(["Word Stress", "Stress practice", "Syllable Structure"])
 
+# Tab 1: Word Stress
 with tabs[0]:
     st.title("📚 Word Search")
     st.caption("This app displays the stress, part of speech, and transcription for words from Chapter 7 of the textbook. Enter the word you want to look up in the text box below and click **Submit**.")
@@ -160,12 +182,17 @@ with tabs[0]:
                     <strong>⚪ IPA:</strong> {transcription}
                 </div>
                 """, unsafe_allow_html=True)
-            st.write("")
-            st.caption("The audio below uses Google TTS with American accent.") 
-            st.audio(temp_file.name)
+                
+                st.write("")
+                st.caption("The audio below uses Google TTS with an American accent.") 
+                st.audio(temp_file.name)
+                
+                # Add stress circles
+                st.caption("Stress Visualization:")
+                graph = add_stress_circles(stress)
+                st.graphviz_chart(graph)
         else:
             st.error("Please enter a word to search.")
-
 # Tab 2: Audio Reading Practice
 with tabs[1]:
     st.title("🔊 Audio Reading Practice")
