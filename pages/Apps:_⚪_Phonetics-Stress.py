@@ -222,7 +222,7 @@ with tabs[2]:
         text_lines = []
         for i, row in enumerate(selected_data.itertuples(), start=1):
             text_lines.append(
-                f"{i + start}. {row.Word}. The part of speech is {convert_pos(row.POS)} and the stress is in the {row.Stress}."
+                f"{i + start}. {row.Word}. The part of speech is {convert_pos(row.POS)}, and the stress is in the {row.Stress}."
             )
         formatted_text = " ".join(text_lines)
 
