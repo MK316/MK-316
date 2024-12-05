@@ -115,38 +115,32 @@ with tabs[0]:
                         f"</div>", unsafe_allow_html=True)
             st.audio(temp_file.name)
 
-# Tab 2: Syllable Structure
 # Tab 2: Stressed Syllable
 with tabs[1]:
     st.title("🌟 Stressed Syllable Visualizer")
     st.markdown("""
     ### Instructions:
-    1. Enter a **single syllable** using IPA symbols ([Visit IPA online website](https://ipa.typeit.org/)).
+    1. Enter a **single stressed syllable** using IPA symbols ([Visit IPA online website](https://ipa.typeit.org/)).
     2. Mark stress using `ˈ` before the syllable.
     3. Example: ˈstr/ɛ/ for a stressed syllable.
     """)
 
-    # Input for a single syllable
-    syllable_input = st.text_input("Enter a single syllable:", placeholder="e.g., ˈstr/ɛ/")
+    # Input for a single stressed syllable
+    syllable_input = st.text_input("Enter a single stressed syllable:", placeholder="e.g., ˈstr/ɛ/")
 
     def parse_single_syllable(input_syllable):
-        """Parse a single syllable into its components."""
+        """Parse a single stressed syllable into its components."""
         is_stressed = input_syllable.startswith("ˈ")
         if is_stressed:
             input_syllable = input_syllable[1:]  # Remove stress marker
 
-        if "//" in input_syllable:  # Handle syllabic consonants
-            parts = input_syllable.split("//")
-            if len(parts) == 2:
-                nucleus_coda = parts[1]
-                return {"Onset": "", "Nucleus_Coda": nucleus_coda, "Syllabic": True, "Stress": is_stressed}
-        elif "/" in input_syllable:  # Handle regular vowels
+        if "/" in input_syllable:  # Handle regular vowels
             parts = input_syllable.split("/")
-            if len(parts) == 3:
+            if len(parts) == 3:  # Onset, Nucleus, Coda
                 return {"Onset": parts[0], "Nucleus": parts[1], "Coda": parts[2], "Syllabic": False, "Stress": is_stressed}
-            elif len(parts) == 2:
+            elif len(parts) == 2:  # Onset and Nucleus only
                 return {"Onset": parts[0], "Nucleus": parts[1], "Coda": "", "Syllabic": False, "Stress": is_stressed}
-            else:
+            elif len(parts) == 1:  # Nucleus only
                 return {"Onset": "", "Nucleus": parts[0], "Coda": "", "Syllabic": False, "Stress": is_stressed}
         return {"Onset": "", "Nucleus": "", "Coda": "", "Syllabic": False, "Stress": is_stressed}
 
@@ -154,7 +148,7 @@ with tabs[1]:
         if syllable_input:
             syllable_data = parse_single_syllable(syllable_input)
 
-            if syllable_data:
+            if syllable_data and syllable_data.get("Stress"):
                 # Create a syllable tree with a yellow circle for stress
                 tree = graphviz.Digraph(format="png")
                 syllable_color = "yellow" if syllable_data.get("Stress") else "white"
@@ -171,37 +165,31 @@ with tabs[1]:
                     )
                     tree.edge("Syllable", "Onset")
 
-                # Add Nucleus or Nucleus_Coda node
-                if syllable_data.get("Syllabic"):
+                # Add Nucleus node
+                if syllable_data.get("Nucleus"):
                     tree.node(
-                        "Nucleus_Coda",
-                        f"Nucleus/Coda\n{format_with_slashes(syllable_data['Nucleus_Coda'])}",
+                        "Nucleus",
+                        f"Nucleus\n{format_with_slashes(syllable_data['Nucleus'])}",
                         shape="ellipse",
                     )
-                    tree.edge("Syllable", "Nucleus_Coda")
-                else:
-                    if syllable_data.get("Nucleus"):
-                        tree.node(
-                            "Nucleus",
-                            f"Nucleus\n{format_with_slashes(syllable_data['Nucleus'])}",
-                            shape="ellipse",
-                        )
-                        tree.edge("Syllable", "Nucleus")
-                    if syllable_data.get("Coda"):  # Add Coda only if it is not empty
-                        tree.node(
-                            "Coda",
-                            f"Coda\n{format_with_slashes(syllable_data['Coda'])}",
-                            shape="ellipse",
-                        )
-                        tree.edge("Nucleus", "Coda")
+                    tree.edge("Syllable", "Nucleus")
 
+                # Add Coda node only if present
+                if syllable_data.get("Coda"):
+                    tree.node(
+                        "Coda",
+                        f"Coda\n{format_with_slashes(syllable_data['Coda'])}",
+                        shape="ellipse",
+                    )
+                    tree.edge("Nucleus", "Coda")
+
+                # Display the tree with the appropriate title
+                st.markdown(f"### Stressed syllable")
                 st.graphviz_chart(tree)
             else:
-                st.error("Invalid syllable format. Please try again.")
+                st.error("Invalid stressed syllable format. Please try again.")
         else:
             st.error("Please enter a syllable to visualize.")
-
-
 
 
 # Tab 3: Syllable Structure
