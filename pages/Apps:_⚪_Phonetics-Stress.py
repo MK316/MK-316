@@ -159,16 +159,19 @@ with tabs[1]:
                 tree = graphviz.Digraph(format="png")
                 syllable_color = "yellow" if syllable_data.get("Stress") else "white"
 
+                # Create the main Syllable node
                 tree.node(
                     "Syllable", "Syllable", shape="ellipse", style="filled", fillcolor=syllable_color
                 )
 
+                # Add the Onset node if present
                 if syllable_data.get("Onset"):
                     tree.node(
                         "Onset", f"Onset\n{format_with_slashes(syllable_data['Onset'])}", shape="ellipse"
                     )
                     tree.edge("Syllable", "Onset")
 
+                # Add Nucleus or Nucleus_Coda node
                 if syllable_data.get("Syllabic"):
                     tree.node(
                         "Nucleus_Coda",
@@ -184,7 +187,7 @@ with tabs[1]:
                             shape="ellipse",
                         )
                         tree.edge("Syllable", "Nucleus")
-                    if syllable_data.get("Coda"):
+                    if syllable_data.get("Coda"):  # Add Coda only if it is not empty
                         tree.node(
                             "Coda",
                             f"Coda\n{format_with_slashes(syllable_data['Coda'])}",
@@ -197,6 +200,8 @@ with tabs[1]:
                 st.error("Invalid syllable format. Please try again.")
         else:
             st.error("Please enter a syllable to visualize.")
+
+
 
 
 # Tab 3: Syllable Structure
