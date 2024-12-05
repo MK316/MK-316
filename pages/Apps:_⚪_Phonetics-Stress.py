@@ -99,35 +99,46 @@ def create_syllable_tree(syllable_data, syllable_number):
 # Multi-tab layout
 tabs = st.tabs(["Word Stress", "Syllable Structure"])
 
-# Tab 1: Word Stress
 with tabs[0]:
     st.title("📚 Word Stress (Searching Engine)")
-    st.caption("This app displays the stress, part of speech, and transcription for words from Chapter 7 of the textbook. Enter the word you want to look up in the text box below.")
+    st.caption("This app displays the stress, part of speech, and transcription for words from Chapter 7 of the textbook. Enter the word you want to look up in the text box below and click **Submit**.")
 
+    # Input box for user to enter a word
     user_input = st.text_input("Enter a word to search:", placeholder="Type a word here...")
-    if user_input:
-        result = df[df['Word'].str.lower() == user_input.lower()]
-        if result.empty:
-            st.error("The word is not in the list.")
-        else:
-            pos = result.iloc[0]['POS']
-            full_pos = convert_pos(pos)
-            stress = result.iloc[0]['Stress']
-            transcription = result.iloc[0]['Transcription']
-            word = result.iloc[0]['Word']
 
-            tts = gTTS(word)
-            temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
-            tts.save(temp_file.name)
+    # Button for mobile users to trigger result
+    if st.button("Submit"):
+        if user_input:
+            # Search the word in the dataset
+            result = df[df['Word'].str.lower() == user_input.lower()]
+            if result.empty:
+                st.error("The word is not in the list.")
+            else:
+                # Extract word details
+                pos = result.iloc[0]['POS']
+                full_pos = convert_pos(pos)
+                stress = result.iloc[0]['Stress']
+                transcription = result.iloc[0]['Transcription']
+                word = result.iloc[0]['Word']
 
-            st.markdown(f"<div style='font-size: 24px; padding: 10px; border: 6px solid #9FD497; border-radius: 10px;'>"
-                        f"<strong>⚪ POS:</strong> {full_pos}<br>"
-                        f"<strong>⚪ Stress:</strong> {stress}<br>"
-                        f"<strong>⚪ Transcription:</strong> {transcription}"
-                        f"</div>", unsafe_allow_html=True)
+                # Generate TTS audio
+                tts = gTTS(word)
+                temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
+                tts.save(temp_file.name)
+
+                # Display the result
+                st.markdown(f"""
+                <div style='font-size: 24px; padding: 10px; border: 6px solid #9FD497; border-radius: 10px;'>
+                    <strong>⚪ POS:</strong> {full_pos}<br>
+                    <strong>⚪ Stress:</strong> {stress}<br>
+                    <strong>⚪ Transcription:</strong> {transcription}
+                </div>
+                """, unsafe_allow_html=True)
             st.write("")
             st.caption("The audio below uses Google TTS with American accent.") 
             st.audio(temp_file.name)
+        else:
+            st.error("Please enter a word to search.")
 
 # Tab 2: Syllable Structure Visualizer
 with tabs[1]:
