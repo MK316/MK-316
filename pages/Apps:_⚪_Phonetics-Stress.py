@@ -165,17 +165,21 @@ with tabs[1]:
                     )
                     tree.edge("Syllable", "Onset")
 
-                # Add Nucleus node
+                # Add the Rhyme node
+                tree.node("Rhyme", "Rhyme", shape="ellipse")
+                tree.edge("Syllable", "Rhyme")
+
+                # Add the Nucleus node
                 if syllable_data.get("Nucleus"):
                     tree.node(
                         "Nucleus",
                         f"Nucleus\n{format_with_slashes(syllable_data['Nucleus'])}",
                         shape="ellipse",
                     )
-                    tree.edge("Syllable", "Nucleus")
+                    tree.edge("Rhyme", "Nucleus")
 
-                # Add Coda node only if present
-                if syllable_data.get("Coda"):
+                # Add the Coda node only if it has content
+                if syllable_data.get("Coda"):  # Ensure Coda is non-empty
                     tree.node(
                         "Coda",
                         f"Coda\n{format_with_slashes(syllable_data['Coda'])}",
@@ -190,6 +194,7 @@ with tabs[1]:
                 st.error("Invalid stressed syllable format. Please try again.")
         else:
             st.error("Please enter a syllable to visualize.")
+
 
 
 # Tab 3: Syllable Structure
