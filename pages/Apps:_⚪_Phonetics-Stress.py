@@ -123,7 +123,7 @@ def create_syllable_tree(syllable_data, syllable_number):
 
 
 # Multi-tab layout
-tabs = st.tabs(["Word Stress", "Syllable Structure", "Stress practice"])
+tabs = st.tabs(["Word Stress", "Stress practice", "Syllable Structure"])
 
 with tabs[0]:
     st.title("📚 Word Search")
@@ -166,37 +166,8 @@ with tabs[0]:
         else:
             st.error("Please enter a word to search.")
 
-# Tab 2: Syllable Structure Visualizer
+# Tab 2: Audio Reading Practice
 with tabs[1]:
-    st.title("🌳 Syllable Structure Visualizer")
-    st.markdown("""
-    ### 🔳 Instructions:
-    1. Enter a word using IPA symbols ([Visit IPA online website](https://ipa.typeit.org/))
-
-    2. Use:
-       - `.` for syllable boundaries.
-       - `/` to mark **both sides** of the nucleus.
-       - `//` to mark **syllabic consonants** (e.g., `//n//`).
-       - `ˈ` before a syllable to mark **stress**.
-    3. Example: ˈstr/ɛ/ŋ.θ//n// for [strɛŋθn̩]
-    """)
-
-    syllable_input = st.text_input("Enter syllabified text:", placeholder="e.g., ˈstr/ɛ/.ŋ/θ/.//n//")
-    if st.button("Generate Tree"):
-        if syllable_input:
-            syllables = parse_syllables(syllable_input)
-            if syllables:
-                for i, syllable_data in enumerate(syllables, start=1):
-                    st.markdown(f"### Syllable {i}")
-                    tree = create_syllable_tree(syllable_data, i)
-                    st.graphviz_chart(tree)
-            else:
-                st.error("No valid syllables found. Please check your input.")
-        else:
-            st.error("Please enter syllabified text.")
-
-# Tab 3: Audio Reading Practice
-with tabs[2]:
     st.title("🔊 Audio Reading Practice")
 
     # Mapping for POS full forms
@@ -277,3 +248,34 @@ with tabs[2]:
             else:
                 st.session_state["tab3_index"] += words_per_batch
                 # Instead of `st.experimental_rerun()`, let Streamlit's state handle re-rendering automatically
+
+
+# Tab 3: Syllable Structure Visualizer
+with tabs[2]:
+    st.title("🌳 Syllable Structure Visualizer")
+    st.markdown("""
+    ### 🔳 Instructions:
+    1. Enter a word using IPA symbols ([Visit IPA online website](https://ipa.typeit.org/))
+
+    2. Use:
+       - `.` for syllable boundaries.
+       - `/` to mark **both sides** of the nucleus.
+       - `//` to mark **syllabic consonants** (e.g., `//n//`).
+       - `ˈ` before a syllable to mark **stress**.
+    3. Example: ˈstr/ɛ/ŋ.θ//n// for [strɛŋθn̩]
+    """)
+
+    syllable_input = st.text_input("Enter syllabified text:", placeholder="e.g., ˈstr/ɛ/.ŋ/θ/.//n//")
+    if st.button("Generate Tree"):
+        if syllable_input:
+            syllables = parse_syllables(syllable_input)
+            if syllables:
+                for i, syllable_data in enumerate(syllables, start=1):
+                    st.markdown(f"### Syllable {i}")
+                    tree = create_syllable_tree(syllable_data, i)
+                    st.graphviz_chart(tree)
+            else:
+                st.error("No valid syllables found. Please check your input.")
+        else:
+            st.error("Please enter syllabified text.")
+
