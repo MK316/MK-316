@@ -199,6 +199,14 @@ with tabs[1]:
 with tabs[2]:
     st.title("🔊 Audio Reading Practice")
 
+    # Mapping for POS full forms
+    pos_mapping = {
+        "n": "noun",
+        "v": "verb",
+        "adj": "adjective",
+        "adv": "adverb"
+    }
+
     # Initialize session state for Tab 3
     if "tab3_index" not in st.session_state:
         st.session_state["tab3_index"] = 0
@@ -211,9 +219,8 @@ with tabs[2]:
     st.markdown("### Instructions")
     st.markdown("""
     1. Enter the starting index (e.g., '1' for words 1-10, '12' for words 12-21, etc.).
-    2. Click **Start** to begin practicing.
-    3. Listen to the audio for 10 words, then click **Next** for the next set.
-    4. When all words are done, you'll see a completion message.
+    2. Click **Start** to generate audio and display text for the selected range.
+    3. The app will process the rest of the dataset automatically when applicable.
     """)
 
     # Input for starting index
@@ -246,7 +253,7 @@ with tabs[2]:
 
             # Create the formatted text
             formatted_texts = [
-                f"{i+1}. {row['Word']}. The part of speech is {row['POS']} and the stress is in the {row['Stress']}."
+                f"{i+1}. {row['Word']}. The part of speech is {pos_mapping.get(row['POS'], row['POS'])}, and the stress is in the {row['Stress']}."
                 for i, row in enumerate(df.iloc[start:end].to_dict(orient="records"))
             ]
             combined_text = " ".join(formatted_texts)
@@ -264,10 +271,9 @@ with tabs[2]:
             # Display the audio player
             st.audio(temp_file.name)
 
-            # Next button
-            if st.button("Next"):
-                if end >= len(df):
-                    st.session_state["completed"] = True
-                else:
-                    st.session_state["tab3_index"] += words_per_batch
+            # Automatically proceed to the next batch
+            if end >= len(df):
+                st.session_state["completed"] = True
+            else:
+                st.session_state["tab3_index"] += words_per_batch
                 st.experimental_rerun()
