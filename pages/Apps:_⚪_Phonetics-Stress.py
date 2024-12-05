@@ -123,7 +123,7 @@ def create_syllable_tree(syllable_data, syllable_number):
 
 
 # Multi-tab layout
-tabs = st.tabs(["Word Stress", "Syllable Structure"])
+tabs = st.tabs(["Word Stress", "Syllable Structure", "Stress practice"])
 
 with tabs[0]:
     st.title("📚 Word Search")
