@@ -100,7 +100,7 @@ def create_syllable_tree(syllable_data, syllable_number):
 tabs = st.tabs(["Word Stress", "Syllable Structure"])
 
 with tabs[0]:
-    st.title("📚 Word Stress (Searching Engine)")
+    st.title("📚 Word Search")
     st.caption("This app displays the stress, part of speech, and transcription for words from Chapter 7 of the textbook. Enter the word you want to look up in the text box below and click **Submit**.")
 
     # Input box for user to enter a word
@@ -128,7 +128,7 @@ with tabs[0]:
 
                 # Display the result
                 st.markdown(f"""
-                <div style='font-size: 24px; padding: 10px; border: 6px solid #9FD497; border-radius: 10px;'>
+                <div style='font-size: 16px; padding: 10px; border: 6px solid #9FD497; border-radius: 10px;'>
                     <strong>⚪ POS:</strong> {full_pos}<br>
                     <strong>⚪ Stress:</strong> {stress}<br>
                     <strong>⚪ Transcription:</strong> {transcription}
