@@ -85,7 +85,7 @@ def create_syllable_tree(syllable_data, syllable_number):
     return graph
 
 # Multi-tab layout
-tabs = st.tabs(["Word Stress", "Syllable Structure", "Tab 3", "Tab 4"])
+tabs = st.tabs(["Word Stress", "Stressed syllable", "Syllable Structure", "Tab 4"])
 
 # Tab 1: Word Stress
 with tabs[0]:
@@ -116,7 +116,91 @@ with tabs[0]:
             st.audio(temp_file.name)
 
 # Tab 2: Syllable Structure
+# Tab 2: Stressed Syllable
 with tabs[1]:
+    st.title("🌟 Stressed Syllable Visualizer")
+    st.markdown("""
+    ### Instructions:
+    1. Enter a **single syllable** using IPA symbols ([Visit IPA online website](https://ipa.typeit.org/)).
+    2. Mark stress using `ˈ` before the syllable.
+    3. Example: ˈstr/ɛ/ for a stressed syllable.
+    """)
+
+    # Input for a single syllable
+    syllable_input = st.text_input("Enter a single syllable:", placeholder="e.g., ˈstr/ɛ/")
+
+    def parse_single_syllable(input_syllable):
+        """Parse a single syllable into its components."""
+        is_stressed = input_syllable.startswith("ˈ")
+        if is_stressed:
+            input_syllable = input_syllable[1:]  # Remove stress marker
+
+        if "//" in input_syllable:  # Handle syllabic consonants
+            parts = input_syllable.split("//")
+            if len(parts) == 2:
+                nucleus_coda = parts[1]
+                return {"Onset": "", "Nucleus_Coda": nucleus_coda, "Syllabic": True, "Stress": is_stressed}
+        elif "/" in input_syllable:  # Handle regular vowels
+            parts = input_syllable.split("/")
+            if len(parts) == 3:
+                return {"Onset": parts[0], "Nucleus": parts[1], "Coda": parts[2], "Syllabic": False, "Stress": is_stressed}
+            elif len(parts) == 2:
+                return {"Onset": parts[0], "Nucleus": parts[1], "Coda": "", "Syllabic": False, "Stress": is_stressed}
+            else:
+                return {"Onset": "", "Nucleus": parts[0], "Coda": "", "Syllabic": False, "Stress": is_stressed}
+        return {"Onset": "", "Nucleus": "", "Coda": "", "Syllabic": False, "Stress": is_stressed}
+
+    if st.button("Visualize Stressed Syllable"):
+        if syllable_input:
+            syllable_data = parse_single_syllable(syllable_input)
+
+            if syllable_data:
+                # Create a syllable tree with a yellow circle for stress
+                tree = graphviz.Digraph(format="png")
+                syllable_color = "yellow" if syllable_data.get("Stress") else "white"
+
+                tree.node(
+                    "Syllable", "Syllable", shape="ellipse", style="filled", fillcolor=syllable_color
+                )
+
+                if syllable_data.get("Onset"):
+                    tree.node(
+                        "Onset", f"Onset\n{format_with_slashes(syllable_data['Onset'])}", shape="ellipse"
+                    )
+                    tree.edge("Syllable", "Onset")
+
+                if syllable_data.get("Syllabic"):
+                    tree.node(
+                        "Nucleus_Coda",
+                        f"Nucleus/Coda\n{format_with_slashes(syllable_data['Nucleus_Coda'])}",
+                        shape="ellipse",
+                    )
+                    tree.edge("Syllable", "Nucleus_Coda")
+                else:
+                    if syllable_data.get("Nucleus"):
+                        tree.node(
+                            "Nucleus",
+                            f"Nucleus\n{format_with_slashes(syllable_data['Nucleus'])}",
+                            shape="ellipse",
+                        )
+                        tree.edge("Syllable", "Nucleus")
+                    if syllable_data.get("Coda"):
+                        tree.node(
+                            "Coda",
+                            f"Coda\n{format_with_slashes(syllable_data['Coda'])}",
+                            shape="ellipse",
+                        )
+                        tree.edge("Nucleus", "Coda")
+
+                st.graphviz_chart(tree)
+            else:
+                st.error("Invalid syllable format. Please try again.")
+        else:
+            st.error("Please enter a syllable to visualize.")
+
+
+# Tab 3: Syllable Structure
+with tabs[2]:
     st.title("🌳 Syllable Structure Visualizer")
     st.markdown("""
     ### 🔳 Instructions:
