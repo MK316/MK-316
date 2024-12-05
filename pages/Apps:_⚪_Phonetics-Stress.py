@@ -199,16 +199,17 @@ with tabs[1]:
 with tabs[2]:
     st.title("🔊 Audio Reading Practice")
 
-    # Initialize if no state exists
+    # Initialize session state for Tab 3
     if "tab3_index" not in st.session_state:
         st.session_state["tab3_index"] = 0
+        st.session_state["completed"] = False
 
     # Current index and batch size
     index = st.session_state["tab3_index"]
     words_per_batch = 10
 
     # Check if all words are completed
-    if index >= len(df):
+    if st.session_state["completed"]:
         st.markdown("### 🎉 You've completed all the words!")
     else:
         # Generate the next batch of text and audio
@@ -220,7 +221,7 @@ with tabs[2]:
         text_lines = []
         for i, row in enumerate(selected_data.itertuples(), start=1):
             text_lines.append(
-                f"{i + start}. {row.Word}. The part of speech is {convert_pos(row.POS)}, and the stress is in the {row.Stress}."
+                f"{i + start}. {row.Word}. The part of speech is {convert_pos(row.POS)} and the stress is in the {row.Stress}."
             )
         formatted_text = " ".join(text_lines)
 
@@ -236,5 +237,14 @@ with tabs[2]:
 
         # Next button
         if st.button("Next"):
+            # Update index for the next batch
             st.session_state["tab3_index"] += words_per_batch
-            st.experimental_rerun()
+
+            # Mark as completed if no more words
+            if st.session_state["tab3_index"] >= len(df):
+                st.session_state["completed"] = True
+
+            # Refresh the UI without using st.experimental_rerun()
+            st.experimental_set_query_params(tab="Tab3")
+            st.experimental_update()
+
