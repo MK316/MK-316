@@ -50,21 +50,22 @@ def convert_pos(pos_abbreviations):
 
 # Add visual circles for stress patterns
 def add_stress_circles(stress):
-    """Generate Graphviz circles based on the stress pattern."""
+    """Generate horizontally arranged Graphviz circles based on the stress pattern."""
     graph = graphviz.Digraph(format="png")
-    
+    graph.attr(rankdir="LR")  # Arrange nodes left-to-right
+
     if stress == "ult":
         graph.node("Circle1", "ult", shape="ellipse", style="filled", fillcolor="yellow", width="2", height="0.8")
     elif stress == "penult":
         graph.node("Circle1", "Penult", shape="ellipse", style="filled", fillcolor="yellow", width="2.5", height="1")
         graph.node("Circle2", "", shape="ellipse", style="filled", fillcolor="lightgray", width="1", height="0.5")
-        graph.edge("Circle1", "Circle2")
+        graph.edge("Circle1", "Circle2", arrowhead="none")
     elif stress == "antepenult":
         graph.node("Circle1", "Antepenult", shape="ellipse", style="filled", fillcolor="yellow", width="3", height="1")
         graph.node("Circle2", "", shape="ellipse", style="filled", fillcolor="lightgray", width="1.5", height="0.5")
         graph.node("Circle3", "", shape="ellipse", style="filled", fillcolor="lightgray", width="1", height="0.5")
-        graph.edge("Circle1", "Circle2")
-        graph.edge("Circle2", "Circle3")
+        graph.edge("Circle1", "Circle2", arrowhead="none")
+        graph.edge("Circle2", "Circle3", arrowhead="none")
     return graph
     
 
@@ -146,6 +147,8 @@ def create_syllable_tree(syllable_data, syllable_number):
 # Multi-tab layout
 tabs = st.tabs(["Word Stress", "Stress practice", "Syllable Structure"])
 
+
+
 # Tab 1: Word Stress
 with tabs[0]:
     st.title("📚 Word Search")
@@ -193,6 +196,10 @@ with tabs[0]:
                 st.graphviz_chart(graph)
         else:
             st.error("Please enter a word to search.")
+
+
+
+
 # Tab 2: Audio Reading Practice
 with tabs[1]:
     st.title("🔊 Audio Reading Practice")
