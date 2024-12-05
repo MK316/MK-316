@@ -20,12 +20,11 @@ def convert_pos(pos_abbreviations):
     pos_list = [pos_mapping[abbreviation.strip()] for abbreviation in pos_abbreviations.split(",") if abbreviation.strip() in pos_mapping]
     return ", ".join(pos_list)
 
-# Sidebar navigation
-st.sidebar.title("📖 Navigation")
-tab = st.sidebar.radio("Go to", ["Word Search", "Tab 2", "Tab 3", "Tab 4"])
+# Set up the tabs
+tabs = st.tabs(["Word Stress", "Tab 2", "Tab 3", "Tab 4"])
 
-# Word Search Tab
-if tab == "Word Search":
+# First Tab: Word Stress
+with tabs[0]:
     st.title("📚 Word Stress (Searching Engine)")
     st.caption("This app displays the stress, part of speech, and transcription for words from Chapter 7 of the textbook. Enter the word you want to look up in the text box below.")
 
@@ -63,17 +62,17 @@ if tab == "Word Search":
             st.caption("The audio below uses Google TTS and plays the word with an American accent.")
             st.audio(temp_file.name)
 
-# Tab 2
-elif tab == "Tab 2":
+# Second Tab: Placeholder
+with tabs[1]:
     st.title("Tab 2")
     st.write("This is Tab 2. You can add any content you want here.")
 
-# Tab 3
-elif tab == "Tab 3":
+# Third Tab: Placeholder
+with tabs[2]:
     st.title("Tab 3")
     st.write("This is Tab 3. Add your content for this section.")
 
-# Tab 4
-elif tab == "Tab 4":
+# Fourth Tab: Placeholder
+with tabs[3]:
     st.title("Tab 4")
     st.write("This is Tab 4. Customize this page as needed.")
