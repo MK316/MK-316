@@ -131,7 +131,7 @@ with tabs[0]:
                 <div style='font-size: 16px; padding: 10px; border: 6px solid #9FD497; border-radius: 10px;'>
                     <strong>⚪ POS:</strong> {full_pos}<br>
                     <strong>⚪ Stress:</strong> {stress}<br>
-                    <strong>⚪ Transcription:</strong> {transcription}
+                    <strong>⚪ IPA:</strong> {transcription}
                 </div>
                 """, unsafe_allow_html=True)
             st.write("")
