@@ -87,7 +87,7 @@ def create_syllable_tree(syllable_data, syllable_number):
 
     # Onset node
     if syllable_data.get("Onset"):
-        graph.node(f"Onset{syllable_number}", f"Onset\n{syllable_data['Onset']}", shape="ellipse")
+        graph.node(f"Onset{syllable_number}", f"Onset\n{format_with_slashes(syllable_data['Onset'])}", shape="ellipse")
         graph.edge(f"Syllable{syllable_number}", f"Onset{syllable_number}")
 
     # Rhyme node
@@ -96,12 +96,12 @@ def create_syllable_tree(syllable_data, syllable_number):
 
     # Nucleus node
     if syllable_data.get("Nucleus"):
-        graph.node(f"Nucleus{syllable_number}", f"Nucleus\n{syllable_data['Nucleus']}", shape="ellipse")
+        graph.node(f"Nucleus{syllable_number}", f"Nucleus\n{format_with_slashes(syllable_data['Nucleus'])}", shape="ellipse")
         graph.edge(f"Rhyme{syllable_number}", f"Nucleus{syllable_number}")
 
     # Coda node (if not empty)
     if syllable_data.get("Coda").strip():
-        graph.node(f"Coda{syllable_number}", f"Coda\n{syllable_data['Coda']}", shape="ellipse")
+        graph.node(f"Coda{syllable_number}", f"Coda\n{format_with_slashes(syllable_data['Coda'])}", shape="ellipse")
         graph.edge(f"Rhyme{syllable_number}", f"Coda{syllable_number}")
 
     return graph
@@ -156,14 +156,28 @@ with tabs[1]:
 # Tab 3: Syllable Structure
 with tabs[2]:
     st.title("🌳 Syllable Structure Visualizer")
-    st.markdown("### Instructions: Enter a word with syllabified IPA text, e.g., `ˈstr/ɛ/.ŋ/θ/.æ/`.")
-    syllable_input = st.text_input("Enter syllabified text:", placeholder="e.g., ˈstr/ɛ/.ŋ/θ/.æ/")
+    st.markdown("""
+    ### 🔳 Instructions:
+    1. Enter a word using IPA symbols ([Visit IPA online website](https://ipa.typeit.org/))
+
+    2. Use:
+       - . for syllable boundaries.
+       - / to mark **both sides** of the nucleus.
+       - // to mark **syllabic consonants** (e.g., //n//).
+       - ˈ before a syllable to mark **stress**.
+    3. Example: ˈstr/ɛ/ŋ.θ//n// for [strɛŋθn̩]
+    """)
+
+    syllable_input = st.text_input("Enter syllabified text:", placeholder="e.g., ˈstr/ɛ/.ŋ/θ/.//n//")
     if st.button("Generate Tree"):
         if syllable_input:
             syllables = parse_syllables(syllable_input)
-            for i, syllable_data in enumerate(syllables, start=1):
-                st.markdown(f"### Syllable {i}")
-                tree = create_syllable_tree(syllable_data, i)
-                st.graphviz_chart(tree)
+            if syllables:
+                for i, syllable_data in enumerate(syllables, start=1):
+                    st.markdown(f"### Syllable {i}")
+                    tree = create_syllable_tree(syllable_data, i)
+                    st.graphviz_chart(tree)
+            else:
+                st.error("No valid syllables found. Please check your input.")
         else:
             st.error("Please enter valid syllabified text.")
