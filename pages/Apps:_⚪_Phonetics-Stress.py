@@ -253,7 +253,7 @@ with tabs[2]:
 
             # Create the formatted text
             formatted_texts = [
-                f"{i+1}. {row['Word']}. The part of speech is {pos_mapping.get(row['POS'], row['POS'])} and the stress is in the {row['Stress']}."
+                f"{i+1}. {row['Word']}. The part of speech is {pos_mapping.get(row['POS'], row['POS'])}, and the stress is in the {row['Stress']}."
                 for i, row in enumerate(df.iloc[start:end].to_dict(orient="records"))
             ]
             combined_text = " ".join(formatted_texts)
