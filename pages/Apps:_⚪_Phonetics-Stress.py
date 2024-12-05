@@ -178,14 +178,14 @@ with tabs[1]:
                     )
                     tree.edge("Rhyme", "Nucleus")
 
-                # Add the Coda node only if it has content
-                if syllable_data.get("Coda"):  # Ensure Coda is non-empty
+                # Add the Coda node only if it contains non-whitespace characters
+                if syllable_data.get("Coda").strip():  # Check for non-empty Coda
                     tree.node(
                         "Coda",
                         f"Coda\n{format_with_slashes(syllable_data['Coda'])}",
                         shape="ellipse",
                     )
-                    tree.edge("Nucleus", "Coda")
+                    tree.edge("Rhyme", "Coda")
 
                 # Display the tree with the appropriate title
                 st.markdown(f"### Stressed syllable")
@@ -194,7 +194,6 @@ with tabs[1]:
                 st.error("Invalid stressed syllable format. Please try again.")
         else:
             st.error("Please enter a syllable to visualize.")
-
 
 
 # Tab 3: Syllable Structure
