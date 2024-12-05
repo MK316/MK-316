@@ -253,7 +253,7 @@ with tabs[2]:
 
             # Create the formatted text
             formatted_texts = [
-                f"{i+1}. {row['Word']}. The part of speech is {pos_mapping.get(row['POS'], row['POS'])}, and the stress is in the {row['Stress']}."
+                f"{i+1}. {row['Word']}. The part of speech is {pos_mapping.get(row['POS'], row['POS'])} and the stress is in the {row['Stress']}."
                 for i, row in enumerate(df.iloc[start:end].to_dict(orient="records"))
             ]
             combined_text = " ".join(formatted_texts)
@@ -271,9 +271,9 @@ with tabs[2]:
             # Display the audio player
             st.audio(temp_file.name)
 
-            # Automatically proceed to the next batch
+            # Automatically update the state for the next batch
             if end >= len(df):
                 st.session_state["completed"] = True
             else:
                 st.session_state["tab3_index"] += words_per_batch
-                st.experimental_rerun()
+                # Instead of `st.experimental_rerun()`, let Streamlit's state handle re-rendering automatically
