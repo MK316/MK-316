@@ -80,10 +80,15 @@ def create_syllable_tree(syllable_data, syllable_number):
         graph.node(f"Nucleus{syllable_number}", f"Nucleus\n{format_with_slashes(syllable_data['Nucleus'])}", shape="ellipse")
         graph.edge(f"Rhyme{syllable_number}", f"Nucleus{syllable_number}")
 
-    # Coda node (if not empty)
-    if syllable_data.get("Coda").strip():
-        graph.node(f"Coda{syllable_number}", f"Coda\n{syllable_data['Coda']}", shape="ellipse")
+    # Add the Coda node (if not empty)
+    if syllable_data.get("Coda") and syllable_data.get("Coda").strip():  # Check for non-empty Coda
+        graph.node(
+            f"Coda{syllable_number}",
+            f"Coda\n{syllable_data['Coda']}",
+            shape="ellipse",
+        )
         graph.edge(f"Rhyme{syllable_number}", f"Coda{syllable_number}")
+
 
     return graph
 
