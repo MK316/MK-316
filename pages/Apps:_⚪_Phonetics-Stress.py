@@ -75,22 +75,26 @@ def create_syllable_tree(syllable_data, syllable_number):
     graph.node(f"Rhyme{syllable_number}", "Rhyme", shape="ellipse")
     graph.edge(f"Syllable{syllable_number}", f"Rhyme{syllable_number}")
 
-    # Nucleus node
-    if syllable_data.get("Nucleus"):
-        graph.node(f"Nucleus{syllable_number}", f"Nucleus\n{format_with_slashes(syllable_data['Nucleus'])}", shape="ellipse")
-        graph.edge(f"Rhyme{syllable_number}", f"Nucleus{syllable_number}")
-
-    # Add the Coda node (if not empty)
-    if syllable_data.get("Coda") and syllable_data.get("Coda").strip():  # Check for non-empty Coda
+    if syllable_data.get("Syllabic"):  # Syllabic consonant
         graph.node(
-            f"Coda{syllable_number}",
-            f"Coda\n{syllable_data['Coda']}",
+            f"Nucleus_Coda{syllable_number}",
+            f"Nucleus/Coda\n{format_with_slashes(syllable_data['Nucleus_Coda'])}",
             shape="ellipse",
         )
-        graph.edge(f"Rhyme{syllable_number}", f"Coda{syllable_number}")
+        graph.edge(f"Rhyme{syllable_number}", f"Nucleus_Coda{syllable_number}")
+    else:
+        # Nucleus node
+        if syllable_data.get("Nucleus"):
+            graph.node(f"Nucleus{syllable_number}", f"Nucleus\n{format_with_slashes(syllable_data['Nucleus'])}", shape="ellipse")
+            graph.edge(f"Rhyme{syllable_number}", f"Nucleus{syllable_number}")
 
+        # Coda node (if not empty)
+        if syllable_data.get("Coda") and syllable_data.get("Coda").strip():
+            graph.node(f"Coda{syllable_number}", f"Coda\n{format_with_slashes(syllable_data['Coda'])}", shape="ellipse")
+            graph.edge(f"Rhyme{syllable_number}", f"Coda{syllable_number}")
 
     return graph
+
 
 # Multi-tab layout
 tabs = st.tabs(["Word Stress", "Syllable Structure"])
