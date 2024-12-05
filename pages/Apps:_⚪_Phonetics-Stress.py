@@ -31,7 +31,7 @@ def generate_text_and_audio(index, df, words_per_batch):
     text_lines = []
     for i, row in enumerate(selected_data.itertuples(), start=1):
         text_lines.append(
-            f"{i + start}. {row.Word}. The part of speech of {row.Word} is {convert_pos(row.POS)} and the stress falls on the {row.Stress}. Or we can say that the stress is on the {row.Stress}imate syllable."
+            f"{i + start}. {row.Word}. The part of speech of {row.Word} is {convert_pos(row.POS)} and the stress of {row.Word} falls on the {row.Stress}. Or we can say that the stress of {row.Word} is on the {row.Stress}imate syllable."
         )
     formatted_text = " ".join(text_lines)
 
@@ -253,7 +253,7 @@ with tabs[2]:
 
             # Create the formatted text
             formatted_texts = [
-                f"{i+1}. {row['Word']}. The part of speech of {row['Word']} is {pos_mapping.get(row['POS'], row['POS'])}, and the stress falls on the {row['Stress']}. Or we can say that the stress is on the {row['Stress']}imate syllable."
+                f"{i+1}. {row['Word']}. The part of speech of {row['Word']} is {pos_mapping.get(row['POS'], row['POS'])}, and the stress of {row['Word']} falls on the {row['Stress']}. Or we can say that the stress of {row['Word']} is on the {row['Stress']}imate syllable."
                 for i, row in enumerate(df.iloc[start:end].to_dict(orient="records"))
             ]
             combined_text = " ".join(formatted_texts)
