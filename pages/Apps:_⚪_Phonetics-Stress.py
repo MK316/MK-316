@@ -125,6 +125,7 @@ with tabs[0]:
                         f"<strong>⚪ Stress:</strong> {stress}<br>"
                         f"<strong>⚪ Transcription:</strong> {transcription}"
                         f"</div>", unsafe_allow_html=True)
+            st.write("")
             st.caption("The audio below uses Google TTS with American accent.") 
             st.audio(temp_file.name)
 
