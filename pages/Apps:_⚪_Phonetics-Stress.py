@@ -236,7 +236,7 @@ with tabs[2]:
         return parsed_syllables
 
     def create_syllable_tree(syllable_data, syllable_number):
-        """Create a syllable tree with Rhyme."""
+        """Create a syllable tree with Rhyme, Nucleus, and Coda branching correctly."""
         graph = graphviz.Digraph(format="png")
         syllable_color = "yellow" if syllable_data.get("Stress") else "white"
 
@@ -279,14 +279,14 @@ with tabs[2]:
                 )
                 graph.edge(f"Rhyme{syllable_number}", f"Nucleus{syllable_number}")
 
-            # Add the Coda node only if it has content
+            # Add the Coda node directly branching from Rhyme (not Nucleus)
             if syllable_data.get("Coda").strip():  # Ensure Coda is non-empty
                 graph.node(
                     f"Coda{syllable_number}",
                     f"Coda\n{format_with_slashes(syllable_data['Coda'])}",
                     shape="ellipse",
                 )
-                graph.edge(f"Nucleus{syllable_number}", f"Coda{syllable_number}")
+                graph.edge(f"Rhyme{syllable_number}", f"Coda{syllable_number}")
 
         return graph
 
@@ -299,4 +299,3 @@ with tabs[2]:
                 st.graphviz_chart(tree)
         else:
             st.error("Please enter a valid syllabified input.")
-
