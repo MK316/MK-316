@@ -200,24 +200,41 @@ with tabs[2]:
     st.title("🔊 Audio Reading Practice")
 
     # Initialize if no state exists
-    if "index" not in state_tab3:
-        state_tab3["index"] = 0
+    if "tab3_index" not in st.session_state:
+        st.session_state["tab3_index"] = 0
 
-    # Load words and process the next batch
-    index = state_tab3["index"]
-    formatted_text, audio_file, next_index = generate_text_and_audio(index, df, words_per_batch)
+    # Current index and batch size
+    index = st.session_state["tab3_index"]
+    words_per_batch = 10
 
-    # Display formatted text
-    st.markdown("### Generated Text")
-    st.text_area("Text for Audio", formatted_text, height=150, disabled=True)
-
-    # Display the audio file
-    st.audio(audio_file)
-
-    # Next button
-    if next_index < len(df):
-        if st.button("Next"):
-            state_tab3["index"] = next_index
-            st.experimental_rerun()
-    else:
+    # Check if all words are completed
+    if index >= len(df):
         st.markdown("### 🎉 You've completed all the words!")
+    else:
+        # Generate the next batch of text and audio
+        start = index
+        end = min(index + words_per_batch, len(df))
+        selected_data = df.iloc[start:end]
+
+        # Format the text for the selected words
+        text_lines = []
+        for i, row in enumerate(selected_data.itertuples(), start=1):
+            text_lines.append(
+                f"{i + start}. {row.Word}. The part of speech is {convert_pos(row.POS)}, and the stress is in the {row.Stress}."
+            )
+        formatted_text = " ".join(text_lines)
+
+        # Generate audio using gTTS
+        tts = gTTS(formatted_text)
+        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
+        tts.save(temp_file.name)
+
+        # Display formatted text and audio
+        st.markdown("### Generated Text")
+        st.text_area("Text for Audio", formatted_text, height=150, disabled=True)
+        st.audio(temp_file.name)
+
+        # Next button
+        if st.button("Next"):
+            st.session_state["tab3_index"] += words_per_batch
+            st.experimental_rerun()
