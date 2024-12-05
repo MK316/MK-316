@@ -204,43 +204,70 @@ with tabs[2]:
         st.session_state["tab3_index"] = 0
     if "completed" not in st.session_state:
         st.session_state["completed"] = False
+    if "started" not in st.session_state:
+        st.session_state["started"] = False
 
-    # Current index and batch size
-    index = st.session_state["tab3_index"]
-    words_per_batch = 10
+    # Display instructions
+    st.markdown("### Instructions")
+    st.markdown("""
+    1. Enter the starting index (e.g., '1' for words 1-10, '12' for words 12-21, etc.).
+    2. Click **Start** to begin practicing.
+    3. Listen to the audio for 10 words, then click **Next** for the next set.
+    4. When all words are done, you'll see a completion message.
+    """)
 
-    # Check if all words are completed
-    if st.session_state["completed"]:
-        st.markdown("### 🎉 You've completed all the words!")
-    else:
-        # Generate the next batch of text and audio
-        start = index
-        end = min(index + words_per_batch, len(df))
-        selected_data = df.iloc[start:end]
+    # Input for starting index
+    user_input = st.text_input("Enter the starting index:", placeholder="Type a number here (e.g., 1, 12, etc.)")
 
-        # Format the text for the selected words
-        text_lines = []
-        for i, row in enumerate(selected_data.itertuples(), start=1):
-            text_lines.append(
-                f"{i + start}. {row.Word}. The part of speech is {convert_pos(row.POS)}, and the stress is in the {row.Stress}."
-            )
-        formatted_text = " ".join(text_lines)
+    # Start button to initialize the range
+    if st.button("Start"):
+        if user_input.isdigit():
+            start_index = int(user_input) - 1  # Convert to 0-based index
+            if 0 <= start_index < len(df):
+                st.session_state["tab3_index"] = start_index
+                st.session_state["started"] = True
+                st.session_state["completed"] = False
+            else:
+                st.error("Invalid starting index. Please enter a number within the range of the dataset.")
+        else:
+            st.error("Please enter a valid number.")
 
-        # Generate audio using gTTS
-        tts = gTTS(formatted_text)
-        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
-        tts.save(temp_file.name)
+    # Proceed if the user clicked Start
+    if st.session_state["started"]:
+        # Check if all words are completed
+        if st.session_state["completed"]:
+            st.markdown("### 🎉 You've completed all the words!")
+        else:
+            # Generate the next batch of text and audio
+            index = st.session_state["tab3_index"]
+            words_per_batch = 10
+            start = index
+            end = min(index + words_per_batch, len(df))
 
-        # Display formatted text and audio
-        st.markdown("### Generated Text")
-        st.text_area("Text for Audio", formatted_text, height=150, disabled=True)
-        st.audio(temp_file.name)
+            # Create the formatted text
+            formatted_texts = [
+                f"{i+1}. {row['Word']}. The part of speech is {row['POS']} and the stress is in the {row['Stress']}."
+                for i, row in enumerate(df.iloc[start:end].to_dict(orient="records"))
+            ]
+            combined_text = " ".join(formatted_texts)
 
-        # Next button
-        if st.button("Next"):
-            # Update index for the next batch
-            st.session_state["tab3_index"] += words_per_batch
+            # Display the text
+            st.markdown("### Words for Practice")
+            for text in formatted_texts:
+                st.markdown(f"- {text}")
 
-            # Mark as completed if no more words
-            if st.session_state["tab3_index"] >= len(df):
-                st.session_state["completed"] = True
+            # Generate audio using gTTS
+            tts = gTTS(combined_text)
+            temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
+            tts.save(temp_file.name)
+
+            # Display the audio player
+            st.audio(temp_file.name)
+
+            # Next button
+            if st.button("Next"):
+                if end >= len(df):
+                    st.session_state["completed"] = True
+                else:
+                    st.session_state["tab3_index"] += words_per_batch
+                st.experimental_rerun()
