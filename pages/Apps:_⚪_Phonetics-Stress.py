@@ -3,6 +3,7 @@ import pandas as pd
 from gtts import gTTS
 import tempfile
 import graphviz
+import math
 
 # Load the dataset from GitHub for Tab 1
 csv_url = "https://raw.githubusercontent.com/MK316/stress2024/refs/heads/main/data/stressdata1.csv"
@@ -15,6 +16,31 @@ pos_mapping = {
     "v": "Verb",
     "adv": "Adverb"
 }
+
+# Global variables for Tab 3
+words_per_batch = 10
+state_tab3 = {"index": 0}  # Track the current starting index
+
+# Function to format text and generate audio
+def generate_text_and_audio(index, df, words_per_batch):
+    start = index
+    end = min(index + words_per_batch, len(df))  # Ensure we don't go out of bounds
+    selected_data = df.iloc[start:end]
+
+    # Format the text for the selected words
+    text_lines = []
+    for i, row in enumerate(selected_data.itertuples(), start=1):
+        text_lines.append(
+            f"{i + start}. {row.Word}. The part of speech is {convert_pos(row.POS)} and the stress is in the {row.Stress}."
+        )
+    formatted_text = " ".join(text_lines)
+
+    # Generate audio using gTTS
+    tts = gTTS(formatted_text)
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
+    tts.save(temp_file.name)
+
+    return formatted_text, temp_file.name, end
 
 def convert_pos(pos_abbreviations):
     """Convert POS abbreviations to full forms."""
@@ -168,3 +194,30 @@ with tabs[1]:
                 st.error("No valid syllables found. Please check your input.")
         else:
             st.error("Please enter syllabified text.")
+
+# Tab 3: Audio Reading Practice
+with tabs[2]:
+    st.title("🔊 Audio Reading Practice")
+
+    # Initialize if no state exists
+    if "index" not in state_tab3:
+        state_tab3["index"] = 0
+
+    # Load words and process the next batch
+    index = state_tab3["index"]
+    formatted_text, audio_file, next_index = generate_text_and_audio(index, df, words_per_batch)
+
+    # Display formatted text
+    st.markdown("### Generated Text")
+    st.text_area("Text for Audio", formatted_text, height=150, disabled=True)
+
+    # Display the audio file
+    st.audio(audio_file)
+
+    # Next button
+    if next_index < len(df):
+        if st.button("Next"):
+            state_tab3["index"] = next_index
+            st.experimental_rerun()
+    else:
+        st.markdown("### 🎉 You've completed all the words!")
