@@ -160,7 +160,7 @@ with tabs[1]:
                 syllable_color = "yellow" if syllable_data.get("Stress") else "white"
 
                 tree.node(
-                    "Syllable", "Syllable", shape="ellipse", style="filled", fillcolor=syllable_color
+                    "Stressed Syllable", "Syllable", shape="ellipse", style="filled", fillcolor=syllable_color
                 )
 
                 if syllable_data.get("Onset"):
