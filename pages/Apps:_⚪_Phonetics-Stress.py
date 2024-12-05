@@ -202,6 +202,7 @@ with tabs[2]:
     # Initialize session state for Tab 3
     if "tab3_index" not in st.session_state:
         st.session_state["tab3_index"] = 0
+    if "completed" not in st.session_state:
         st.session_state["completed"] = False
 
     # Current index and batch size
@@ -243,8 +244,3 @@ with tabs[2]:
             # Mark as completed if no more words
             if st.session_state["tab3_index"] >= len(df):
                 st.session_state["completed"] = True
-
-            # Refresh the UI without using st.experimental_rerun()
-            st.experimental_set_query_params(tab="Tab3")
-            st.experimental_update()
-
