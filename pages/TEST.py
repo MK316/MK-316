@@ -27,9 +27,15 @@ def convert_pos(pos_abbrev):
 def add_stress_circles(stress):
     stress_options = ["1st", "2nd", "antepenult", "penult", "ult"]
     circle_html = "<div style='display: flex; flex-direction: row; justify-content: center; gap: 10px;'>"
-    for option in stress_options:
+    for idx, option in enumerate(stress_options):
         color = "yellow" if option == stress else "gray"
-        circle_html += f"<div style='width: 60px; height: 60px; background: {color}; border-radius: 50%; display: flex; align-items: center; justify-content: center;'>{option}</div>"
+        width = "80px"  # increased width for better visibility
+        text = option.capitalize()
+        if option == "2nd":
+            circle_html += f"<div style='width: {width}; height: 60px; background: {color}; border-radius: 50%; display: flex; align-items: center; justify-content: center;'>{text}</div>"
+            circle_html += "<div style='display: flex; align-items: center; justify-content: center; padding: 0 15px;'> (optional syllables) </div>"
+        else:
+            circle_html += f"<div style='width: {width}; height: 60px; background: {color}; border-radius: 50%; display: flex; align-items: center; justify-content: center;'>{text}</div>"
     circle_html += "</div>"
     return circle_html
 
