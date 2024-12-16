@@ -7,7 +7,7 @@ from gtts import gTTS
 st.set_page_config(layout="wide")
 
 # Load the dataset from GitHub
-@st.cache
+@st.cache_data
 def load_data(url):
     return pd.read_csv(url)
 
