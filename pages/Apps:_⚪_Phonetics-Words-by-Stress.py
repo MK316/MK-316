@@ -11,7 +11,7 @@ st.set_page_config(layout="wide")
 def load_data(url):
     return pd.read_csv(url)
 
-csv_url = "https://raw.githubusercontent.com/MK316/stress2024/refs/heads/main/data/stressdata1.csv"
+csv_url = "https://raw.githubusercontent.com/MK316/stress2024/refs/heads/main/data/data20241216.csv"
 df = load_data(csv_url)
 
 # POS mapping
@@ -46,7 +46,7 @@ if 'button_clicked' not in st.session_state:
 
 # Main app layout
 st.title("Words-by-stress")
-selected_stress = st.selectbox("Select Stress", ["1st", "2nd", "antepenult", "penult", "ult"])
+selected_stress = st.selectbox("Select Stress", ["1st", "2nd", "antepenult", "penult", "ult", "compound"])
 
 # Display stress circles
 if selected_stress:
@@ -55,7 +55,7 @@ if selected_stress:
     # Display data based on selected stress
     filtered_data = df[df['Stress'] == selected_stress]
     st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
-    st.dataframe(filtered_data[['Word', 'POS', 'Transcription']])
+    st.dataframe(filtered_data[['Word', 'POS', 'Transcription', 'Variation']])
 
 # Word Search with Audio Playback
 st.title("Word Search")
@@ -78,6 +78,7 @@ if search_button or st.session_state.button_clicked:
         stress = result.iloc[0]['Stress']
         transcription = result.iloc[0]['Transcription']
         word = result.iloc[0]['Word']
+        variation = result.iloc[0]['Variation']
 
         tts = gTTS(text=word, lang='en')
         temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
@@ -86,6 +87,7 @@ if search_button or st.session_state.button_clicked:
         st.write(f"POS: {full_pos}")
         st.write(f"Stress: {stress}")
         st.write(f"IPA: {transcription}")
+        st.write(f"Variation: {variation}")
         st.audio(temp_file.name)
 
         st.session_state.button_clicked = False  # Reset state after successful search
