@@ -40,6 +40,10 @@ def add_stress_circles(stress):
     circle_html += "</div>"
     return circle_html
 
+# Initialize session state for button click
+if 'button_clicked' not in st.session_state:
+    st.session_state.button_clicked = False
+
 # Main app layout
 st.title("Words-by-stress")
 selected_stress = st.selectbox("Select Stress", ["1st", "2nd", "antepenult", "penult", "ult"])
@@ -51,17 +55,23 @@ if selected_stress:
     # Display data based on selected stress
     filtered_data = df[df['Stress'] == selected_stress]
     st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
-    # Ensure DataFrame takes full width
-    st.dataframe(filtered_data[['Word', 'POS', 'Transcription']], width=1000)  # Adjust width accordingly
+    st.dataframe(filtered_data[['Word', 'POS', 'Transcription']])
 
 # Word Search with Audio Playback
 st.title("Word Search")
 user_input = st.text_input("Enter a word to search:", placeholder="Type a word here...")
 
-if st.button("Search"):
+# Manage button click state
+def on_search():
+    st.session_state.button_clicked = True
+
+search_button = st.button("Search", on_click=on_search)
+
+if search_button or st.session_state.button_clicked:
     result = df[df['Word'].str.lower() == user_input.lower()]
     if result.empty:
         st.error("The word is not in the list.")
+        st.session_state.button_clicked = False  # Reset state if the search fails
     else:
         pos = result.iloc[0]['POS']
         full_pos = convert_pos(pos)
@@ -77,3 +87,5 @@ if st.button("Search"):
         st.write(f"Stress: {stress}")
         st.write(f"IPA: {transcription}")
         st.audio(temp_file.name)
+
+        st.session_state.button_clicked = False  # Reset state after successful search
