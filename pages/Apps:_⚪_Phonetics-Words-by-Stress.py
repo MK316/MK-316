@@ -7,7 +7,7 @@ from gtts import gTTS
 st.set_page_config(layout="wide")
 
 # Load the dataset from GitHub
-@st.cache
+@st.cache_data
 def load_data(url):
     return pd.read_csv(url)
 
@@ -55,7 +55,7 @@ if selected_stress:
     # Display data based on selected stress
     filtered_data = df[df['Stress'] == selected_stress]
     st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
-    st.dataframe(filtered_data[['Word', 'POS', 'Transcription', 'Variation']])
+    st.dataframe(filtered_data[['Word', 'POS', 'Transcription', 'Variation']], width=800)
 
 # Word Search with Audio Playback
 st.title("Word Search")
