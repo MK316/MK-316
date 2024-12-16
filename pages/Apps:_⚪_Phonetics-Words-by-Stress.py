@@ -2,21 +2,16 @@ import streamlit as st
 import pandas as pd
 import tempfile
 from gtts import gTTS
-from pydub import AudioSegment
 
 # Set page configuration for wider layout
 st.set_page_config(layout="wide")
-
-# Ensure session state for button click is initialized
-if 'button_clicked' not in st.session_state:
-    st.session_state.button_clicked = False
 
 # Load the dataset from GitHub
 @st.cache
 def load_data(url):
     return pd.read_csv(url)
 
-csv_url = "https://raw.githubusercontent.com/MK316/stress2024/refs/heads/main/data/data20241216.csv"
+csv_url = "https://raw.githubusercontent.com/MK316/stress2024/refs/heads/main/data/stressdata1.csv"
 df = load_data(csv_url)
 
 # POS mapping
@@ -45,6 +40,10 @@ def add_stress_circles(stress):
     circle_html += "</div>"
     return circle_html
 
+# Initialize session state for button click
+if 'button_clicked' not in st.session_state:
+    st.session_state.button_clicked = False
+
 # Main app layout
 st.title("Words-by-stress")
 selected_stress = st.selectbox("Select Stress", ["1st", "2nd", "antepenult", "penult", "ult"])
@@ -52,29 +51,17 @@ selected_stress = st.selectbox("Select Stress", ["1st", "2nd", "antepenult", "pe
 # Display stress circles
 if selected_stress:
     st.markdown(add_stress_circles(selected_stress), unsafe_allow_html=True)
+
+    # Display data based on selected stress
     filtered_data = df[df['Stress'] == selected_stress]
     st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
-    st.dataframe(filtered_data[['Word', 'POS', 'Transcription']], width=800)
-
-    # Button to generate audio for all words
-    if st.button('Generate Audio for All Words'):
-        combined_audio = AudioSegment.silent(duration=1000)  # Start with 1 second of silence
-        for index, row in filtered_data.iterrows():
-            tts = gTTS(text=row['Word'], lang='en')
-            temp_file = tempfile.NamedTemporaryFile(delete=True, suffix=".mp3")
-            tts.save(temp_file.name)
-            word_audio = AudioSegment.from_mp3(temp_file.name)
-            combined_audio += word_audio + AudioSegment.silent(duration=1000)  # Add 1 second pause after each word
-
-        # Save the combined audio to a temporary file
-        combined_audio_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
-        combined_audio.export(combined_audio_file.name, format='mp3')
-        st.audio(combined_audio_file.name)
+    st.dataframe(filtered_data[['Word', 'POS', 'Transcription']])
 
 # Word Search with Audio Playback
 st.title("Word Search")
 user_input = st.text_input("Enter a word to search:", placeholder="Type a word here...")
 
+# Manage button click state
 def on_search():
     st.session_state.button_clicked = True
 
