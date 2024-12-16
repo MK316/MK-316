@@ -28,66 +28,43 @@ def convert_pos(pos_abbrev):
 def add_stress_circles(stress):
     graph = graphviz.Digraph(format="png")
     graph.attr(rankdir="LR")  # Arrange nodes left-to-right
-    for option in ["ult", "penult", "antepenult", "1st", "2nd", "compound"]:
+    for option in ["ult", "penult", "antepenult", "1st", "2nd"]:
         color = "yellow" if option == stress else "lightgrey"
         graph.node(option, option.capitalize(), style='filled', fillcolor=color)
     return graph
 
-# Multi-tab layout
-tabs = st.tabs(["Words-by-stress", "Word Stress", "Audio Reading Practice", "Syllable Structure Visualizer"])
+# Main app layout
+st.title("Words-by-stress")
+stress_options = ["1st", "2nd", "...", "antepenult", "penult", "ult"]
+selected_stress = st.selectbox("Select Stress", stress_options)
 
-# Tab 0: Words-by-stress
-with tabs[0]:
-    st.title("Words-by-stress")
-    stress_options = ["ult", "penult", "antepenult", "1st", "2nd", "compound"]
-    selected_stress = None
+# Display data based on selected stress
+if selected_stress and selected_stress != "...":
+    filtered_data = df[df['Stress'] == selected_stress]
+    st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
+    st.dataframe(filtered_data[['Word', 'POS', 'Transcription']])
+    st.graphviz_chart(add_stress_circles(selected_stress))
 
-    # Button group for stress options
-    cols = st.columns(len(stress_options))
-    for idx, option in enumerate(stress_options):
-        if cols[idx].button(option):
-            selected_stress = option
+# Word Search with Audio Playback
+st.title("Word Search")
+user_input = st.text_input("Enter a word to search:", placeholder="Type a word here...")
 
-    # Display data based on selected stress
-    if selected_stress:
-        filtered_data = df[df['Stress'] == selected_stress]
-        st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
-        st.dataframe(filtered_data[['Word', 'POS', 'Transcription']])
-        st.graphviz_chart(add_stress_circles(selected_stress))
+if st.button("Search"):
+    result = df[df['Word'].str.lower() == user_input.lower()]
+    if result.empty:
+        st.error("The word is not in the list.")
+    else:
+        pos = result.iloc[0]['POS']
+        full_pos = convert_pos(pos)
+        stress = result.iloc[0]['Stress']
+        transcription = result.iloc[0]['Transcription']
+        word = result.iloc[0]['Word']
 
-# Tab 1: Word Stress
-with tabs[1]:
-    st.title("Word Search")
-    user_input = st.text_input("Enter a word to search:", placeholder="Type a word here...")
+        tts = gTTS(text=word, lang='en')
+        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
+        tts.save(temp_file.name)
 
-    if st.button("Search"):
-        result = df[df['Word'].str.lower() == user_input.lower()]
-        if result.empty:
-            st.error("The word is not in the list.")
-        else:
-            pos = result.iloc[0]['POS']
-            full_pos = convert_pos(pos)
-            stress = result.iloc[0]['Stress']
-            transcription = result.iloc[0]['Transcription']
-            word = result.iloc[0]['Word']
-
-            tts = gTTS(text=word, lang='en')
-            temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
-            tts.save(temp_file.name)
-
-            st.write(f"POS: {full_pos}")
-            st.write(f"Stress: {stress}")
-            st.write(f"IPA: {transcription}")
-            st.audio(temp_file.name)
-
-# Tab 2: Audio Reading Practice
-with tabs[2]:
-    st.title("Audio Reading Practice")
-    st.text("This tab will implement audio reading features.")
-
-# Tab 3: Syllable Structure Visualizer
-with tabs[3]:
-    st.title("Syllable Structure Visualizer")
-    st.text("Implement features to visualize syllable structure here.")
-
-# Additional functions can be defined and used here as needed.
+        st.write(f"POS: {full_pos}")
+        st.write(f"Stress: {stress}")
+        st.write(f"IPA: {transcription}")
+        st.audio(temp_file.name)
