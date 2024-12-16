@@ -26,16 +26,14 @@ def convert_pos(pos_abbrev):
 # Function to add visual circles for stress patterns
 def add_stress_circles(stress):
     stress_options = ["1st", "2nd", "antepenult", "penult", "ult"]
-    circle_html = "<div style='display: flex; flex-direction: row; justify-content: center; gap: 10px;'>"
+    circle_html = "<div style='display: flex; flex-direction: row; justify-content: center; gap: 20px;'>"
     for idx, option in enumerate(stress_options):
-        color = "yellow" if option == stress else "gray"
-        width = "120px"  # increased width for better visibility
-        text = option.capitalize()
+        background_color = "yellow" if option == stress else "white"
+        text_color = "black" if option == stress else "gray"
+        border_color = "black"
+        circle_html += f"<div style='width: 80px; height: 60px; background: {background_color}; border: 2px solid {border_color}; color: {text_color}; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px;'>{option.capitalize()}</div>"
         if option == "2nd":
-            circle_html += f"<div style='width: {width}; height: 60px; background: {color}; border-radius: 50%; display: flex; align-items: center; justify-content: center;'>{text}</div>"
-            circle_html += "<div style='display: flex; align-items: center; justify-content: center; padding: 0 15px;'> (optional syllables) </div>"
-        else:
-            circle_html += f"<div style='width: {width}; height: 60px; background: {color}; border-radius: 50%; display: flex; align-items: center; justify-content: center;'>{text}</div>"
+            circle_html += "<div style='display: flex; align-items: center; justify-content: center; color: gray; font-size: 16px;'> (optional syllables) </div>"
     circle_html += "</div>"
     return circle_html
 
