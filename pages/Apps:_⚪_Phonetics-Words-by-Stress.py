@@ -62,7 +62,7 @@ if selected_stress:
 
 # Word Search with Audio Playback
 st.title("❄️ 2. Word details with Audio")
-user_input = st.text_input("🌱 Enter the number next to a word to search (e.g., 104 for 'category'):", placeholder="Type a word here...")
+user_input = st.text_input("🔴 Enter the number next to a word to search (e.g., 104 for 'category'):", placeholder="Type a word here...")
 
 # Manage button click state
 def on_search():
