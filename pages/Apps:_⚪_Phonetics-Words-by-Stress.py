@@ -68,17 +68,18 @@ def on_search():
 search_button = st.button("Search", on_click=on_search)
 
 if search_button or st.session_state.button_clicked:
-    result = df[df['Word'].str.lower() == user_input.lower()]
-    if result.empty:
-        st.error("The word is not in the list.")
-        st.session_state.button_clicked = False  # Reset state if the search fails
-    else:
-        pos = result.iloc[0]['POS']
+    try:
+        # Convert user input to integer index
+        index = int(user_input)
+        # Access the DataFrame by index
+        row = df.iloc[index]
+        
+        pos = row['POS']
         full_pos = convert_pos(pos)
-        stress = result.iloc[0]['Stress']
-        transcription = result.iloc[0]['Transcription']
-        word = result.iloc[0]['Word']
-        variation = result.iloc[0]['Variation']
+        stress = row['Stress']
+        transcription = row['Transcription']
+        word = row['Word']
+        variation = row.get('Variation', 'N/A')  # Assuming 'Variation' might not exist
 
         tts = gTTS(text=word, lang='en')
         temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
@@ -90,4 +91,9 @@ if search_button or st.session_state.button_clicked:
         st.write(f"Variation: {variation}")
         st.audio(temp_file.name)
 
-        st.session_state.button_clicked = False  # Reset state after successful search
+    except ValueError:
+        st.error("Please enter a valid integer index.")
+    except IndexError:
+        st.error("Index out of range. Please enter a valid index.")
+    finally:
+        st.session_state.button_clicked = False  # Reset state after the search attempt
