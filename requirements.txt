@@ -9,6 +9,7 @@ pytz
 gTTS
 pandas
 pydub
+imageio[ffmpeg]
 scipy
 plotly
 librosa
