@@ -45,7 +45,7 @@ if 'button_clicked' not in st.session_state:
     st.session_state.button_clicked = False
 
 # Main app layout
-st.title("Words-by-stress")
+st.title("⛄ Words-by-stress")
 selected_stress = st.selectbox("Select Stress", ["1st", "2nd", "antepenult", "penult", "ult", "compound"])
 
 # Display stress circles
@@ -54,12 +54,13 @@ if selected_stress:
 
     # Display data based on selected stress
     filtered_data = df[df['Stress'] == selected_stress]
-    st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
+    st.write("")
+    st.write(f"🌱 Total words with '{selected_stress}' stress: {len(filtered_data)}")
     st.dataframe(filtered_data[['Word', 'POS', 'Transcription', 'Variation']], width=600)
 
 # Word Search with Audio Playback
-st.title("Word Search")
-user_input = st.text_input("Enter the number next to a word to search (e.g., 104 for 'category'):", placeholder="Type a word here...")
+st.title("Generate audio")
+user_input = st.text_input("🌱 Enter the number next to a word to search (e.g., 104 for 'category'):", placeholder="Type a word here...")
 
 # Manage button click state
 def on_search():
