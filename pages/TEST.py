@@ -35,11 +35,17 @@ def add_stress_circles(stress):
 
 # Main app layout
 st.title("Words-by-stress")
-stress_options = ["1st", "2nd", "...", "antepenult", "penult", "ult"]
-selected_stress = st.selectbox("Select Stress", stress_options)
+stress_options = ["1st", "2nd", "antepenult", "penult", "ult"]
+selected_stress = None
+
+# Button group for stress options
+cols = st.columns(len(stress_options))
+for idx, option in enumerate(stress_options):
+    if cols[idx].button(option):
+        selected_stress = option
 
 # Display data based on selected stress
-if selected_stress and selected_stress != "...":
+if selected_stress:
     filtered_data = df[df['Stress'] == selected_stress]
     st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
     st.dataframe(filtered_data[['Word', 'POS', 'Transcription']])
