@@ -56,7 +56,7 @@ if selected_stress:
     filtered_data = df[df['Stress'] == selected_stress]
     st.write("")
     st.write(f"🌱 Total words with '{selected_stress}' stress: {len(filtered_data)}")
-    st.dataframe(filtered_data[['Word', 'POS', 'Transcription', 'Variation']], width=600, height=300)
+    st.dataframe(filtered_data[['Word', 'POS', 'Transcription', 'Variation']], width=600, height=200)
 
 # Word Search with Audio Playback
 st.title("Word detail with Audio")
