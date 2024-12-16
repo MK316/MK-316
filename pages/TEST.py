@@ -40,14 +40,20 @@ tabs = st.tabs(["Words-by-stress", "Word Stress", "Audio Reading Practice", "Syl
 with tabs[0]:
     st.title("Words-by-stress")
     stress_options = ["ult", "penult", "antepenult", "1st", "2nd", "compound"]
-    selected_stress = st.sidebar.radio("Choose stress pattern:", stress_options)
+    selected_stress = None
 
-    filtered_data = df[df['Stress'] == selected_stress]
+    # Button group for stress options
+    cols = st.columns(len(stress_options))
+    for idx, option in enumerate(stress_options):
+        if cols[idx].button(option):
+            selected_stress = option
 
-    st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
-    st.dataframe(filtered_data[['Word', 'POS', 'Transcription']])
-
-    st.graphviz_chart(add_stress_circles(selected_stress))
+    # Display data based on selected stress
+    if selected_stress:
+        filtered_data = df[df['Stress'] == selected_stress]
+        st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
+        st.dataframe(filtered_data[['Word', 'POS', 'Transcription']])
+        st.graphviz_chart(add_stress_circles(selected_stress))
 
 # Tab 1: Word Stress
 with tabs[1]:
