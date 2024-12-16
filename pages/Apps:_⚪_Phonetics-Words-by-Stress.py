@@ -45,10 +45,10 @@ if 'button_clicked' not in st.session_state:
     st.session_state.button_clicked = False
 
 # Main app layout
-st.title("⛄ Words-by-stress")
+st.title("⛄ 1. Words-by-stress")
 st.caption("Chapter 7. Stress; A total of 564 words")
 st.caption("Focus on learning the first word's details, and understand the variations as a reference.")
-selected_stress = st.selectbox("Select Stress", ["1st", "2nd", "antepenult", "penult", "ult", "compound"])
+selected_stress = st.selectbox("🔴 Select Stress Position", ["1st", "2nd", "antepenult", "penult", "ult", "compound"])
 
 # Display stress circles
 if selected_stress:
@@ -61,7 +61,7 @@ if selected_stress:
     st.dataframe(filtered_data[['Word', 'POS', 'Transcription', 'Variation']], width=600, height=200)
 
 # Word Search with Audio Playback
-st.title("❄️ Word details with Audio")
+st.title("❄️ 2. Word details with Audio")
 user_input = st.text_input("🌱 Enter the number next to a word to search (e.g., 104 for 'category'):", placeholder="Type a word here...")
 
 # Manage button click state
