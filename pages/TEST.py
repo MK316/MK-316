@@ -30,8 +30,8 @@ def add_stress_circles(stress):
     for idx, option in enumerate(stress_options):
         background_color = "yellow" if option == stress else "white"
         text_color = "black" if option == stress else "gray"
-        border_color = "black"
-        circle_html += f"<div style='width: 80px; height: 60px; background: {background_color}; border: 2px solid {border_color}; color: {text_color}; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px;'>{option.capitalize()}</div>"
+        border_color = "gray"
+        circle_html += f"<div style='width: 100px; height: 60px; background: {background_color}; border: 2px solid {border_color}; color: {text_color}; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px;'>{option.capitalize()}</div>"
         if option == "2nd":
             circle_html += "<div style='display: flex; align-items: center; justify-content: center; color: gray; font-size: 16px;'> (optional syllables) </div>"
     circle_html += "</div>"
