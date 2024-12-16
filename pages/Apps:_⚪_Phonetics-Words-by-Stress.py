@@ -46,6 +46,7 @@ if 'button_clicked' not in st.session_state:
 
 # Main app layout
 st.title("⛄ Words-by-stress")
+st.caption("Chapter 7. Stress; A total of 564 words")
 selected_stress = st.selectbox("Select Stress", ["1st", "2nd", "antepenult", "penult", "ult", "compound"])
 
 # Display stress circles
