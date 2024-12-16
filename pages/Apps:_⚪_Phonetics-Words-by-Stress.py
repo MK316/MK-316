@@ -3,13 +3,16 @@ import pandas as pd
 import tempfile
 from gtts import gTTS
 from pydub import AudioSegment
-from pydub.playback import play
 
 # Set page configuration for wider layout
 st.set_page_config(layout="wide")
 
+# Ensure session state for button click is initialized
+if 'button_clicked' not in st.session_state:
+    st.session_state.button_clicked = False
+
 # Load the dataset from GitHub
-@st.cache_data
+@st.cache
 def load_data(url):
     return pd.read_csv(url)
 
@@ -44,13 +47,11 @@ def add_stress_circles(stress):
 
 # Main app layout
 st.title("Words-by-stress")
-selected_stress = st.selectbox("Select Stress", ["1st", "2nd", "antepenult", "penult", "ult", "compound"])
+selected_stress = st.selectbox("Select Stress", ["1st", "2nd", "antepenult", "penult", "ult"])
 
 # Display stress circles
 if selected_stress:
     st.markdown(add_stress_circles(selected_stress), unsafe_allow_html=True)
-
-    # Display data based on selected stress
     filtered_data = df[df['Stress'] == selected_stress]
     st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
     st.dataframe(filtered_data[['Word', 'POS', 'Transcription']], width=800)
