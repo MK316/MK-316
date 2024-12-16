@@ -3,6 +3,9 @@ import pandas as pd
 import tempfile
 from gtts import gTTS
 
+# Set page configuration for wider layout
+st.set_page_config(layout="wide")
+
 # Load the dataset from GitHub
 @st.cache
 def load_data(url):
@@ -48,7 +51,8 @@ if selected_stress:
     # Display data based on selected stress
     filtered_data = df[df['Stress'] == selected_stress]
     st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
-    st.dataframe(filtered_data[['Word', 'POS', 'Transcription']])
+    # Ensure DataFrame takes full width
+    st.dataframe(filtered_data[['Word', 'POS', 'Transcription']], width=1000)  # Adjust width accordingly
 
 # Word Search with Audio Playback
 st.title("Word Search")
