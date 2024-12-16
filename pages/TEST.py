@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import graphviz
 import tempfile
 from gtts import gTTS
 
@@ -24,24 +23,15 @@ pos_mapping = {
 def convert_pos(pos_abbrev):
     return ", ".join([pos_mapping.get(p.strip(), p.strip()) for p in pos_abbrev.split(',')])
 
-# Function to add visual circles for stress patterns
-def add_stress_circles(stress):
-    graph = graphviz.Digraph(format="png")
-    graph.attr(rankdir="LR")  # Arrange nodes left-to-right
-    for option in ["ult", "penult", "antepenult", "1st", "2nd"]:
-        color = "yellow" if option == stress else "lightgrey"
-        graph.node(option, option.capitalize(), style='filled', fillcolor=color)
-    return graph
-
 # Main app layout
 st.title("Words-by-stress")
 stress_options = ["1st", "2nd", "antepenult", "penult", "ult"]
 selected_stress = None
 
-# Button group for stress options
+# Display button for each stress option with color change on select
 cols = st.columns(len(stress_options))
 for idx, option in enumerate(stress_options):
-    if cols[idx].button(option):
+    if cols[idx].button(option, key=option, help=f"Show words with {option} stress"):
         selected_stress = option
 
 # Display data based on selected stress
@@ -49,7 +39,11 @@ if selected_stress:
     filtered_data = df[df['Stress'] == selected_stress]
     st.write(f"Total words with '{selected_stress}' stress: {len(filtered_data)}")
     st.dataframe(filtered_data[['Word', 'POS', 'Transcription']])
-    st.graphviz_chart(add_stress_circles(selected_stress))
+    for idx, option in enumerate(stress_options):
+        if option == selected_stress:
+            cols[idx].markdown(f"<h1 style='color: yellow;'>{option}</h1>", unsafe_allow_html=True)
+        else:
+            cols[idx].markdown(f"<h1 style='color: gray;'>{option}</h1>", unsafe_allow_html=True)
 
 # Word Search with Audio Playback
 st.title("Word Search")
