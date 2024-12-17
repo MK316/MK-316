@@ -14,4 +14,4 @@ st.caption("Laste updated: Nov.14, 2024")
 # URL to the raw image on GitHub
 image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
 # Display the image
-st.image(image_url, caption="\"Wannna really learn coding? Give teaching a go!\"", use_column_width=True)
+st.image(image_url, caption="\"Wannna really learn coding? Give teaching a go!\"", use_container_width=True)
