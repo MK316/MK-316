@@ -61,7 +61,7 @@ if selected_stress:
     st.dataframe(filtered_data[['Word', 'POS', 'Transcription', 'Variation']], width=600, height=200)
 
 # Word Search with Audio Playback
-st.title("❄️ 2. Word details with Audio")
+st.markdown("### ❄️ 2. Word details with Audio")
 user_input = st.text_input("🔴 Enter the number next to a word to search (e.g., 104 for 'category'):", placeholder="Type a word here...")
 
 # Manage button click state
