@@ -45,7 +45,7 @@ if 'button_clicked' not in st.session_state:
     st.session_state.button_clicked = False
 
 # Main app layout
-st.title("⛄ 1. Words-by-stress")
+st.markdown("### ⛄ 1. Words-by-stress")
 st.caption("Chapter 7. Stress; A total of 564 words")
 st.caption("Focus on learning the first word's details, and understand the variations as a reference.")
 selected_stress = st.selectbox("🔴 Select Stress Position", ["1st", "2nd", "antepenult", "penult", "ult", "compound"])
