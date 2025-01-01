@@ -15,24 +15,31 @@ def main():
     st.title('My Digital Classroom')
 
     # Set up tabs
-    tabs = st.tabs(["Fall 2024", "Spring 2024", "Fall 2023", "Spring 2023", "Additional Content"])
+    tabs = st.tabs(["Spring 2025", "Fall 2024", "Spring 2024", "Fall 2023", "Spring 2023", "Additional Content"])
 
-    # Fall 2024 content
+    # Spring 2025 content
     with tabs[0]:
+    #    st.subheader("Fall 2024 Courses")
+        fall_url = 'https://github.com/MK316/spring2025/blob/main/pages/README.md'
+        fall_content = fetch_github_readme(fall_url)
+        st.markdown(fall_content, unsafe_allow_html=True)
+    
+    # Fall 2024 content
+    with tabs[1]:
     #    st.subheader("Fall 2024 Courses")
         fall_url = 'https://github.com/MK316/MK-316/blob/main/pages/fall2024.md'
         fall_content = fetch_github_readme(fall_url)
         st.markdown(fall_content, unsafe_allow_html=True)
 
     # Spring 2024 content
-    with tabs[1]:
+    with tabs[2]:
     #    st.subheader("Spring 2024 Courses")
         spring_url = 'https://github.com/MK316/MK-316/blob/main/pages/spring2024.md'
         spring_content = fetch_github_readme(spring_url)
         st.markdown(spring_content, unsafe_allow_html=True)
 
     # Additional Content tab (optional)
-    with tabs[2]:
+    with tabs[3]:
     #    st.subheader("Fall 2023 Courses")
         # Placeholder URL for additional content if needed
         # Uncomment and update the URL if you have content for this tab
@@ -41,7 +48,7 @@ def main():
         st.markdown(additional_content, unsafe_allow_html=True)
 
 
-    with tabs[3]:
+    with tabs[4]:
         # st.subheader("Spring 2023 Courses")
         # Placeholder URL for additional content if needed
         # Uncomment and update the URL if you have content for this tab
@@ -50,7 +57,7 @@ def main():
         st.markdown(additional_content, unsafe_allow_html=True)
 
     # Additional Content tab (optional)
-    with tabs[4]:
+    with tabs[5]:
         st.subheader("Additional Content")
         # Placeholder URL for additional content if needed
         # Uncomment and update the URL if you have content for this tab
