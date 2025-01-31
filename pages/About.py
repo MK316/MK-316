@@ -30,7 +30,7 @@ def main():
         # URL to the raw image on GitHub
         image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
         # Display the image
-        st.image(image_url, caption="\"Be curious, not judgmental.\" — Walt Whitman", use_column_width=True)
+        st.image(image_url, caption="\"Be curious, not judgmental.\" — Walt Whitman", use_container_width=True)
 
     # Publications
     with tabs[1]:
