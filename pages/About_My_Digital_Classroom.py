@@ -12,14 +12,14 @@ def fetch_github_readme(url):
         return "Error: Unable to load content from GitHub."
 
 def main():
-    st.title('My Digital Classroom')
+    st.title('Digital Classroom')
 
     # Set up tabs
     tabs = st.tabs(["Spring 2025", "Fall 2024", "Spring 2024", "Fall 2023", "Spring 2023", "Additional Content"])
 
     # Spring 2025 content
     with tabs[0]:
-    #    st.subheader("Fall 2024 Courses")
+    #    st.markdown("#### Courses offered in Spring 2025 semester")
         fall_url = 'https://github.com/MK316/spring2025/blob/main/README.md'
         fall_content = fetch_github_readme(fall_url)
         st.markdown(fall_content, unsafe_allow_html=True)
