@@ -59,6 +59,6 @@ phonetics_apps_page()
 # URL to the raw image on GitHub
 image_url = "https://github.com/MK316/MK-316/raw/main/images/bg2.png"
 # Display the image
-st.image(image_url, caption="\"He who knows no foreign languages knows nothing of his own.\" — Johann Wolfgang von Goethe", use_column_width=True)
+st.image(image_url, caption="\"He who knows no foreign languages knows nothing of his own.\" — Johann Wolfgang von Goethe", use_container_width=True)
 
 
