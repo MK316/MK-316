@@ -13,7 +13,7 @@ with tab1:
     st.image("https://github.com/MK316/MK-316/raw/main/images/2409a.png", width=300)
 with tab2:
     st.header("2025 Memories")
-    st.image("https://github.com/MK316/MK-316/blob/main/images/KSW20250312.png", width=400)
+    st.image("https://github.com/MK316/MK-316/raw/main/images/KSW20250312.png", width=400)
 with tab3:
     st.header("An owl")
     st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
