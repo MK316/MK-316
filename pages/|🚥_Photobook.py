@@ -12,7 +12,7 @@ with tab1:
     st.write("03")
     st.image("https://github.com/MK316/MK-316/raw/main/images/2409a.png", width=300)
     st.caption("20241203: A dark chapter began by a monster")
-    st.image("https://github.com/MK316/MK-316/raw/main/images/202412603_6hrs.png", width=300)
+    st.image("https://github.com/MK316/MK-316/raw/main/images/20241203_6hrs.png", width=300)
     st.caption('Kisses: "The world will not be destroyed by those who do evil, but by those who watch them without doing anything." — Albert Einstein')
     st.image("https://github.com/MK316/MK-316/raw/main/images/kisses.png", width=300)
 with tab2:
