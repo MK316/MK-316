@@ -17,7 +17,7 @@ def main():
     st.title('Text Summary Tool')
     
     # Create multiple tabs
-    tabs = st.tabs(["Word Count", "Remove Line Breaks", "Application 1", "Application 4", "Application 5"])
+    tabs = st.tabs(["Word Count", "Remove Line Breaks", "Application 3", "Application 4", "Application 5"])
 
     with tabs[0]:  # Word Count tab
         st.header("🔍 Word and Sentence Counter")
@@ -40,7 +40,7 @@ def main():
         if user_input:
             processed_text = remove_line_breaks(user_input)
             st.write("📝 Here's your text without line breaks:")
-            st.text_area("Copy the text below:", processed_text, height=300)
+            st.text_area("Copy the text below:", processed_text, height=300, key='processed')
 
     # Placeholder tabs for future applications
     with tabs[2]:
