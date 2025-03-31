@@ -17,7 +17,7 @@ def main():
     st.title('Text Summary Tool')
     
     # Create multiple tabs
-    tabs = st.tabs(["Word Count", "Remove Line Breaks", "Application 3", "Application 4", "Application 5"])
+    tabs = st.tabs(["Word Count", "Remove Line Breaks", "Application 1", "Application 4", "Application 5"])
 
     with tabs[0]:  # Word Count tab
         st.header("🔍 Word and Sentence Counter")
