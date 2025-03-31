@@ -9,15 +9,19 @@ def count_sentences(text):
     # Split the text by sentence delimiters and count the parts
     return len(re.findall(r'[.!?]+', text)) + 1
 
+def remove_line_breaks(text):
+    # Replace newline and carriage return characters with a space
+    return re.sub(r'[\r\n]+', ' ', text)
+
 def main():
     st.title('Text Summary Tool')
     
     # Create multiple tabs
-    tabs = st.tabs(["Word Count", "Other", "Application 3", "Application 4", "Application 5"])
+    tabs = st.tabs(["Word Count", "Remove Line Breaks", "Application 3", "Application 4", "Application 5"])
 
     with tabs[0]:  # Word Count tab
         st.header("🔍 Word and Sentence Counter")
-        st.caption("This application will display the number of words and sentences in your text. After pasting your text in the box below, hit 'Control + Enter' key to see the result. [2024.11.01]")
+        st.caption("This application will display the number of words and sentences in your text. After pasting your text in the box below, hit 'Control + Enter' key to see the result.")
         user_input = st.text_area("Paste your text here:", height=300)
         
         if user_input:
@@ -28,9 +32,15 @@ def main():
             st.write(f"〽️ **Word Count**: {word_count}")
             st.write(f"〽️ **Sentence Count**: {sentence_count}")
 
-    with tabs[1]:  # Other Features tab
-        st.header("Other Features")
-        st.write("More features can be implemented here.")
+    with tabs[1]:  # Remove Line Breaks tab
+        st.header("🔄 Remove Line Breaks")
+        st.caption("Paste your text here and see it transformed without line breaks, making it easier to copy without formatting.")
+        user_input = st.text_area("Paste your text here to remove line breaks:", height=300)
+        
+        if user_input:
+            processed_text = remove_line_breaks(user_input)
+            st.write("📝 Here's your text without line breaks:")
+            st.text_area("Copy the text below:", processed_text, height=300)
 
     # Placeholder tabs for future applications
     with tabs[2]:
@@ -47,4 +57,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
