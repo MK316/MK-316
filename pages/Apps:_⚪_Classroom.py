@@ -190,3 +190,8 @@ with tabs[4]:
             st.pyplot(fig)
         else:
             st.warning("Please enter some text to generate a word cloud.")
+    st.markdown("""
+        ### Sample text to copy and paste
+
+        This study explores the potential of Streamlit, an open-source Python framework for building interactive web apps, as a practical and pedagogically meaningful platform in English teacher education. In contexts where teachers must address diverse learner needs, Streamlit facilitates the creation of interactive, learner-responsive applications. With minimal coding and appropriate scaffolding, pre-service teachers can develop custom web-based tools that foster student interaction, targeted feedback, and extend learning beyond classrooms. Drawing on data from a semester-long course (N =13) for English education majors, this study demonstrates how beginner-level Python coding, complemented by generative AI, enhances digital agency and instructional creativity. The study draws on student reflections and post-course surveys to address two primary questions: engagement in coding-based design without prior technical experience and the fostering of creative thinking in digital instruction. Survey findings indicate that students perceived the Python learning curve as manageable, successfully utilized Streamlit, and were motivated to explore personalized instructional ideas. A thematic analysis of reflection essays aligned with these questions revealed shifts in pedagogical perspective, greater awareness of digital instructional design, and increased recognition of future roles as technology-integrated educators. These findings support the feasibility and value of incorporating app creation into digital literacy training in teacher education.
+        """)
